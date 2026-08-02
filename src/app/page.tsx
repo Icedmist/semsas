@@ -228,9 +228,9 @@ export default function Homepage() {
             src="/images/hero-bg.jpg"
             alt="Gombe City Sunrise Backdrop"
             fill
+            sizes="100vw"
             className="object-cover opacity-35 filter brightness-50"
             priority
-            quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary-navy via-primary-navy/95 to-transparent mix-blend-multiply" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary-navy via-transparent to-primary-navy/20" />
@@ -335,9 +335,9 @@ export default function Homepage() {
                   src="/images/hero-ambulance.jpg"
                   alt="Gombe SEMSAS Rapid Response Ambulance"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover relative z-10"
                   priority
-                  quality={95}
                 />
                 
                 {/* Visual Glow Effect overlay */}
@@ -410,6 +410,7 @@ export default function Homepage() {
                   src="/images/about-personnel.jpg"
                   alt="SEMSAS Emergency Paramedics Team"
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
@@ -834,6 +835,7 @@ export default function Homepage() {
                       src="/images/coordinator.jpg"
                       alt="Dr. Abdullahi Yusuf Gombe"
                       fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover"
                     />
                   </div>
@@ -965,6 +967,7 @@ export default function Homepage() {
                     src={news.image}
                     alt={news.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute top-4 left-4 bg-primary-navy text-white font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md">
