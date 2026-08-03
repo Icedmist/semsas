@@ -43,7 +43,7 @@ export default function Newsroom() {
       date: "August 1, 2026",
       readTime: "5 min read",
       summary: "In a strategic effort to improve response times across Gombe State, SEMSAS has successfully established new ambulance deployment points in Kaltungo and Balanga Local Government Areas. This deployment will provide direct coverage for transit routes and rural medical emergencies.",
-      author: "Dr. Abdullahi Yusuf Gombe",
+      author: "Dr. Suraj Abdulkarim",
       image: "/images/news-hero.jpg",
       featured: true
     },
@@ -84,7 +84,7 @@ export default function Newsroom() {
       date: "July 04, 2026",
       readTime: "4 min read",
       summary: "Federal medical inspectors audited the Gombe dispatch operations and approved funding structures designed to subsidize maternal healthcare transfers.",
-      author: "Dr. Abdullahi Yusuf Gombe",
+      author: "Dr. Suraj Abdulkarim",
       image: "/images/services-hero.jpg"
     },
     {
@@ -120,7 +120,7 @@ export default function Newsroom() {
   return (
     <div className="pt-20 bg-bg-gray">
       {/* Hero Section */}
-      <section className="relative h-[45vh] min-h-[350px] flex items-center justify-center bg-primary-navy overflow-hidden">
+      <section className="relative h-[45vh] min-h-[350px] flex items-center justify-center bg-primary-navy overflow-hidden hero-banner">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/news-hero.jpg"
@@ -192,7 +192,7 @@ export default function Newsroom() {
                   </div>
                   <Link
                     href={`/news/${featuredArticle.id}`}
-                    className="inline-flex items-center gap-1.5 bg-primary-navy hover:bg-emergency-red text-white font-bold px-5 py-2.5 rounded-xl transition-all text-xs"
+                    className="btn btn-dark px-5 py-2.5 text-xs"
                   >
                     Read Full Article <ArrowRight className="w-3.5 h-3.5" />
                   </Link>

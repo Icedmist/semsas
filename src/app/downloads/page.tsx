@@ -133,7 +133,7 @@ export default function DownloadsPortal() {
   return (
     <div className="pt-20 bg-bg-gray">
       {/* Hero Section */}
-      <section className="relative py-20 bg-primary-navy text-white text-center overflow-hidden">
+      <section className="relative py-20 bg-primary-navy text-white text-center overflow-hidden hero-banner">
         <div className="absolute top-0 right-0 w-80 h-80 bg-emergency-blue/20 rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
           <nav className="text-xs font-semibold tracking-widest text-gray-300 uppercase">
@@ -237,7 +237,7 @@ export default function DownloadsPortal() {
                     
                     <button
                       onClick={() => alert(`Downloading placeholder: ${doc.title}`)}
-                      className="flex items-center justify-center gap-1.5 bg-primary-navy hover:bg-emergency-red text-white font-bold py-2.5 rounded-xl transition-colors text-xs"
+                      className="btn btn-dark py-2.5 text-xs"
                     >
                       <Download className="w-3.5 h-3.5" /> Download
                     </button>

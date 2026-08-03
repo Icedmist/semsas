@@ -50,7 +50,7 @@ export default function ServicesPage() {
     {
       icon: <Radio className="w-6 h-6 text-emergency-blue" />,
       title: "Emergency Dispatch",
-      desc: "Direct toll-free routing over 112 with modern caller tracking and immediate unit allocation."
+      desc: "Direct emergency routing over 0703 382 5646 with modern caller tracking and immediate unit allocation."
     },
     {
       icon: <Activity className="w-6 h-6 text-emerald-500" />,
@@ -107,7 +107,7 @@ export default function ServicesPage() {
   return (
     <div className="pt-20 bg-bg-gray">
       {/* Hero Section */}
-      <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center bg-primary-navy overflow-hidden">
+      <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center bg-primary-navy overflow-hidden hero-banner">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/services-hero.jpg"
@@ -137,7 +137,7 @@ export default function ServicesPage() {
       {/* Introduction */}
       <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <div className="inline-flex items-center gap-1.5 bg-primary-navy/5 text-primary-navy px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase">
+          <div className="section-tag">
             Emergency Care Framework
           </div>
           <h2 className="font-heading font-black text-3xl text-primary-navy">
@@ -153,7 +153,7 @@ export default function ServicesPage() {
       <section className="py-24 bg-bg-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           <div className="text-center space-y-3">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-emergency-red bg-emergency-red/5 px-3 py-1 rounded-full inline-block">
+            <span className="section-tag section-tag-red">
               Operational Scope
             </span>
             <h2 className="font-heading font-black text-2xl sm:text-3xl text-primary-navy">
@@ -205,7 +205,7 @@ export default function ServicesPage() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-16">
           <div className="max-w-2xl mx-auto space-y-4">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-emergency-red bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full inline-block">
+            <span className="section-tag section-tag-light">
               Infographic Flow
             </span>
             <h2 className="font-heading font-black text-3xl">

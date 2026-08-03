@@ -82,7 +82,7 @@ export default function AboutPage() {
   return (
     <div className="pt-20 bg-bg-gray">
       {/* Hero Banner */}
-      <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center bg-primary-navy overflow-hidden">
+      <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center bg-primary-navy overflow-hidden hero-banner hero-banner">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/about-hero.jpg"
@@ -128,7 +128,7 @@ export default function AboutPage() {
 
             {/* Right Copy */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-1.5 bg-primary-navy/5 text-primary-navy px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase">
+              <div className="section-tag">
                 Who We Are
               </div>
               <h2 className="font-heading font-black text-3xl sm:text-4xl text-primary-navy">
@@ -212,7 +212,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
           
           <div className="max-w-2xl mx-auto space-y-4">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-primary-navy bg-primary-navy/5 px-3 py-1 rounded-full inline-block">
+            <span className="section-tag">
               Our Foundations
             </span>
             <h2 className="font-heading font-black text-3xl sm:text-4xl text-primary-navy">
@@ -234,7 +234,7 @@ export default function AboutPage() {
               <motion.div
                 key={idx}
                 variants={cardVariants}
-                className="bg-bg-gray hover:bg-white p-8 rounded-3xl border border-gray-150 hover:shadow-lg transition-all duration-300 text-left space-y-4 group"
+                className="card-lift bg-white p-8 rounded-3xl border border-gray-150 hover:shadow-soft text-left space-y-4 group"
               >
                 <div className="w-12 h-12 rounded-2xl bg-white group-hover:bg-primary-navy/5 flex items-center justify-center shadow-sm">
                   {val.icon}
@@ -258,7 +258,7 @@ export default function AboutPage() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-16">
           <div className="max-w-2xl mx-auto space-y-4">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-emergency-red bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full inline-block">
+            <span className="section-tag section-tag-light">
               Deliverables
             </span>
             <h2 className="font-heading font-black text-3xl sm:text-4xl">

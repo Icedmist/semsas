@@ -28,8 +28,8 @@ export default function EmergencyInformation() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const emergencyContacts = [
-    { name: "Emergency Line", phone: "112", subtitle: "Toll-Free Dispatch (24/7)", icon: <Phone className="w-6 h-6 text-white" />, color: "bg-emergency-red shadow-[0_0_15px_rgba(214,40,40,0.3)]" },
-    { name: "Ambulance Hotline", phone: "767", subtitle: "Mobile Secondary Call Line", icon: <Phone className="w-6 h-6 text-white" />, color: "bg-emergency-blue" },
+    { name: "Emergency Line", phone: "0703 382 5646", subtitle: "Primary Emergency Dispatch (24/7)", icon: <Phone className="w-6 h-6 text-white" />, color: "bg-emergency-red shadow-[0_0_15px_rgba(214,40,40,0.3)]" },
+    { name: "Ambulance Hotline", phone: "0703 382 5646", subtitle: "Direct Ambulance Dispatch", icon: <Phone className="w-6 h-6 text-white" />, color: "bg-emergency-blue" },
     { name: "State SEMA", phone: "+234 803 123 4567", subtitle: "Disaster Operations", icon: <Activity className="w-6 h-6 text-white" />, color: "bg-primary-navy" },
     { name: "Federal Road Safety (FRSC)", phone: "122", subtitle: "Highway Crash Alerts", icon: <Compass className="w-6 h-6 text-white" />, color: "bg-orange-500" },
     { name: "Federal Fire Service", phone: "112", subtitle: "Fire and Triage Support", icon: <Flame className="w-6 h-6 text-white" />, color: "bg-red-600" },
@@ -51,7 +51,7 @@ export default function EmergencyInformation() {
 
   const safetySteps = [
     { num: 1, title: "Stay Calm", desc: "Assess the situation quickly to avoid further risk." },
-    { num: 2, title: "Call Emergency Services", desc: "Dial 112 or 767 and speak clearly to the operator." },
+    { num: 2, title: "Call Emergency Services", desc: "Dial 0703 382 5646 and speak clearly to the operator." },
     { num: 3, title: "Share Your Location", desc: "Give nearby landmarks, street names, or LGA details." },
     { num: 4, title: "Do Not Move Patients", desc: "Avoid moving spine/neck trauma victims unless there is immediate danger (e.g., fire)." },
     { num: 5, title: "Follow Instructions", desc: "The dispatcher will guide you through first-aid triage steps over the phone." },
@@ -97,7 +97,7 @@ export default function EmergencyInformation() {
   return (
     <div className="pt-20 bg-bg-gray">
       {/* Hero Banner */}
-      <section className="relative py-20 bg-primary-navy text-white text-center overflow-hidden">
+      <section className="relative py-20 bg-primary-navy text-white text-center overflow-hidden hero-banner">
         <div className="absolute top-0 left-0 w-80 h-80 bg-emergency-red/10 rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
           <nav className="text-xs font-semibold tracking-widest text-gray-300 uppercase">
@@ -119,7 +119,7 @@ export default function EmergencyInformation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           <div className="text-center space-y-3">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-emergency-red bg-emergency-red/5 px-3 py-1 rounded-full inline-block">
+            <span className="section-tag section-tag-red">
               Dial Lines
             </span>
             <h2 className="font-heading font-black text-2xl sm:text-3xl text-primary-navy">
@@ -163,7 +163,7 @@ export default function EmergencyInformation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           <div className="text-center space-y-3">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-primary-navy bg-primary-navy/5 px-3 py-1 rounded-full inline-block">
+            <span className="section-tag">
               Triage Rules
             </span>
             <h2 className="font-heading font-black text-2xl sm:text-3xl text-primary-navy">
@@ -198,7 +198,7 @@ export default function EmergencyInformation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           
           <div className="text-center space-y-3">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-primary-navy bg-primary-navy/5 px-3 py-1 rounded-full inline-block">
+            <span className="section-tag">
               First-Aid Steps
             </span>
             <h2 className="font-heading font-black text-2xl sm:text-3xl text-primary-navy">
@@ -235,7 +235,7 @@ export default function EmergencyInformation() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           <div className="text-center space-y-3">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-emergency-red bg-emergency-red/5 px-3 py-1 rounded-full inline-block">
+            <span className="section-tag section-tag-red">
               FAQ
             </span>
             <h2 className="font-heading font-black text-2xl sm:text-3xl text-primary-navy">

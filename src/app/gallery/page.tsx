@@ -128,7 +128,7 @@ export default function GalleryPage() {
   return (
     <div className="pt-20 bg-bg-gray">
       {/* Hero Banner */}
-      <section className="relative h-[45vh] min-h-[350px] flex items-center justify-center bg-primary-navy overflow-hidden">
+      <section className="relative h-[45vh] min-h-[350px] flex items-center justify-center bg-primary-navy overflow-hidden hero-banner">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero-bg.jpg"

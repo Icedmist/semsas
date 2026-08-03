@@ -46,7 +46,7 @@ export default function Contact() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const departments = [
-    { name: "Emergency Operations", ext: "Ext 101", phone: "112 / 767", icon: <Activity className="w-5 h-5" /> },
+    { name: "Emergency Operations", ext: "Ext 101", phone: "07033825646", icon: <Activity className="w-5 h-5" /> },
     { name: "Administration", ext: "Ext 202", phone: "+234 803 000 0000", icon: <Building className="w-5 h-5" /> },
     { name: "Clinical Training", ext: "Ext 303", phone: "+234 803 000 0001", icon: <Award className="w-5 h-5" /> },
     { name: "Media & Relations", ext: "Ext 404", phone: "+234 803 000 0002", icon: <Shield className="w-5 h-5" /> },
@@ -93,7 +93,7 @@ export default function Contact() {
   return (
     <div className="pt-20 bg-bg-gray">
       {/* Hero Banner */}
-      <section className="relative py-20 bg-primary-navy text-white text-center overflow-hidden">
+      <section className="relative py-20 bg-primary-navy text-white text-center overflow-hidden hero-banner">
         <div className="absolute top-0 left-0 w-80 h-80 bg-emergency-red/10 rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
           <nav className="text-xs font-semibold tracking-widest text-gray-300 uppercase">
@@ -118,7 +118,7 @@ export default function Contact() {
             {/* Left side: details cards */}
             <div className="lg:col-span-5 space-y-8 text-left">
               <div className="space-y-3">
-                <span className="text-xs uppercase font-extrabold tracking-widest text-primary-navy bg-primary-navy/5 px-3 py-1 rounded-full inline-block">
+                <span className="section-tag">
                   Directory details
                 </span>
                 <h2 className="font-heading font-black text-3xl text-primary-navy">
@@ -147,7 +147,7 @@ export default function Contact() {
                   <div>
                     <h4 className="font-heading font-extrabold text-sm text-primary-navy">Administrative Line</h4>
                     <p className="text-xs text-muted-text mt-1">Admin Office: +234 (0) 803 000 0000</p>
-                    <p className="text-xs text-emergency-red font-bold mt-1">Emergency Dispatch: Dial 112</p>
+                    <p className="text-xs text-emergency-red font-bold mt-1">Emergency Dispatch: Dial 0703 382 5646</p>
                   </div>
                 </div>
 
@@ -271,7 +271,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-primary-navy hover:bg-emergency-red text-white font-bold py-3.5 rounded-xl transition-all text-xs shadow-md flex items-center justify-center gap-2"
+                  className="btn btn-dark w-full py-3.5 text-xs"
                 >
                   <Send className="w-4 h-4" />
                   {isSubmitting ? "Sending..." : "Submit Message"}

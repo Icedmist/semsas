@@ -52,7 +52,7 @@ export default function OrganizationalStructure() {
       id: "dispatch",
       name: "Emergency Communication & Dispatch Centre",
       subtitle: "Operational Nerve Centre",
-      desc: "Handles incoming 112 / 767 toll-free emergency calls, identifies patient locations, conducts remote triaging, and allocates response teams.",
+      desc: "Handles incoming emergency calls on 0703 382 5646, identifies patient locations, conducts remote triaging, and allocates response teams.",
       icon: <Radio className="w-5 h-5" />
     },
     {
@@ -81,7 +81,7 @@ export default function OrganizationalStructure() {
   return (
     <div className="pt-20 bg-bg-gray">
       {/* Hero Banner */}
-      <section className="relative py-20 bg-primary-navy text-white text-center overflow-hidden">
+      <section className="relative py-20 bg-primary-navy text-white text-center overflow-hidden hero-banner">
         <div className="absolute top-0 right-0 w-80 h-80 bg-emergency-blue/20 rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
           <nav className="text-xs font-semibold tracking-widest text-gray-300 uppercase">
@@ -103,7 +103,7 @@ export default function OrganizationalStructure() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           <div className="text-center space-y-3">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-primary-navy bg-primary-navy/5 px-3 py-1 rounded-full inline-block">
+            <span className="section-tag">
               Interactive Flowchart
             </span>
             <h2 className="font-heading font-black text-2xl sm:text-3xl text-primary-navy">
@@ -191,7 +191,7 @@ export default function OrganizationalStructure() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
           
           <div className="max-w-2xl mx-auto space-y-3">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-emergency-red bg-emergency-red/5 px-3 py-1 rounded-full inline-block">
+            <span className="section-tag section-tag-red">
               Operational Matrix
             </span>
             <h2 className="font-heading font-black text-2xl sm:text-3xl text-primary-navy">

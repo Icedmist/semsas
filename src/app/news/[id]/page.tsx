@@ -41,7 +41,7 @@ export default function ArticleDetail({ params }: { params: Promise<{ id: string
       category: "Emergency Response",
       date: "August 1, 2026",
       readTime: "5 min read",
-      author: "Dr. Abdullahi Yusuf Gombe",
+      author: "Dr. Suraj Abdulkarim",
       authorRole: "State SEMSAS Coordinator",
       image: "/images/news-hero.jpg",
       toc: [
@@ -63,7 +63,7 @@ export default function ArticleDetail({ params }: { params: Promise<{ id: string
 
         <h3 id="clinical-standards" class="text-xl font-heading font-black text-primary-navy mt-8 mb-4">Clinical and Logistics Setup</h3>
         <p class="text-muted-text font-light leading-relaxed mb-6">
-          Each station carries standard Type-B ambulances equipped with cardiac monitors, portable oxygen ports, and emergency trauma pharmaceuticals. Crucially, the crews are connected to the central 112 / 767 digital routing matrix, enabling real-time dispatch management and hospital alerts in transit.
+          Each station carries standard Type-B ambulances equipped with cardiac monitors, portable oxygen ports, and emergency trauma pharmaceuticals. Crucially, the crews are connected to the central 0703 382 5646 digital routing matrix, enabling real-time dispatch management and hospital alerts in transit.
         </p>
 
         <h3 id="future-roadmap" class="text-xl font-heading font-black text-primary-navy mt-8 mb-4">Future Infrastructure Goals</h3>

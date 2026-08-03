@@ -27,9 +27,6 @@ import {
   ThumbsUp,
   Flame,
   UserCheck,
-  Globe,
-  Mail,
-  User,
   ShieldCheck
 } from "lucide-react";
 
@@ -132,52 +129,6 @@ export default function Homepage() {
     };
   }, [statsAnimated]);
 
-  // Leadership Team list
-  const leadershipTeam = [
-    {
-      name: "Dr. Abdullahi Yusuf Gombe",
-      role: "State SEMSAS Coordinator",
-      bio: "An accomplished public health administrator with over 18 years of clinical experience. Formerly led regional healthcare reform committees before spearheading Gombe SEMSAS.",
-      email: "a.yusuf@semsas.gm.gov.ng",
-      linkedin: "#"
-    },
-    {
-      name: "Mrs. Amina Danjuma",
-      role: "Director of Operations",
-      bio: "Specializes in ambulance fleet logistics and dispatch system architecture. She has overseen large-scale medical emergency responses in northeastern Nigeria.",
-      email: "a.danjuma@semsas.gm.gov.ng",
-      linkedin: "#"
-    },
-    {
-      name: "Dr. Bello Ibrahim",
-      role: "Medical Director",
-      bio: "Board-certified emergency physician who leads the triage and medical protocol training. Focuses on setting clinical standards for pre-hospital treatments.",
-      email: "b.ibrahim@semsas.gm.gov.ng",
-      linkedin: "#"
-    },
-    {
-      name: "Mallam Yusuf Haruna",
-      role: "Communications & Dispatch Manager",
-      bio: "Information technology expert with a background in telecommunications. Manages the uptime, scaling, and training protocols for the 112 dispatch operators.",
-      email: "y.haruna@semsas.gm.gov.ng",
-      linkedin: "#"
-    },
-    {
-      name: "Engr. Timothy Solomon",
-      role: "Fleet & Equipment Support Coordinator",
-      bio: "Ensures the response fleet is medically stocked, mechanically sound, and calibrated. Manages regular safety inspections of on-board diagnostic setups.",
-      email: "t.solomon@semsas.gm.gov.ng",
-      linkedin: "#"
-    },
-    {
-      name: "Sister Deborah Mark",
-      role: "Responder Training Coordinator",
-      bio: "Senior nurse educator and trauma life support trainer. Coordinates the continuous development curriculum for EMT crews and paramedics across the state.",
-      email: "d.mark@semsas.gm.gov.ng",
-      linkedin: "#"
-    }
-  ];
-
   // Partners lists
   const partners = [
     { name: "Federal Ministry of Health", text: "FMOH" },
@@ -207,7 +158,7 @@ export default function Homepage() {
     {
       title: "SEMSAS Response Time Decreases to Record Lows Across Gombe Metropolis",
       date: "July 12, 2026",
-      excerpt: "A new dispatch optimization system integrated into the 112 toll-free hotline has successfully slashed response times by 18% in the metropolitan area.",
+      excerpt: "A new dispatch optimization system integrated into the 0703 382 5646 emergency hotline has successfully slashed response times by 18% in the metropolitan area.",
       image: "/images/hero-bg.jpg",
     },
   ];
@@ -220,7 +171,7 @@ export default function Homepage() {
       {/* ----------------- HERO SECTION ----------------- */}
       <section
         id="home"
-        className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-primary-navy"
+        className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-primary-navy hero-banner"
       >
         {/* Background Image with Cinematic Dark Gradient Overlay */}
         <div className="absolute inset-0 z-0">
@@ -281,15 +232,15 @@ export default function Homepage() {
                 className="flex flex-col sm:flex-row gap-4 max-w-md sm:max-w-none"
               >
                 <a
-                  href="tel:112"
-                  className="flex items-center justify-center gap-2 bg-emergency-red text-white font-bold px-8 py-4 rounded-xl hover:bg-red-700 transition-colors shadow-lg hover:shadow-[0_10px_20px_rgba(214,40,40,0.3)] text-center"
+                  href="tel:07033825646"
+                  className="btn btn-red px-8 py-4 text-center"
                 >
                   <Phone className="w-5 h-5 fill-white" />
                   Request an Ambulance
                 </a>
                 <a
                   href="#about"
-                  className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-semibold px-8 py-4 rounded-xl transition-colors text-center"
+                  className="btn btn-ghost px-8 py-4 text-center"
                 >
                   Learn More
                   <ArrowRight className="w-4 h-4" />
@@ -353,7 +304,7 @@ export default function Homepage() {
       <section id="emergencyinfo" className="relative z-20 -mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Emergency Numbers */}
-          <div className="bg-primary-navy text-white border border-white/10 rounded-2xl p-6 shadow-xl hover:translate-y-[-5px] transition-transform duration-300 flex items-start gap-4">
+          <div className="bg-[#051F3D]/90 backdrop-blur border border-white/10 rounded-2xl p-6 shadow-soft card-lift hover:shadow-glow-blue flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-emergency-red/20 border border-emergency-red/40 flex items-center justify-center text-emergency-red flex-shrink-0">
               <Phone className="w-6 h-6 animate-pulse" />
             </div>
@@ -361,14 +312,13 @@ export default function Homepage() {
               <h3 className="font-heading font-black text-lg text-white mb-1">Emergency Numbers</h3>
               <p className="text-xs text-gray-300 mb-3">Toll-Free dispatch open 24/7 statewide</p>
               <div className="flex flex-wrap gap-2 text-sm font-bold">
-                <span className="bg-emergency-red px-3 py-1 rounded-md shadow-md text-white font-extrabold tracking-wider">Toll-Free: 112</span>
-                <span className="bg-white/10 border border-white/10 px-3 py-1 rounded-md text-white font-bold">Mobile: 767</span>
+                <span className="bg-emergency-red px-3 py-1 rounded-md shadow-md text-white font-extrabold tracking-wider">Call: 0703 382 5646</span>
               </div>
             </div>
           </div>
 
           {/* Card 2: Coverage */}
-          <div className="bg-primary-navy text-white border border-white/10 rounded-2xl p-6 shadow-xl hover:translate-y-[-5px] transition-transform duration-300 flex items-start gap-4">
+          <div className="bg-[#051F3D]/90 backdrop-blur border border-white/10 rounded-2xl p-6 shadow-soft card-lift hover:shadow-glow-blue flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-emergency-blue/20 border border-emergency-blue/40 flex items-center justify-center text-emergency-blue flex-shrink-0">
               <MapPin className="w-6 h-6" />
             </div>
@@ -383,7 +333,7 @@ export default function Homepage() {
           </div>
 
           {/* Card 3: Promise */}
-          <div className="bg-primary-navy text-white border border-white/10 rounded-2xl p-6 shadow-xl hover:translate-y-[-5px] transition-transform duration-300 flex items-start gap-4">
+          <div className="bg-[#051F3D]/90 backdrop-blur border border-white/10 rounded-2xl p-6 shadow-soft card-lift hover:shadow-glow-blue flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/45 flex items-center justify-center text-emerald-400 flex-shrink-0">
               <Shield className="w-6 h-6" />
             </div>
@@ -429,8 +379,8 @@ export default function Homepage() {
 
             {/* Right Column: Copy */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-1 bg-primary-navy/5 text-primary-navy px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase">
-                About SEMSAS
+              <div className="section-tag">
+                About GoSEMSAS
               </div>
               <h2 className="font-heading font-black text-3xl sm:text-4xl text-primary-navy">
                 Coordinating Rapid Emergency Care Across Gombe State
@@ -445,13 +395,13 @@ export default function Homepage() {
               <div className="flex flex-wrap gap-4 pt-4">
                 <a
                   href="#services"
-                  className="bg-primary-navy text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-opacity-95 transition-all text-sm"
+                  className="btn btn-dark px-6 py-3.5 text-sm"
                 >
                   Our Services
                 </a>
                 <a
                   href="#emergencyinfo"
-                  className="bg-gray-100 hover:bg-gray-200 text-primary-navy font-semibold px-6 py-3.5 rounded-xl transition-all text-sm"
+                  className="btn bg-gray-100 hover:bg-gray-200 text-primary-navy px-6 py-3.5 text-sm"
                 >
                   Emergency Procedures
                 </a>
@@ -526,7 +476,7 @@ export default function Homepage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
           
           <div className="max-w-2xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-1 bg-emergency-red/5 text-emergency-red px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase">
+            <div className="section-tag section-tag-red">
               What We Do
             </div>
             <h2 className="font-heading font-black text-3xl sm:text-4xl text-primary-navy">
@@ -552,7 +502,7 @@ export default function Homepage() {
               {
                 icon: <Phone className="w-6 h-6 text-primary-navy" />,
                 title: "Emergency Dispatch System",
-                desc: "Toll-free 112 routing with smart tracking to allocate the closest ambulance unit.",
+                desc: "Dedicated emergency routing on 0703 382 5646 with smart tracking to allocate the closest ambulance unit.",
               },
               {
                 icon: <Users className="w-6 h-6 text-emerald-500" />,
@@ -572,10 +522,10 @@ export default function Homepage() {
             ].map((service, idx) => (
               <div
                 key={idx}
-                className="bg-gradient-to-br from-white to-slate-50/40 rounded-3xl p-8 shadow-[0_10px_30px_rgba(8,47,91,0.02)] border border-slate-100 hover:border-slate-200/80 hover:shadow-[0_20px_40px_rgba(8,47,91,0.06)] hover:translate-y-[-4px] transition-all duration-300 text-left group flex flex-col justify-between min-h-[240px]"
+                className="card-lift bg-white rounded-3xl p-8 shadow-soft border border-slate-100 hover:border-primary-navy/15 text-left group flex flex-col justify-between min-h-[240px]"
               >
                 <div className="border-l-2 pl-4 border-l-slate-200 group-hover:border-l-emergency-red transition-colors duration-300">
-                  <div className="w-12 h-12 rounded-2xl bg-bg-gray border border-slate-100 flex items-center justify-center mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-navy/5 to-emergency-red/5 border border-primary-navy/10 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
                     {service.icon}
                   </div>
                   <h3 className="font-heading font-extrabold text-lg mb-2 text-primary-navy">
@@ -607,7 +557,7 @@ export default function Homepage() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-16">
           <div className="max-w-2xl mx-auto space-y-4">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-emergency-red bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full inline-block">
+            <span className="section-tag section-tag-light">
               Lifeline Protocol
             </span>
             <h2 className="font-heading font-black text-3xl sm:text-4xl">
@@ -624,7 +574,7 @@ export default function Homepage() {
             <div className="absolute top-[35px] left-[5%] right-[5%] h-[2px] bg-gradient-to-r from-emergency-red via-emergency-blue to-emerald-500 z-0 opacity-40" />
 
             {[
-              { num: 1, title: "Call Hotline", desc: "Dial toll-free 112 or 767 immediately." },
+              { num: 1, title: "Call Hotline", desc: "Dial 0703 382 5646 immediately." },
               { num: 2, title: "Verify Details", desc: "Dispatcher verifies coordinates and triage state." },
               { num: 3, title: "Assign Unit", desc: "Closest active ambulance team is selected." },
               { num: 4, title: "Rapid Dispatch", desc: "Paramedics depart under siren guidance." },
@@ -650,7 +600,7 @@ export default function Homepage() {
           {/* Mobile Vertical Timeline */}
           <div className="lg:hidden space-y-8 text-left max-w-md mx-auto relative pl-6 border-l border-white/10">
             {[
-              { num: 1, title: "Call Hotline", desc: "Dial toll-free 112 or 767 immediately during emergencies." },
+              { num: 1, title: "Call Hotline", desc: "Dial 0703 382 5646 immediately during emergencies." },
               { num: 2, title: "Verify Details", desc: "The dispatcher verifies your exact location coordinates and triage state." },
               { num: 3, title: "Assign Unit", desc: "The closest available ambulance unit is located and assigned to the case." },
               { num: 4, title: "Rapid Dispatch", desc: "Ambulance paramedics depart instantly, keeping dispatch informed in transit." },
@@ -679,7 +629,7 @@ export default function Homepage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
           
           <div className="max-w-2xl mx-auto space-y-4">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-primary-navy bg-primary-navy/5 px-3 py-1 rounded-full inline-block">
+            <span className="section-tag">
               Our Strengths
             </span>
             <h2 className="font-heading font-black text-3xl sm:text-4xl text-primary-navy">
@@ -715,7 +665,7 @@ export default function Homepage() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="bg-bg-gray hover:bg-white p-8 rounded-3xl border border-gray-100 hover:shadow-lg transition-all duration-300 text-left space-y-4 group"
+                className="card-lift bg-white p-8 rounded-3xl border border-gray-100 hover:shadow-soft text-left space-y-4 group"
               >
                 <div className="w-12 h-12 rounded-2xl bg-white group-hover:bg-primary-navy/5 flex items-center justify-center shadow-sm">
                   {item.icon}
@@ -823,7 +773,7 @@ export default function Homepage() {
 
           {/* Leadership Message Card */}
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-            <div className="bg-bg-gray rounded-3xl p-8 lg:p-12 border border-gray-150 shadow-sm relative overflow-hidden text-left">
+            <div className="card-lift bg-white rounded-3xl p-8 lg:p-12 border border-gray-150 shadow-soft relative overflow-hidden text-left">
               <div className="absolute top-0 right-0 w-48 h-48 bg-primary-navy/5 rounded-full blur-3xl" />
               
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -832,11 +782,11 @@ export default function Homepage() {
                 <div className="lg:col-span-4 relative flex justify-center">
                   <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-2xl overflow-hidden shadow-md border-4 border-white">
                     <Image
-                      src="/images/coordinator.jpg"
-                      alt="Dr. Abdullahi Yusuf Gombe"
+                      src="/images/Dr%20Suraj%20Abdulkarim%20.jpg"
+                      alt="Dr. Suraj Abdulkarim"
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
+                      className="object-cover object-top"
                     />
                   </div>
                 </div>
@@ -858,76 +808,12 @@ export default function Homepage() {
                     </p>
                   </div>
                   <div className="pt-2">
-                    <h5 className="font-heading font-extrabold text-base text-primary-navy">Dr. Abdullahi Yusuf Gombe</h5>
+                    <h5 className="font-heading font-extrabold text-base text-primary-navy">Dr. Suraj Abdulkarim</h5>
                     <p className="text-xs text-muted-text">State Coordinator, Gombe State SEMSAS</p>
                   </div>
                 </div>
 
               </div>
-            </div>
-          </div>
-
-          {/* Officers Grid */}
-          <div className="space-y-12">
-            <div className="max-w-3xl mx-auto text-center space-y-2">
-              <span className="text-xs uppercase font-extrabold tracking-widest text-primary-navy bg-primary-navy/5 px-3 py-1 rounded-full inline-block">
-                Executive Committee
-              </span>
-              <h3 className="font-heading font-black text-xl sm:text-2xl text-primary-navy">
-                Executive Officers & Managers
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {leadershipTeam.map((leader, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white rounded-3xl p-6 border border-gray-150 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between text-left"
-                >
-                  <div className="space-y-4">
-                    {/* Portrait Placeholder Avatar */}
-                    <div className="w-16 h-16 rounded-2xl bg-primary-navy/5 text-primary-navy flex items-center justify-center border border-primary-navy/10">
-                      <User className="w-8 h-8" />
-                    </div>
-                    <div>
-                      <h4 className="font-heading font-extrabold text-base text-primary-navy leading-tight">
-                        {leader.name}
-                      </h4>
-                      <p className="text-xs font-semibold text-emergency-red mt-0.5">
-                        {leader.role}
-                      </p>
-                    </div>
-                    <p className="text-muted-text text-xs leading-relaxed font-light">
-                      {leader.bio}
-                    </p>
-                  </div>
-
-                  <div className="pt-6 mt-6 border-t border-gray-100 flex items-center justify-between">
-                    <div className="flex gap-2">
-                      <a
-                        href={`mailto:${leader.email}`}
-                        className="w-8 h-8 rounded-lg bg-bg-gray hover:bg-primary-navy/5 text-muted-text hover:text-primary-navy flex items-center justify-center transition-colors"
-                        title="Email Administrator"
-                      >
-                        <Mail className="w-4 h-4" />
-                      </a>
-                      <a
-                        href={leader.linkedin}
-                        className="w-8 h-8 rounded-lg bg-bg-gray hover:bg-primary-navy/5 text-muted-text hover:text-primary-navy flex items-center justify-center transition-colors"
-                        title="LinkedIn Profile"
-                      >
-                        <Globe className="w-4 h-4" />
-                      </a>
-                    </div>
-                    <Link
-                      href="/contact"
-                      className="text-[10px] uppercase font-bold text-primary-navy hover:text-emergency-red tracking-wider"
-                    >
-                      Contact Coordinator &rarr;
-                    </Link>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
 
@@ -940,7 +826,7 @@ export default function Homepage() {
           
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 text-left max-w-4xl mx-auto">
             <div className="space-y-3">
-              <span className="text-xs uppercase font-extrabold tracking-widest text-emergency-red bg-emergency-red/5 px-3 py-1 rounded-full inline-block">
+              <span className="section-tag section-tag-red">
                 Media Center
               </span>
               <h2 className="font-heading font-black text-3xl sm:text-4xl text-primary-navy">
@@ -949,7 +835,7 @@ export default function Homepage() {
             </div>
             <a
               href="#newsevents"
-              className="inline-flex items-center gap-2 bg-primary-navy text-white text-sm font-semibold px-5 py-3 rounded-xl hover:bg-opacity-95 transition-all shadow-sm"
+              className="btn btn-dark px-5 py-3 text-sm"
             >
               View All News
               <ChevronRight className="w-4 h-4" />
@@ -960,7 +846,7 @@ export default function Homepage() {
             {newsItems.map((news, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-150 flex flex-col group hover:shadow-md transition-shadow"
+                className="card-lift bg-white rounded-3xl overflow-hidden shadow-soft border border-gray-150 flex flex-col group"
               >
                 <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
                   <Image
@@ -1029,15 +915,15 @@ export default function Homepage() {
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
             <a
-              href="tel:112"
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-emergency-red text-white font-bold px-8 py-4 rounded-xl hover:bg-red-700 transition-colors shadow-lg hover:shadow-[0_10px_20px_rgba(214,40,40,0.4)]"
+              href="tel:07033825646"
+              className="btn btn-red w-full sm:w-auto px-8 py-4"
             >
               <Phone className="w-5 h-5 fill-white" />
-              Call Toll-Free: 112 / 767
+              Call Emergency: 0703 382 5646
             </a>
             <a
               href="#contact"
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-semibold px-8 py-4 rounded-xl transition-all"
+              className="btn btn-ghost w-full sm:w-auto px-8 py-4"
             >
               Contact SEMSAS Office
             </a>
@@ -1053,7 +939,7 @@ export default function Homepage() {
             {/* Contact details */}
             <div className="lg:col-span-5 space-y-8">
               <div className="space-y-3">
-                <span className="text-xs uppercase font-extrabold tracking-widest text-primary-navy bg-primary-navy/5 px-3 py-1 rounded-full inline-block">
+                <span className="section-tag">
                   Get In Touch
                 </span>
                 <h2 className="font-heading font-black text-3xl text-primary-navy">
@@ -1082,7 +968,7 @@ export default function Homepage() {
                   <div>
                     <h5 className="font-heading font-bold text-sm text-primary-navy">Inquiries Hotline</h5>
                     <p className="text-muted-text text-xs">Admin Line: +234 (0) 803 000 0000 (Placeholder)</p>
-                    <p className="text-emergency-red text-xs font-bold mt-0.5">Emergency Triage: Dial 112 (Toll-Free)</p>
+                    <p className="text-emergency-red text-xs font-bold mt-0.5">Emergency Triage: Dial 0703 382 5646</p>
                   </div>
                 </div>
 
@@ -1099,13 +985,13 @@ export default function Homepage() {
             </div>
 
             {/* Contact Form */}
-            <div className="lg:col-span-7 bg-bg-gray rounded-3xl p-8 border border-gray-150 shadow-sm">
+            <div className="lg:col-span-7 bg-white rounded-3xl p-8 border border-gray-150 shadow-soft">
               <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-primary-navy" htmlFor="name">Full Name</label>
                     <input
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-navy"
+                      className="w-full bg-bg-gray border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-navy focus:bg-white focus:ring-4 focus:ring-primary-navy/10 transition-all"
                       type="text"
                       id="name"
                       placeholder="e.g. Ibrahim Yusuf"
@@ -1115,7 +1001,7 @@ export default function Homepage() {
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-primary-navy" htmlFor="email">Email Address</label>
                     <input
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-navy"
+                      className="w-full bg-bg-gray border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-navy focus:bg-white focus:ring-4 focus:ring-primary-navy/10 transition-all"
                       type="email"
                       id="email"
                       placeholder="e.g. ibrahim@example.com"
@@ -1127,7 +1013,7 @@ export default function Homepage() {
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-primary-navy" htmlFor="subject">Subject</label>
                   <input
-                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-navy"
+                    className="w-full bg-bg-gray border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-navy focus:bg-white focus:ring-4 focus:ring-primary-navy/10 transition-all"
                     type="text"
                     id="subject"
                     placeholder="How can we assist you?"
@@ -1138,7 +1024,7 @@ export default function Homepage() {
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-primary-navy" htmlFor="message">Message</label>
                   <textarea
-                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-navy min-h-[120px]"
+                    className="w-full bg-bg-gray border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-navy focus:bg-white focus:ring-4 focus:ring-primary-navy/10 transition-all min-h-[120px]"
                     id="message"
                     placeholder="Write details of your inquiries here..."
                     required
@@ -1147,7 +1033,7 @@ export default function Homepage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-primary-navy text-white font-bold py-3.5 rounded-xl hover:bg-opacity-95 transition-all text-sm shadow-md"
+                  className="btn btn-dark w-full py-3.5 text-sm"
                 >
                   Send Message
                 </button>
