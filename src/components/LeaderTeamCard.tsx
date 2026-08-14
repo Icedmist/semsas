@@ -34,9 +34,9 @@ export default function LeaderTeamCard({ leader, idx = 0, contactHref = "/#conta
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: idx * 0.08 }}
-      className="group relative overflow-hidden rounded-3xl border border-primary-navy/10 bg-white shadow-sm hover:shadow-2xl hover:shadow-primary-navy/15 transition-all duration-500 hover:-translate-y-1.5 flex flex-col"
+      className="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm hover:shadow-[0_24px_50px_-20px_rgba(10,42,82,0.3)] hover:border-slate-300 transition-all duration-500 hover:-translate-y-1.5 flex flex-col"
     >
-      <div className="relative h-24 bg-gradient-to-br from-primary-navy via-primary-navy to-emergency-red overflow-hidden">
+      <div className="relative h-24 bg-gradient-to-br from-[#0A2A52] via-primary-navy to-emergency-red overflow-hidden">
         <div
           className="absolute inset-0 opacity-20"
           style={{

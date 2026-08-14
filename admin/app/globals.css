@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Sora", "Montserrat", system-ui, -apple-system, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  --color-primary-navy: #0052A5;
+  --color-primary-deep: #003066;
+  --color-emergency-red: #DC143C;
+  --color-emergency-blue: #2F80ED;
+  --color-emergency-amber: #FFB81C;
+  --color-success-green: #00A86B;
+  --color-bg-gray: #F5F7FA;
+  --color-text-dark: #1B1B1B;
+  --color-muted-text: #6B7280;
+
+  --shadow-soft: 0 12px 40px -12px rgba(0, 82, 165, 0.14);
+  --shadow-glow-red: 0 10px 30px -8px rgba(220, 20, 60, 0.45);
+  --shadow-glow-blue: 0 10px 30px -8px rgba(0, 82, 165, 0.4);
+}
+
+:root {
+  --background: #F7F9FC;
+  --foreground: #1B1B1B;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-gray);
+  color: var(--color-text-dark);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-dark {
+  background: linear-gradient(135deg, #0052A5 0%, #0a6bc0 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 24px -8px rgba(0, 82, 165, 0.45);
+}
+.btn-dark:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -10px rgba(0, 82, 165, 0.55);
+}
+.btn-red {
+  background: linear-gradient(135deg, #DC143C 0%, #b01030 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 24px -8px rgba(220, 20, 60, 0.5);
+}
+.btn-red:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -10px rgba(220, 20, 60, 0.6);
+}
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}

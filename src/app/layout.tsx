@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
+import { MotionConfig } from "framer-motion";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Gombe State Emergency Medical Services & Ambulance System | SEMSAS",
@@ -49,9 +48,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-bg-gray text-text-dark">
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <MotionConfig reducedMotion="user">{children}</MotionConfig>
       </body>
     </html>
   );

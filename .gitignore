@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# standalone admin app
+/admin/.next/
+/admin/node_modules/
+/admin/*.tsbuildinfo
+/admin/next-env.d.ts

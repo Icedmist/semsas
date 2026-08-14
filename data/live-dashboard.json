@@ -1,0 +1,19 @@
+{
+  "updatedAt": "2026-08-13T00:00:00.000Z",
+  "dashboard": {
+    "emergencyCalls": 1280,
+    "livesSaved": 342,
+    "patientsMoved": 875,
+    "totalAmbulances": 25
+  },
+  "hero": {
+    "ambulances": 25,
+    "personnel": 180,
+    "communities": 110,
+    "responses": 4500
+  },
+  "status": {
+    "message": "All Systems Working",
+    "status": "operational"
+  }
+}
