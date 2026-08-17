@@ -21,7 +21,7 @@ export async function OPTIONS(request: Request) {
 }
 
 export async function GET(request: Request) {
-  const data = getLiveDashboardData();
+  const data = await getLiveDashboardData();
   return NextResponse.json(data, {
     headers: getCorsHeaders(request),
   });
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const saved = saveLiveDashboardData(body);
+    const saved = await saveLiveDashboardData(body);
     return NextResponse.json({ success: true, data: saved }, {
       headers: corsHeaders
     });
