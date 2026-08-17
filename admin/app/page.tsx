@@ -6,105 +6,61 @@ import {
   Heart,
   Users,
   Ambulance,
-  Truck,
-  UserCheck,
-  MapPin,
-  RefreshCw,
-  Save,
-  CheckCircle2,
-  XCircle,
+  Building2,
+  PhoneCall,
+  CheckCircle,
+  Clock,
+  TrendingUp,
+  MapPinned,
+  Baby,
   AlertTriangle,
-  LayoutDashboard,
-  Globe,
+  Award,
+  RadioTower,
+  Save,
+  RefreshCw,
+  XCircle,
+  CheckCircle2,
+  Database,
+  MapPin,
+  HelpCircle
 } from "lucide-react";
 
-interface LiveDashboardData {
-  updatedAt: string;
-  dashboard: {
-    emergencyCalls: number;
-    livesSaved: number;
-    patientsMoved: number;
-    totalAmbulances: number;
-  };
-  hero: {
-    ambulances: number;
-    personnel: number;
-    communities: number;
-    responses: number;
-  };
-  status: {
-    message: string;
-    status: "operational" | "degraded" | "offline";
-  };
-}
+import { defaultDashboardData } from "../../src/lib/default-dashboard-data";
 
-const STATUS_META: Record<
-  LiveDashboardData["status"]["status"],
-  { label: string; color: string; dot: string }
-> = {
-  operational: { label: "Operational", color: "text-emerald-600 bg-emerald-50 border-emerald-200", dot: "bg-emerald-500" },
-  degraded: { label: "Degraded", color: "text-amber-600 bg-amber-50 border-amber-200", dot: "bg-amber-500" },
-  offline: { label: "Offline", color: "text-red-600 bg-red-50 border-red-200", dot: "bg-red-500" },
-};
+type DashboardDataSchema = typeof defaultDashboardData;
 
-interface FieldProps {
-  label: string;
-  value: number;
-  onChange: (value: number) => void;
-}
-
-function NumberField({ label, value, onChange }: FieldProps) {
-  return (
-    <div className="space-y-1.5">
-      <label className="text-[11px] font-bold uppercase tracking-wider text-muted-text">
-        {label}
-      </label>
-      <input
-        type="number"
-        min={0}
-        value={value}
-        onChange={(e) => onChange(Math.max(0, parseInt(e.target.value || "0", 10)))}
-        className="w-full bg-bg-gray border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-primary-navy focus:outline-none focus:border-primary-navy focus:bg-white focus:ring-4 focus:ring-primary-navy/10 transition-all"
-      />
-    </div>
-  );
-}
-
-function MetricCard({
-  icon,
-  title,
-  iconClass,
-  children,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  iconClass: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="bg-white rounded-3xl border border-gray-100 shadow-soft p-6 sm:p-8 space-y-5">
-      <div className="flex items-center gap-3">
-        <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${iconClass}`}>
-          {icon}
-        </div>
-        <h3 className="font-heading font-bold text-base text-primary-navy">{title}</h3>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{children}</div>
-    </div>
-  );
-}
+const TABS = [
+  { id: "overview", label: "Overview", icon: Activity },
+  { id: "fleet", label: "Ambulance Fleet", icon: Ambulance },
+  { id: "team", label: "RESMAT Team", icon: Users },
+  { id: "facilities", label: "Facilities", icon: Building2 },
+  { id: "calls", label: "Emergency Calls", icon: PhoneCall },
+  { id: "transport", label: "Patient Transport", icon: Baby },
+  { id: "emergencyTypes", label: "Emergency Types", icon: HelpCircle },
+  { id: "performance", label: "Performance", icon: Award },
+  { id: "census", label: "Where We Serve", icon: MapPinned },
+  { id: "trends", label: "Monthly Births", icon: TrendingUp },
+  { id: "serviceRuns", label: "Service Runs", icon: Clock }
+];
 
 export default function AdminConsole() {
-  const [data, setData] = useState<LiveDashboardData | null>(null);
+  const [data, setData] = useState<DashboardDataSchema | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveResult, setSaveResult] = useState<"success" | "error" | null>(null);
   const [dirty, setDirty] = useState(false);
+  const [activeTab, setActiveTab] = useState("overview");
+
+  // Read API URL from environment variables
+  const getApiUrl = () => {
+    const nextUrl = process.env.NEXT_PUBLIC_API_URL;
+    return nextUrl ? `${nextUrl}/api/live-stats` : "/api/live-stats";
+  };
 
   const loadData = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/live-stats");
+      const res = await fetch(getApiUrl());
       if (!res.ok) throw new Error("Failed to load");
       const json = await res.json();
       setData(json);
@@ -122,12 +78,13 @@ export default function AdminConsole() {
     loadData();
   }, []);
 
-  const patch = (section: "dashboard" | "hero" | "status", partial: Partial<LiveDashboardData["dashboard"] & LiveDashboardData["hero"] & LiveDashboardData["status"]>) => {
-    setData((prev) =>
-      prev
-        ? { ...prev, [section]: { ...(prev as any)[section], ...partial } }
-        : prev
-    );
+  const patch = (section: keyof DashboardDataSchema, partial: any) => {
+    setData((prev) => {
+      if (!prev) return prev;
+      const updated = { ...prev };
+      updated[section] = { ...(updated[section] as any), ...partial };
+      return updated;
+    });
     setDirty(true);
     setSaveResult(null);
   };
@@ -136,20 +93,24 @@ export default function AdminConsole() {
     if (!data) return;
     setSaving(true);
     try {
-      const res = await fetch("/api/live-stats", {
+      const secretKey = process.env.NEXT_PUBLIC_ADMIN_SECRET_KEY || "";
+      const res = await fetch(getApiUrl(), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          dashboard: data.dashboard,
-          hero: data.hero,
-          status: data.status,
-        }),
+        headers: {
+          "Content-Type": "application/json",
+          ...(secretKey ? { Authorization: `Bearer ${secretKey}` } : {})
+        },
+        body: JSON.stringify(data)
       });
       if (!res.ok) throw new Error("Failed to save");
       const json = await res.json();
-      setData(json.data);
-      setDirty(false);
-      setSaveResult("success");
+      if (json.success) {
+        setData(json.data);
+        setDirty(false);
+        setSaveResult("success");
+      } else {
+        throw new Error(json.error || "Save failed");
+      }
     } catch (error) {
       console.error(error);
       setSaveResult("error");
@@ -158,55 +119,72 @@ export default function AdminConsole() {
     }
   };
 
-  const statusMeta = data ? STATUS_META[data.status.status] : null;
+  if (loading && !data) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50 space-y-4">
+        <RefreshCw className="w-12 h-12 text-[#0052A5] animate-spin" />
+        <p className="text-sm font-semibold text-slate-600">Connecting to Live SEMSAS Database...</p>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50 space-y-4">
+        <XCircle className="w-16 h-16 text-red-500" />
+        <p className="text-lg font-bold text-slate-800">Failed to load dashboard data</p>
+        <button onClick={loadData} className="px-6 py-2.5 bg-[#0052A5] text-white rounded-xl font-bold text-sm">
+          Retry Connection
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-bg-gray">
-      {/* Top Bar */}
-      <header className="sticky top-0 z-30 bg-[#0B2E5B] text-white shadow-lg">
-        <div className="h-1 bg-gradient-to-r from-emergency-red via-emergency-amber to-emergency-blue" />
+    <div className="min-h-screen bg-slate-50 pb-24">
+      {/* Premium Header */}
+      <header className="sticky top-0 z-30 bg-[#0B2E5B] text-white shadow-md">
+        <div className="h-1 bg-gradient-to-r from-red-500 via-amber-500 to-blue-500" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center">
-              <LayoutDashboard className="w-5 h-5 text-emergency-amber" />
+              <Database className="w-5 h-5 text-amber-400" />
             </div>
             <div>
-              <h1 className="font-heading font-extrabold text-lg leading-none">
-                SEMSAS Admin Console
-              </h1>
+              <h1 className="font-heading font-extrabold text-lg leading-none">SEMSAS Multi-Slide Console</h1>
               <p className="text-[11px] text-white/50 font-medium mt-1">
-                Live Dashboard &amp; Statistics Management
+                Centralized Live Dashboard Editor (linked to {process.env.NEXT_PUBLIC_API_URL || "Local Server"})
               </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             {dirty && (
-              <span className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold text-emergency-amber bg-emergency-amber/10 border border-emergency-amber/30 px-3 py-1.5 rounded-full">
+              <span className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold text-amber-500 bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-full">
                 <AlertTriangle className="w-3.5 h-3.5" /> Unsaved changes
               </span>
             )}
             <button
               onClick={loadData}
               disabled={loading}
-              className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors disabled:opacity-50"
+              className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-colors disabled:opacity-50"
             >
               <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
-              <span className="hidden sm:inline">Reload</span>
+              <span>Reload</span>
             </button>
             <button
               onClick={handleSave}
-              disabled={saving || !data}
-              className="btn btn-red px-5 py-2.5 text-xs"
+              disabled={saving}
+              className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-colors disabled:opacity-50"
             >
               <Save className="w-4 h-4" />
-              {saving ? "Saving..." : "Save Changes"}
+              <span>{saving ? "Saving..." : "Publish Updates"}</span>
             </button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-        {/* Save feedback */}
+      {/* Main Console Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         {saveResult && (
           <div
             className={`flex items-center justify-between gap-4 rounded-2xl border px-5 py-4 text-sm font-semibold ${
@@ -216,14 +194,10 @@ export default function AdminConsole() {
             }`}
           >
             <div className="flex items-center gap-2.5">
-              {saveResult === "success" ? (
-                <CheckCircle2 className="w-5 h-5" />
-              ) : (
-                <XCircle className="w-5 h-5" />
-              )}
+              {saveResult === "success" ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
               {saveResult === "success"
-                ? "Changes saved successfully. The public live dashboard has been updated."
-                : "Something went wrong. Please check the data and try again."}
+                ? "Dashboard updated successfully. All slide changes are now live."
+                : "Failed to publish updates. Please check your credentials/network."}
             </div>
             <button onClick={() => setSaveResult(null)} className="hover:opacity-70">
               <XCircle className="w-5 h-5" />
@@ -231,225 +205,473 @@ export default function AdminConsole() {
           </div>
         )}
 
-        {loading && !data ? (
-          <div className="flex flex-col items-center justify-center py-24 space-y-4">
-            <RefreshCw className="w-10 h-10 text-primary-navy animate-spin" />
-            <p className="text-sm text-muted-text font-medium">Loading live dashboard data...</p>
-          </div>
-        ) : !data ? (
-          <div className="bg-white rounded-3xl border border-red-200 p-12 text-center space-y-3">
-            <XCircle className="w-10 h-10 text-red-500 mx-auto" />
-            <p className="font-bold text-primary-navy">Failed to load live dashboard data.</p>
-            <button onClick={loadData} className="btn btn-dark px-6 py-3 text-sm mx-auto">
-              Try Again
-            </button>
-          </div>
-        ) : (
-          <>
-            {/* Status summary */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white rounded-3xl border border-gray-100 shadow-soft p-6">
-              <div className="flex items-center gap-3">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border ${statusMeta?.color}`}>
-                  <Activity className="w-6 h-6" />
-                </div>
-                <div>
-                  <div className="text-[10px] uppercase font-bold text-muted-text tracking-widest">
-                    Current System Status
-                  </div>
-                  <div className="flex items-center gap-2 mt-0.5">
-                    <span className={`w-2.5 h-2.5 rounded-full animate-pulse ${statusMeta?.dot}`} />
-                    <span className="font-heading font-extrabold text-lg text-primary-navy">
-                      {statusMeta?.label}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 text-[11px] text-muted-text font-semibold">
-                <Globe className="w-3.5 h-3.5" />
-                Last updated:{" "}
-                {data.updatedAt ? new Date(data.updatedAt).toLocaleString() : "Never"}
-              </div>
-            </div>
-
-            {/* Live Dashboard Stats */}
-            <div>
-              <h2 className="font-heading font-extrabold text-lg text-primary-navy mb-4 flex items-center gap-2">
-                Live Dashboard Stats
-                <span className="text-[10px] uppercase tracking-wider text-muted-text font-bold bg-bg-gray border border-gray-200 px-2.5 py-1 rounded-full">
-                  Public /dashboard
-                </span>
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <MetricCard
-                  icon={<Activity className="w-5 h-5 text-emergency-red" />}
-                  title="Emergency Calls"
-                  iconClass="bg-emergency-red/10"
-                >
-                  <NumberField
-                    label="Total Calls"
-                    value={data.dashboard.emergencyCalls}
-                    onChange={(v) => patch("dashboard", { emergencyCalls: v })}
-                  />
-                </MetricCard>
-                <MetricCard
-                  icon={<Heart className="w-5 h-5 text-emerald-500" />}
-                  title="Lives Saved"
-                  iconClass="bg-emerald-500/10"
-                >
-                  <NumberField
-                    label="Lives Saved"
-                    value={data.dashboard.livesSaved}
-                    onChange={(v) => patch("dashboard", { livesSaved: v })}
-                  />
-                </MetricCard>
-                <MetricCard
-                  icon={<Users className="w-5 h-5 text-emergency-amber" />}
-                  title="Patients Moved"
-                  iconClass="bg-emergency-amber/10"
-                >
-                  <NumberField
-                    label="Patients Moved"
-                    value={data.dashboard.patientsMoved}
-                    onChange={(v) => patch("dashboard", { patientsMoved: v })}
-                  />
-                </MetricCard>
-                <MetricCard
-                  icon={<Ambulance className="w-5 h-5 text-[#FF0000]" />}
-                  title="Total Ambulances"
-                  iconClass="bg-red-50"
-                >
-                  <NumberField
-                    label="Ambulances"
-                    value={data.dashboard.totalAmbulances}
-                    onChange={(v) => patch("dashboard", { totalAmbulances: v })}
-                  />
-                </MetricCard>
-              </div>
-            </div>
-
-            {/* Homepage Hero Stats */}
-            <div>
-              <h2 className="font-heading font-extrabold text-lg text-primary-navy mb-4 flex items-center gap-2">
-                Homepage Hero Counters
-                <span className="text-[10px] uppercase tracking-wider text-muted-text font-bold bg-bg-gray border border-gray-200 px-2.5 py-1 rounded-full">
-                  Public Homepage
-                </span>
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <MetricCard
-                  icon={<Truck className="w-5 h-5 text-emergency-blue" />}
-                  title="Ambulance Units"
-                  iconClass="bg-emergency-blue/10"
-                >
-                  <NumberField
-                    label="Units"
-                    value={data.hero.ambulances}
-                    onChange={(v) => patch("hero", { ambulances: v })}
-                  />
-                </MetricCard>
-                <MetricCard
-                  icon={<UserCheck className="w-5 h-5 text-emerald-500" />}
-                  title="Emergency Personnel"
-                  iconClass="bg-emerald-500/10"
-                >
-                  <NumberField
-                    label="Personnel"
-                    value={data.hero.personnel}
-                    onChange={(v) => patch("hero", { personnel: v })}
-                  />
-                </MetricCard>
-                <MetricCard
-                  icon={<MapPin className="w-5 h-5 text-emergency-amber" />}
-                  title="Communities Served"
-                  iconClass="bg-emergency-amber/10"
-                >
-                  <NumberField
-                    label="Communities"
-                    value={data.hero.communities}
-                    onChange={(v) => patch("hero", { communities: v })}
-                  />
-                </MetricCard>
-                <MetricCard
-                  icon={<Activity className="w-5 h-5 text-emergency-red" />}
-                  title="Emergency Responses"
-                  iconClass="bg-emergency-red/10"
-                >
-                  <NumberField
-                    label="Responses"
-                    value={data.hero.responses}
-                    onChange={(v) => patch("hero", { responses: v })}
-                  />
-                </MetricCard>
-              </div>
-            </div>
-
-            {/* System Status */}
-            <div>
-              <h2 className="font-heading font-extrabold text-lg text-primary-navy mb-4">
-                System Status Banner
-              </h2>
-              <div className="bg-white rounded-3xl border border-gray-100 shadow-soft p-6 sm:p-8 space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {(Object.keys(STATUS_META) as Array<keyof typeof STATUS_META>).map(
-                    (key) => {
-                      const meta = STATUS_META[key];
-                      return (
-                        <button
-                          key={key}
-                          onClick={() => patch("status", { status: key })}
-                          className={`flex items-center justify-center gap-2.5 rounded-2xl border px-4 py-3.5 text-sm font-bold transition-all duration-300 ${
-                            data.status.status === key
-                              ? `${meta.color} shadow-sm ring-2 ring-offset-1`
-                              : "bg-bg-gray border-gray-200 text-muted-text hover:border-gray-300"
-                          }`}
-                        >
-                          <span className={`w-2.5 h-2.5 rounded-full ${meta.dot}`} />
-                          {meta.label}
-                        </button>
-                      );
-                    }
-                  )}
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[11px] font-bold uppercase tracking-wider text-muted-text">
-                    Status Message
-                  </label>
-                  <input
-                    type="text"
-                    value={data.status.message}
-                    onChange={(e) => patch("status", { message: e.target.value })}
-                    className="w-full bg-bg-gray border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-primary-navy focus:outline-none focus:border-primary-navy focus:bg-white focus:ring-4 focus:ring-primary-navy/10 transition-all"
-                    placeholder="e.g. All Systems Working"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Sticky Save Bar */}
-            <div className="sticky bottom-6 z-20 flex items-center justify-between gap-4 bg-white/90 backdrop-blur border border-gray-200 rounded-2xl shadow-[0_20px_50px_-20px_rgba(8,47,91,0.3)] px-6 py-4">
-              <div className="text-xs text-muted-text">
-                {dirty ? (
-                  <span className="flex items-center gap-2 font-semibold text-emergency-amber">
-                    <AlertTriangle className="w-4 h-4" /> You have unsaved changes
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-2 font-semibold text-emerald-600">
-                    <CheckCircle2 className="w-4 h-4" /> All changes saved
-                  </span>
-                )}
-              </div>
+        {/* Tabbed Navigation Bar */}
+        <div className="flex gap-2 overflow-x-auto pb-2 border-b border-slate-200">
+          {TABS.map((tab) => {
+            const TabIcon = tab.icon;
+            const active = activeTab === tab.id;
+            return (
               <button
-                onClick={handleSave}
-                disabled={saving || !dirty}
-                className="btn btn-red px-6 py-3 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 px-4 py-3 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 ${
+                  active
+                    ? "bg-[#0B2E5B] text-white shadow-sm"
+                    : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
+                }`}
               >
-                <Save className="w-4 h-4" />
-                {saving ? "Saving..." : "Publish Updates"}
+                <TabIcon className="w-4 h-4" />
+                {tab.label}
               </button>
+            );
+          })}
+        </div>
+
+        {/* Tab Content Fields */}
+        <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+          {/* TAB 1: OVERVIEW */}
+          {activeTab === "overview" && (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Overview Settings</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {renderNumberField("overview", "totalEmergencies", "Total Emergencies", data.overview.totalEmergencies)}
+                {renderNumberField("overview", "totalAmbulances", "Total Ambulances", data.overview.totalAmbulances)}
+                {renderTextField("overview", "avgResponseTime", "Average Response Time", data.overview.avgResponseTime)}
+                {renderNumberField("overview", "livesSaved", "Lives Saved", data.overview.livesSaved)}
+                {renderNumberField("overview", "patientsTransported", "Patients Transported", data.overview.patientsTransported)}
+                {renderNumberField("overview", "emergencyTrend", "Emergency Trend (%)", data.overview.emergencyTrend, true)}
+              </div>
             </div>
-          </>
-        )}
+          )}
+
+          {/* TAB 2: AMBULANCE FLEET */}
+          {activeTab === "fleet" && (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Ambulance Fleet by LGA</h2>
+              {renderNumberField("ambulanceFleet", "total", "Total Fleet Count (Global)", data.ambulanceFleet.total)}
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 mt-4">
+                <p className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">Fleet Distribution</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {data.ambulanceFleet.byLGA.map((lga, idx) => (
+                    <div key={lga.name} className="bg-white p-3 rounded-xl border border-slate-200">
+                      <label className="text-xs font-bold text-slate-700 block mb-1">{lga.name}</label>
+                      <input
+                        type="number"
+                        min={0}
+                        value={lga.count}
+                        onChange={(e) => {
+                          const updatedLGA = [...data.ambulanceFleet.byLGA];
+                          updatedLGA[idx].count = Math.max(0, parseInt(e.target.value || "0", 10));
+                          patch("ambulanceFleet", { byLGA: updatedLGA });
+                        }}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-sm font-semibold focus:bg-white focus:outline-none"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 3: RESMAT TEAM */}
+          {activeTab === "team" && (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">RESMAT Personnel Count</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {renderNumberField("staff", "cemtorsOffices", "CEMTTOs Offices", data.staff.cemtorsOffices)}
+                {renderNumberField("staff", "volunteerDrivers", "Volunteer Drivers", data.staff.volunteerDrivers)}
+                <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-200 flex flex-col justify-center">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Auto-Calculated Total</span>
+                  <span className="text-3xl font-extrabold text-[#0B2E5B] mt-1">
+                    {data.staff.cemtorsOffices + data.staff.volunteerDrivers}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 4: FACILITIES */}
+          {activeTab === "facilities" && (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Medical Facilities Distribution</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {renderNumberField("facilities", "remonic", "MAMII / Remonic Health Facilities", data.facilities.remonic)}
+                {renderNumberField("facilities", "cemone", "CEmoNC Health Facilities", data.facilities.cemone)}
+              </div>
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <p className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">Zonal Distribution</p>
+                <div className="space-y-3">
+                  {data.facilities.distribution.map((dist, idx) => (
+                    <div key={dist.area} className="bg-white p-4 rounded-xl border border-slate-200 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                      <span className="text-xs font-bold text-slate-800">{dist.area}</span>
+                      <div>
+                        <label className="text-[10px] text-slate-400 font-bold uppercase block mb-1">MAMII (Remonic)</label>
+                        <input
+                          type="number"
+                          value={dist.remonic}
+                          onChange={(e) => {
+                            const updatedDist = [...data.facilities.distribution];
+                            updatedDist[idx].remonic = Math.max(0, parseInt(e.target.value || "0", 10));
+                            patch("facilities", { distribution: updatedDist });
+                          }}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-semibold focus:bg-white focus:outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] text-slate-400 font-bold uppercase block mb-1">CEmoNC</label>
+                        <input
+                          type="number"
+                          value={dist.cemone}
+                          onChange={(e) => {
+                            const updatedDist = [...data.facilities.distribution];
+                            updatedDist[idx].cemone = Math.max(0, parseInt(e.target.value || "0", 10));
+                            patch("facilities", { distribution: updatedDist });
+                          }}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-semibold focus:bg-white focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 5: EMERGENCY CALLS */}
+          {activeTab === "calls" && (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Emergency Calls & Dispatch Settings</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {renderNumberField("dailyDispatch", "callsReceived", "Calls Received Today", data.dailyDispatch.callsReceived)}
+                {renderTextField("dailyDispatch", "avgResponseTime", "Avg Response Time", data.dailyDispatch.avgResponseTime)}
+                {renderNumberField("dailyDispatch", "successfulInterventions", "Successful Interventions Today", data.dailyDispatch.successfulInterventions)}
+                {renderTextField("dailyDispatch", "avgTimeToScene", "Avg Time to Scene", data.dailyDispatch.avgTimeToScene)}
+              </div>
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <p className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">Hourly Calls Trend</p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
+                  {data.dailyDispatch.trends.map((t, idx) => (
+                    <div key={t.time} className="bg-white p-3 rounded-xl border border-slate-200">
+                      <span className="text-xs font-bold text-slate-700 block mb-1">{t.time}</span>
+                      <input
+                        type="number"
+                        value={t.calls}
+                        onChange={(e) => {
+                          const updatedTrends = [...data.dailyDispatch.trends];
+                          updatedTrends[idx].calls = Math.max(0, parseInt(e.target.value || "0", 10));
+                          patch("dailyDispatch", { trends: updatedTrends });
+                        }}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-semibold focus:bg-white focus:outline-none"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 6: PATIENT TRANSPORT */}
+          {activeTab === "transport" && (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Maternal Patient Transport</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {renderNumberField("transport", "totalDeliveries", "Safe Deliveries", data.transport.totalDeliveries)}
+                {renderNumberField("transport", "totalOtherEmergencies", "Other Complications", data.transport.totalOtherEmergencies)}
+                {renderNumberField("transport", "resmatCases", "Total RESMAT Cases", data.transport.resmatCases)}
+              </div>
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <p className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">Monthly Breakdown</p>
+                <div className="space-y-3">
+                  {data.transport.monthlyData.map((m, idx) => (
+                    <div key={m.month} className="bg-white p-3 rounded-xl border border-slate-200 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                      <span className="text-xs font-bold text-slate-800">{m.month}</span>
+                      <div>
+                        <label className="text-[10px] text-slate-400 font-bold uppercase block mb-1">Deliveries</label>
+                        <input
+                          type="number"
+                          value={m.deliveries}
+                          onChange={(e) => {
+                            const updatedMData = [...data.transport.monthlyData];
+                            updatedMData[idx].deliveries = Math.max(0, parseInt(e.target.value || "0", 10));
+                            updatedMData[idx].total = updatedMData[idx].deliveries + updatedMData[idx].otherEmergencies;
+                            patch("transport", { monthlyData: updatedMData });
+                          }}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-semibold focus:bg-white focus:outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] text-slate-400 font-bold uppercase block mb-1">Other Cases</label>
+                        <input
+                          type="number"
+                          value={m.otherEmergencies}
+                          onChange={(e) => {
+                            const updatedMData = [...data.transport.monthlyData];
+                            updatedMData[idx].otherEmergencies = Math.max(0, parseInt(e.target.value || "0", 10));
+                            updatedMData[idx].total = updatedMData[idx].deliveries + updatedMData[idx].otherEmergencies;
+                            patch("transport", { monthlyData: updatedMData });
+                          }}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-semibold focus:bg-white focus:outline-none"
+                        />
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[10px] text-slate-400 font-bold uppercase block">Total</span>
+                        <span className="text-sm font-bold text-slate-700">{m.deliveries + m.otherEmergencies}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 7: EMERGENCY TYPES */}
+          {activeTab === "emergencyTypes" && (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Emergency Call Types</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Labor Complications */}
+                <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                  <p className="text-sm font-bold text-[#DC143C] mb-3">Labor Complications</p>
+                  <div className="space-y-3">
+                    {data.emergencyTypes.laborComplications.map((c, idx) => (
+                      <div key={c.name} className="bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between gap-4">
+                        <span className="text-xs font-bold text-slate-700">{c.name}</span>
+                        <input
+                          type="number"
+                          value={c.count}
+                          onChange={(e) => {
+                            const updatedLabor = [...data.emergencyTypes.laborComplications];
+                            updatedLabor[idx].count = Math.max(0, parseInt(e.target.value || "0", 10));
+                            patch("emergencyTypes", { laborComplications: updatedLabor });
+                          }}
+                          className="w-24 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-center focus:bg-white focus:outline-none"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Pregnancy Complications */}
+                <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                  <p className="text-sm font-bold text-[#0052A5] mb-3">Pregnancy Complications</p>
+                  <div className="space-y-3">
+                    {data.emergencyTypes.pregnancyComplications.map((c, idx) => (
+                      <div key={c.name} className="bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between gap-4">
+                        <span className="text-xs font-bold text-slate-700">{c.name}</span>
+                        <input
+                          type="number"
+                          value={c.count}
+                          onChange={(e) => {
+                            const updatedPreg = [...data.emergencyTypes.pregnancyComplications];
+                            updatedPreg[idx].count = Math.max(0, parseInt(e.target.value || "0", 10));
+                            patch("emergencyTypes", { pregnancyComplications: updatedPreg });
+                          }}
+                          className="w-24 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-center focus:bg-white focus:outline-none"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 8: PERFORMANCE */}
+          {activeTab === "performance" && (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Response & Survival Performance</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {renderNumberField("performance", "responseTimeTarget", "Response Time Target (mins)", data.performance.responseTimeTarget)}
+                {renderNumberField("performance", "responseTimeActual", "Response Time Actual (mins)", data.performance.responseTimeActual)}
+                {renderNumberField("performance", "survivalRate", "Survival Rate (%)", data.performance.survivalRate, true)}
+                {renderNumberField("performance", "satisfactionScore", "Satisfaction Score (%)", data.performance.satisfactionScore, true)}
+                {renderNumberField("performance", "coverageArea", "Coverage Area (%)", data.performance.coverageArea, true)}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 9: CENSUS / WHERE WE SERVE */}
+          {activeTab === "census" && (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Where We Serve (Census Details)</h2>
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 overflow-x-auto">
+                <table className="w-full min-w-[600px] text-xs">
+                  <thead>
+                    <tr className="border-b border-slate-300 text-slate-500 font-bold uppercase">
+                      <th className="text-left py-2 px-3">LGA Name</th>
+                      <th className="text-left py-2 px-3">Population</th>
+                      <th className="text-left py-2 px-3">Ambulances</th>
+                      <th className="text-right py-2 px-3">Ambulance Ratio</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.census.byLGA.map((lga, idx) => (
+                      <tr key={lga.name} className="border-b border-slate-200 bg-white">
+                        <td className="py-2 px-3 font-bold text-slate-800">{lga.name}</td>
+                        <td className="py-2 px-3">
+                          <input
+                            type="number"
+                            value={lga.population}
+                            onChange={(e) => {
+                              const updatedCensus = [...data.census.byLGA];
+                              const pop = Math.max(0, parseInt(e.target.value || "0", 10));
+                              updatedCensus[idx].population = pop;
+                              // Auto calculate ratio
+                              const amb = updatedCensus[idx].ambulances || 1;
+                              updatedCensus[idx].ratio = `1:${Math.round(pop / amb).toLocaleString()}`;
+                              patch("census", { byLGA: updatedCensus });
+                            }}
+                            className="bg-slate-50 border border-slate-200 rounded px-2 py-1 focus:bg-white focus:outline-none"
+                          />
+                        </td>
+                        <td className="py-2 px-3">
+                          <input
+                            type="number"
+                            value={lga.ambulances}
+                            onChange={(e) => {
+                              const updatedCensus = [...data.census.byLGA];
+                              const amb = Math.max(1, parseInt(e.target.value || "1", 10));
+                              updatedCensus[idx].ambulances = amb;
+                              // Auto calculate ratio
+                              const pop = updatedCensus[idx].population || 0;
+                              updatedCensus[idx].ratio = `1:${Math.round(pop / amb).toLocaleString()}`;
+                              patch("census", { byLGA: updatedCensus });
+                            }}
+                            className="bg-slate-50 border border-slate-200 rounded px-2 py-1 focus:bg-white focus:outline-none"
+                          />
+                        </td>
+                        <td className="py-2 px-3 text-right font-semibold text-[#0B2E5B]">
+                          {lga.ratio}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 10: MONTHLY BIRTHS / TRENDS */}
+          {activeTab === "trends" && (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Monthly Births (June - Dec 2025)</h2>
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <div className="space-y-3">
+                  {data.trends.monthly.map((m, idx) => (
+                    <div key={m.month} className="bg-white p-3 rounded-xl border border-slate-200 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                      <span className="text-xs font-bold text-slate-800">{m.month}</span>
+                      <div>
+                        <label className="text-[10px] text-slate-400 font-bold uppercase block mb-1">Emergencies</label>
+                        <input
+                          type="number"
+                          value={m.emergencies}
+                          onChange={(e) => {
+                            const updatedMonthly = [...data.trends.monthly];
+                            updatedMonthly[idx].emergencies = Math.max(0, parseInt(e.target.value || "0", 10));
+                            patch("trends", { monthly: updatedMonthly });
+                          }}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-semibold focus:bg-white focus:outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] text-slate-400 font-bold uppercase block mb-1">Deliveries</label>
+                        <input
+                          type="number"
+                          value={m.deliveries}
+                          onChange={(e) => {
+                            const updatedMonthly = [...data.trends.monthly];
+                            updatedMonthly[idx].deliveries = Math.max(0, parseInt(e.target.value || "0", 10));
+                            patch("trends", { monthly: updatedMonthly });
+                          }}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-semibold focus:bg-white focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 11: AMBULANCE SERVICE RUNS */}
+          {activeTab === "serviceRuns" && (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Ambulance Service Runs</h2>
+              {renderNumberField("ambulanceServiceRuns", "total", "Total Patient Transfers", data.ambulanceServiceRuns.total)}
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 mt-4">
+                <p className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">Monthly Service Runs</p>
+                <div className="space-y-3">
+                  {data.ambulanceServiceRuns.monthlyRuns.map((r, idx) => (
+                    <div key={r.month} className="bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between gap-4">
+                      <span className="text-xs font-bold text-slate-800">{r.month}</span>
+                      <input
+                        type="number"
+                        value={r.runs}
+                        onChange={(e) => {
+                          const updatedRuns = [...data.ambulanceServiceRuns.monthlyRuns];
+                          updatedRuns[idx].runs = Math.max(0, parseInt(e.target.value || "0", 10));
+                          // Auto sum total
+                          const sumTotal = updatedRuns.reduce((sum, run) => sum + run.runs, 0);
+                          patch("ambulanceServiceRuns", {
+                            monthlyRuns: updatedRuns,
+                            total: sumTotal
+                          });
+                        }}
+                        className="w-24 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-center focus:bg-white focus:outline-none"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );
+
+  // Field renderer helpers
+  function renderNumberField(
+    section: keyof DashboardDataSchema,
+    field: string,
+    label: string,
+    val: number,
+    float = false
+  ) {
+    return (
+      <div className="space-y-1.5">
+        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{label}</label>
+        <input
+          type="number"
+          step={float ? "0.1" : "1"}
+          value={val}
+          onChange={(e) => {
+            const parsed = float ? parseFloat(e.target.value || "0") : parseInt(e.target.value || "0", 10);
+            patch(section, { [field]: Math.max(0, parsed) });
+          }}
+          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-[#0B2E5B] focus:bg-white transition-all"
+        />
+      </div>
+    );
+  }
+
+  // Field renderer helpers
+  function renderTextField(
+    section: keyof DashboardDataSchema,
+    field: string,
+    label: string,
+    val: string
+  ) {
+    return (
+      <div className="space-y-1.5">
+        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{label}</label>
+        <input
+          type="text"
+          value={val}
+          onChange={(e) => patch(section, { [field]: e.target.value })}
+          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-[#0B2E5B] focus:bg-white transition-all"
+        />
+      </div>
+    );
+  }
 }
