@@ -213,7 +213,7 @@ export default function AdminConsole() {
       </header>
 
       {/* Main Console Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         {saveResult && (
           <div
             className={`flex items-center justify-between gap-4 rounded-2xl border px-5 py-4 text-sm font-semibold ${
@@ -245,7 +245,7 @@ export default function AdminConsole() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-4 py-3 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 ${
                   active
-                    ? "bg-[#0B2E5B] text-white shadow-sm"
+                    ? "bg-gradient-to-r from-primary-navy to-primary-deep text-white shadow-glow-blue"
                     : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
                 }`}
               >
@@ -257,11 +257,11 @@ export default function AdminConsole() {
         </div>
 
         {/* Tab Content Fields */}
-        <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-soft space-y-6">
           {/* TAB 1: OVERVIEW */}
           {activeTab === "overview" && (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Overview Settings</h2>
+              <SectionHeader title="Overview Settings" />
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {renderNumberField("overview", "totalEmergencies", "Total Emergencies", data.overview.totalEmergencies)}
                 {renderNumberField("overview", "totalAmbulances", "Total Ambulances", data.overview.totalAmbulances)}
@@ -276,7 +276,7 @@ export default function AdminConsole() {
           {/* TAB 2: AMBULANCE FLEET */}
           {activeTab === "fleet" && (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Ambulance Fleet by LGA</h2>
+              <SectionHeader title="Ambulance Fleet by LGA" />
               {renderNumberField("ambulanceFleet", "total", "Total Fleet Count (Global)", data.ambulanceFleet.total)}
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 mt-4">
                 <p className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">Fleet Distribution</p>
@@ -305,13 +305,13 @@ export default function AdminConsole() {
           {/* TAB 3: RESMAT TEAM */}
           {activeTab === "team" && (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">RESMAT Personnel Count</h2>
+              <SectionHeader title="RESMAT Personnel Count" />
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {renderNumberField("staff", "cemtorsOffices", "CEMTTOs Offices", data.staff.cemtorsOffices)}
                 {renderNumberField("staff", "volunteerDrivers", "Volunteer Drivers", data.staff.volunteerDrivers)}
                 <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-200 flex flex-col justify-center">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Auto-Calculated Total</span>
-                  <span className="text-3xl font-extrabold text-[#0B2E5B] mt-1">
+                  <span className="text-3xl font-extrabold text-primary-navy mt-1">
                     {data.staff.cemtorsOffices + data.staff.volunteerDrivers}
                   </span>
                 </div>
@@ -322,7 +322,7 @@ export default function AdminConsole() {
           {/* TAB 4: FACILITIES */}
           {activeTab === "facilities" && (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Medical Facilities Distribution</h2>
+              <SectionHeader title="Medical Facilities Distribution" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {renderNumberField("facilities", "remonic", "MAMII / Remonic Health Facilities", data.facilities.remonic)}
                 {renderNumberField("facilities", "cemone", "CEmoNC Health Facilities", data.facilities.cemone)}
@@ -369,7 +369,7 @@ export default function AdminConsole() {
           {/* TAB 5: EMERGENCY CALLS */}
           {activeTab === "calls" && (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Emergency Calls & Dispatch Settings</h2>
+              <SectionHeader title="Emergency Calls & Dispatch Settings" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {renderNumberField("dailyDispatch", "callsReceived", "Calls Received Today", data.dailyDispatch.callsReceived)}
                 {renderTextField("dailyDispatch", "avgResponseTime", "Avg Response Time", data.dailyDispatch.avgResponseTime)}
@@ -402,7 +402,7 @@ export default function AdminConsole() {
           {/* TAB 6: PATIENT TRANSPORT */}
           {activeTab === "transport" && (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Maternal Patient Transport</h2>
+              <SectionHeader title="Maternal Patient Transport" />
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {renderNumberField("transport", "totalDeliveries", "Safe Deliveries", data.transport.totalDeliveries)}
                 {renderNumberField("transport", "totalOtherEmergencies", "Other Complications", data.transport.totalOtherEmergencies)}
@@ -456,7 +456,7 @@ export default function AdminConsole() {
           {/* TAB 7: EMERGENCY TYPES */}
           {activeTab === "emergencyTypes" && (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Emergency Call Types</h2>
+              <SectionHeader title="Emergency Call Types" />
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Labor Complications */}
                 <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
@@ -508,7 +508,7 @@ export default function AdminConsole() {
           {/* TAB 8: PERFORMANCE */}
           {activeTab === "performance" && (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Response & Survival Performance</h2>
+              <SectionHeader title="Response & Survival Performance" />
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {renderNumberField("performance", "responseTimeTarget", "Response Time Target (mins)", data.performance.responseTimeTarget)}
                 {renderNumberField("performance", "responseTimeActual", "Response Time Actual (mins)", data.performance.responseTimeActual)}
@@ -522,7 +522,7 @@ export default function AdminConsole() {
           {/* TAB 9: CENSUS / WHERE WE SERVE */}
           {activeTab === "census" && (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Where We Serve (Census Details)</h2>
+              <SectionHeader title="Where We Serve (Census Details)" />
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 overflow-x-auto">
                 <table className="w-full min-w-[600px] text-xs">
                   <thead>
@@ -569,7 +569,7 @@ export default function AdminConsole() {
                             className="bg-slate-50 border border-slate-200 rounded px-2 py-1 focus:bg-white focus:outline-none"
                           />
                         </td>
-                        <td className="py-2 px-3 text-right font-semibold text-[#0B2E5B]">
+                        <td className="py-2 px-3 text-right font-semibold text-primary-navy">
                           {lga.ratio}
                         </td>
                       </tr>
@@ -583,7 +583,7 @@ export default function AdminConsole() {
           {/* TAB 10: MONTHLY BIRTHS / TRENDS */}
           {activeTab === "trends" && (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Monthly Births (June - Dec 2025)</h2>
+              <SectionHeader title="Monthly Births (June - Dec 2025)" />
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
                 <div className="space-y-3">
                   {data.trends.monthly.map((m, idx) => (
@@ -625,7 +625,7 @@ export default function AdminConsole() {
           {/* TAB 11: AMBULANCE SERVICE RUNS */}
           {activeTab === "serviceRuns" && (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-[#0B2E5B] border-b pb-2">Ambulance Service Runs</h2>
+              <SectionHeader title="Ambulance Service Runs" />
               {renderNumberField("ambulanceServiceRuns", "total", "Total Patient Transfers", data.ambulanceServiceRuns.total)}
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 mt-4">
                 <p className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">Monthly Service Runs</p>
@@ -660,6 +660,15 @@ export default function AdminConsole() {
   );
 
   // Field renderer helpers
+  function SectionHeader({ title }: { title: string }) {
+    return (
+      <div className="border-b border-slate-200 pb-3">
+        <h2 className="text-lg font-bold text-primary-navy">{title}</h2>
+        <div className="w-12 h-1 bg-emergency-amber rounded-full mt-1.5" />
+      </div>
+    );
+  }
+
   function renderNumberField(
     section: keyof DashboardDataSchema,
     field: string,
@@ -678,7 +687,7 @@ export default function AdminConsole() {
             const parsed = float ? parseFloat(e.target.value || "0") : parseInt(e.target.value || "0", 10);
             patch(section, { [field]: Math.max(0, parsed) });
           }}
-          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-[#0B2E5B] focus:bg-white transition-all"
+          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-primary-navy focus:bg-white focus:shadow-[0_0_0_4px_rgba(0,82,165,0.1)] transition-all"
         />
       </div>
     );
@@ -698,7 +707,7 @@ export default function AdminConsole() {
           type="text"
           value={val}
           onChange={(e) => patch(section, { [field]: e.target.value })}
-          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-[#0B2E5B] focus:bg-white transition-all"
+          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-primary-navy focus:bg-white focus:shadow-[0_0_0_4px_rgba(0,82,165,0.1)] transition-all"
         />
       </div>
     );
