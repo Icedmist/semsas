@@ -1,53 +1,31 @@
 import fs from "fs";
 import path from "path";
+import { defaultDashboardData } from "./default-dashboard-data";
 
-export interface LiveDashboardData {
-  updatedAt: string;
-  dashboard: {
-    emergencyCalls: number;
-    livesSaved: number;
-    patientsMoved: number;
-    totalAmbulances: number;
-  };
-  hero: {
-    ambulances: number;
-    personnel: number;
-    communities: number;
-    responses: number;
-  };
-  status: {
-    message: string;
-    status: "operational" | "degraded" | "offline";
-  };
-}
+export type LiveDashboardData = typeof defaultDashboardData;
 
-const DEFAULT_DATA: LiveDashboardData = {
-  updatedAt: new Date().toISOString(),
-  dashboard: {
-    emergencyCalls: 0,
-    livesSaved: 0,
-    patientsMoved: 0,
-    totalAmbulances: 0,
-  },
-  hero: {
-    ambulances: 25,
-    personnel: 180,
-    communities: 110,
-    responses: 4500,
-  },
-  status: {
-    message: "All Systems Working",
-    status: "operational",
-  },
-};
+const DATA_PATH = path.join(process.cwd(), "data", "live-dashboard.json");
 
 export function getLiveDashboardData(): LiveDashboardData {
   try {
-    const dataPath = path.join(process.cwd(), "data", "live-dashboard.json");
-    const raw = fs.readFileSync(dataPath, "utf-8");
+    const raw = fs.readFileSync(DATA_PATH, "utf-8");
     return JSON.parse(raw) as LiveDashboardData;
   } catch (error) {
     console.error("Failed to read live dashboard data:", error);
-    return DEFAULT_DATA;
+    return defaultDashboardData;
+  }
+}
+
+export function saveLiveDashboardData(data: LiveDashboardData): LiveDashboardData {
+  try {
+    const saved = {
+      ...data,
+      updatedAt: new Date().toISOString(),
+    };
+    fs.writeFileSync(DATA_PATH, JSON.stringify(saved, null, 2), "utf-8");
+    return saved;
+  } catch (error) {
+    console.error("Failed to save live dashboard data:", error);
+    throw error;
   }
 }
