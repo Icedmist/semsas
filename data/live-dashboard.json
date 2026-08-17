@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-08-17T13:16:41.246Z",
+  "updatedAt": "2026-08-17T14:21:22.793Z",
   "overview": {
-    "totalEmergencies": 2012,
+    "totalEmergencies": 2026,
     "totalAmbulances": 53,
     "avgResponseTime": "15 mins",
     "livesSaved": 783,
@@ -9,12 +9,12 @@
     "emergencyTrend": 8.5
   },
   "ambulanceFleet": {
-    "total": 58,
+    "total": 70,
     "byLGA": [
       {
         "name": "Gombe",
         "shortName": "GME",
-        "count": 19
+        "count": 30
       },
       {
         "name": "Akko",
