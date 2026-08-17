@@ -15,9 +15,10 @@ function formatTime(date: Date) {
 
 export default function DashboardFooter() {
   const { isPaused, currentSection, setCurrentSection } = useLiveUpdates();
-  const [time, setTime] = useState(() => formatTime(new Date()));
+  const [time, setTime] = useState("");
 
   useEffect(() => {
+    setTime(formatTime(new Date()));
     if (isPaused) return;
     const id = setInterval(() => setTime(formatTime(new Date())), 1000);
     return () => clearInterval(id);
