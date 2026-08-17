@@ -35,26 +35,24 @@ export default function DashboardPage() {
         if (mountedRef.current && data) {
           setLiveData((prev: any) => {
             const updated = JSON.parse(JSON.stringify(prev));
-            // Update Overview & Fleet totals from the live-stats API
-            if (data.dashboard) {
-              if (data.dashboard.emergencyCalls !== undefined) {
-                updated.overview.totalEmergencies = data.dashboard.emergencyCalls;
-              }
-              if (data.dashboard.livesSaved !== undefined) {
-                updated.overview.livesSaved = data.dashboard.livesSaved;
-              }
-              if (data.dashboard.patientsMoved !== undefined) {
-                updated.overview.patientsTransported = data.dashboard.patientsMoved;
-              }
-              if (data.dashboard.totalAmbulances !== undefined) {
-                updated.overview.totalAmbulances = data.dashboard.totalAmbulances;
-                updated.ambulanceFleet.total = data.dashboard.totalAmbulances;
-              }
-            }
-            if (data.hero) {
-              if (data.hero.personnel !== undefined) {
-                updated.staff.totalPersonnel = data.hero.personnel;
-                updated.staff.volunteerDrivers = Math.max(0, data.hero.personnel - updated.staff.cemtorsOffices);
+            // Merge top-level carousel sections returned by the live-stats API
+            const sections = [
+              "overview",
+              "ambulanceFleet",
+              "staff",
+              "facilities",
+              "dailyDispatch",
+              "transport",
+              "emergencyTypes",
+              "performance",
+              "census",
+              "trends",
+              "ambulanceServiceRuns",
+              "status"
+            ] as const;
+            for (const section of sections) {
+              if (data[section] && typeof data[section] === "object") {
+                updated[section] = { ...updated[section], ...data[section] };
               }
             }
             return updated;
