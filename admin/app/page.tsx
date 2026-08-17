@@ -142,45 +142,67 @@ export default function AdminConsole() {
 
   return (
     <div className="min-h-screen bg-slate-50 pb-24">
-      {/* Premium Header */}
-      <header className="sticky top-0 z-30 bg-[#0B2E5B] text-white shadow-md">
-        <div className="h-1 bg-gradient-to-r from-red-500 via-amber-500 to-blue-500" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center">
-              <Database className="w-5 h-5 text-amber-400" />
+      {/* Premium Branded Header */}
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2.5 min-w-0">
+              {/* Logos grid */}
+              {[
+                { src: "/images/nemsas-logo.png", alt: "NEMSAS Logo" },
+                { src: "/images/fmoh-logo.png", alt: "Federal Ministry of Health", border: true },
+                { src: "/images/moh-gombe-logo.jpeg", alt: "Gombe State Ministry of Health", border: true },
+                { src: "/images/worldbank-logo.jpeg", alt: "World Bank", border: true }
+              ].map((logo) => (
+                <div
+                  key={logo.src}
+                  className={`hidden md:flex w-12 h-12 rounded-full overflow-hidden bg-white items-center justify-center shrink-0 ${
+                    logo.border ? "border border-slate-200" : ""
+                  }`}
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="object-contain w-10 h-10"
+                  />
+                </div>
+              ))}
+              <div className="ml-1 sm:ml-3 min-w-0">
+                <h1 className="text-[13px] sm:text-base font-heading font-black text-[#0052A5] tracking-wide truncate leading-tight">
+                  GOMBE STATE EMERGENCY MEDICAL SERVICES &amp; AMBULANCE SYSTEM (SEMSAS)
+                </h1>
+                <p className="text-[9px] sm:text-[10px] text-[#DC143C] font-black tracking-[0.15em] mt-0.5">
+                  ADMIN CONSOLE • EDITING LIVE DASHBOARD
+                </p>
+              </div>
             </div>
-            <div>
-              <h1 className="font-heading font-extrabold text-lg leading-none">SEMSAS Multi-Slide Console</h1>
-              <p className="text-[11px] text-white/50 font-medium mt-1">
-                Centralized Live Dashboard Editor (linked to {process.env.NEXT_PUBLIC_API_URL || "Local Server"})
-              </p>
+
+            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+              {dirty && (
+                <span className="hidden lg:flex items-center gap-1 text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2.5 py-1.5 rounded-full">
+                  <AlertTriangle className="w-3.5 h-3.5" /> Unsaved
+                </span>
+              )}
+              <button
+                onClick={loadData}
+                disabled={loading}
+                className="flex items-center justify-center w-10 h-10 rounded-full border border-slate-200 bg-white hover:border-[#0052A5] hover:bg-slate-50 transition-all focus:outline-none"
+                title="Reload Data"
+              >
+                <RefreshCw className={`w-4 h-4 text-slate-600 ${loading ? "animate-spin" : ""}`} />
+              </button>
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className="flex items-center gap-2 bg-[#DC143C] hover:bg-[#b01030] text-white font-bold text-xs px-5 py-2.5 rounded-full shadow-[0_4px_12px_rgba(220,20,60,0.3)] transition-all cursor-pointer disabled:opacity-50"
+              >
+                <Save className="w-4 h-4" />
+                <span>{saving ? "Saving..." : "Publish Updates"}</span>
+              </button>
             </div>
-          </div>
-          <div className="flex items-center gap-3">
-            {dirty && (
-              <span className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold text-amber-500 bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-full">
-                <AlertTriangle className="w-3.5 h-3.5" /> Unsaved changes
-              </span>
-            )}
-            <button
-              onClick={loadData}
-              disabled={loading}
-              className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-colors disabled:opacity-50"
-            >
-              <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
-              <span>Reload</span>
-            </button>
-            <button
-              onClick={handleSave}
-              disabled={saving}
-              className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-colors disabled:opacity-50"
-            >
-              <Save className="w-4 h-4" />
-              <span>{saving ? "Saving..." : "Publish Updates"}</span>
-            </button>
           </div>
         </div>
+        <div className="h-1 bg-[#0052A5]" />
       </header>
 
       {/* Main Console Content */}
