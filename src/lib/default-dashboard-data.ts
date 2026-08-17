@@ -127,5 +127,10 @@ export const defaultDashboardData = {
       { month: "November", runs: 266 },
       { month: "December", runs: 357 }
     ]
-  }
+  },
+  status: {
+    message: "All Systems Working",
+    status: "operational" as "operational" | "degraded" | "offline"
+  },
+  updatedAt: new Date().toISOString()
 };

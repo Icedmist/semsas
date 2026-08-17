@@ -124,7 +124,14 @@ export default function DashboardStats() {
                 </div>
                 <div>
                   <AnimatedCounter
-                    value={data ? data.dashboard[stat.key] : 0}
+                    value={(() => {
+                      if (!data) return 0;
+                      if (stat.key === "emergencyCalls") return data.overview.totalEmergencies;
+                      if (stat.key === "livesSaved") return data.overview.livesSaved;
+                      if (stat.key === "patientsMoved") return data.overview.patientsTransported;
+                      if (stat.key === "totalAmbulances") return data.overview.totalAmbulances;
+                      return 0;
+                    })()}
                     className={`font-heading font-black text-4xl tabular-nums ${stat.valueClass}`}
                   />
                   <p className="text-xs text-slate-500 font-semibold mt-1">{stat.label}</p>
