@@ -14,7 +14,7 @@ function formatTime(date: Date) {
 }
 
 export default function DashboardFooter() {
-  const { isPaused } = useLiveUpdates();
+  const { isPaused, currentSection, setCurrentSection } = useLiveUpdates();
   const [time, setTime] = useState(() => formatTime(new Date()));
 
   useEffect(() => {
@@ -37,15 +37,17 @@ export default function DashboardFooter() {
             <span className="text-sm font-heading font-extrabold text-primary-navy">112</span>
           </div>
 
-          <div className="flex items-center gap-2" title="11 LGAs under coverage">
+          <div className="flex items-center gap-2" title="11 sections under coverage">
             {Array.from({ length: LGA_STATUS_DOTS }).map((_, i) => (
-              <span
+              <button
                 key={i}
-                className={`transition-all duration-300 rounded-full ${
-                  i === 0
+                onClick={() => setCurrentSection(i)}
+                className={`transition-all duration-300 rounded-full cursor-pointer focus:outline-none ${
+                  i === currentSection
                     ? "w-5 h-2 bg-gradient-to-r from-primary-navy to-emergency-red shadow-[0_0_8px_rgba(220,20,60,0.4)]"
                     : "w-2 h-2 bg-slate-300 hover:bg-primary-navy"
                 }`}
+                aria-label={`Go to slide ${i + 1}`}
               />
             ))}
           </div>
