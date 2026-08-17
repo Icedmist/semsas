@@ -21,7 +21,7 @@ import {
   Phone
 } from "lucide-react";
 
-import { defaultDashboardData } from "../../src/lib/default-dashboard-data";
+import { defaultDashboardData } from "@/lib/default-dashboard-data";
 import {
   SlideOverview,
   SlideAmbulanceFleet,
@@ -34,7 +34,7 @@ import {
   SlideCensus,
   SlideLaborDelivery,
   SlideServiceRuns
-} from "../../src/components/dashboard/slides/DashboardSlides";
+} from "@/components/dashboard/slides/DashboardSlides";
 
 type DashboardDataSchema = typeof defaultDashboardData;
 
