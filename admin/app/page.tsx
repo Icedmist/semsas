@@ -121,8 +121,8 @@ export default function AdminConsole() {
 
   if (loading && !data) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50 space-y-4">
-        <RefreshCw className="w-12 h-12 text-[#0052A5] animate-spin" />
+      <div className="flex flex-col items-center justify-center min-h-screen bg-bg-gray space-y-4">
+        <RefreshCw className="w-12 h-12 text-primary-navy animate-spin" />
         <p className="text-sm font-semibold text-slate-600">Connecting to Live SEMSAS Database...</p>
       </div>
     );
@@ -130,10 +130,10 @@ export default function AdminConsole() {
 
   if (!data) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50 space-y-4">
-        <XCircle className="w-16 h-16 text-red-500" />
+      <div className="flex flex-col items-center justify-center min-h-screen bg-bg-gray space-y-4">
+        <XCircle className="w-16 h-16 text-emergency-red" />
         <p className="text-lg font-bold text-slate-800">Failed to load dashboard data</p>
-        <button onClick={loadData} className="px-6 py-2.5 bg-[#0052A5] text-white rounded-xl font-bold text-sm">
+        <button onClick={loadData} className="btn btn-dark px-6 py-2.5 text-sm">
           Retry Connection
         </button>
       </div>
@@ -141,12 +141,12 @@ export default function AdminConsole() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-24">
+    <div className="min-h-screen bg-bg-gray pb-24">
       {/* Premium Branded Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2.5 min-w-0">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
               {/* Logos grid */}
               {[
                 { src: "/images/nemsas-logo.png", alt: "NEMSAS Logo" },
@@ -156,9 +156,7 @@ export default function AdminConsole() {
               ].map((logo) => (
                 <div
                   key={logo.src}
-                  className={`hidden md:flex w-12 h-12 rounded-full overflow-hidden bg-white items-center justify-center shrink-0 ${
-                    logo.border ? "border border-slate-200" : ""
-                  }`}
+                  className="hidden xs:flex sm:w-12 sm:h-12 w-10 h-10 rounded-full overflow-hidden bg-white items-center justify-center border border-slate-200 shadow-sm shrink-0"
                 >
                   <img
                     src={logo.src}
@@ -168,33 +166,42 @@ export default function AdminConsole() {
                 </div>
               ))}
               <div className="ml-1 sm:ml-3 min-w-0">
-                <h1 className="text-[13px] sm:text-base font-heading font-black text-[#0052A5] tracking-wide truncate leading-tight">
+                <h1 className="text-[13px] sm:text-base xl:text-lg font-heading font-extrabold text-primary-navy tracking-wide truncate leading-tight">
                   GOMBE STATE EMERGENCY MEDICAL SERVICES &amp; AMBULANCE SYSTEM (SEMSAS)
                 </h1>
-                <p className="text-[9px] sm:text-[10px] text-[#DC143C] font-black tracking-[0.15em] mt-0.5">
+                <p className="text-[9px] sm:text-[11px] text-emergency-red font-bold tracking-[0.18em] mt-0.5">
                   ADMIN CONSOLE • EDITING LIVE DASHBOARD
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <div className="flex items-center gap-2 sm:gap-2.5 flex-shrink-0">
+              {!dirty && (
+                <span className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  Live
+                </span>
+              )}
               {dirty && (
-                <span className="hidden lg:flex items-center gap-1 text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2.5 py-1.5 rounded-full">
+                <span className="hidden lg:flex items-center gap-1 text-[11px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-full">
                   <AlertTriangle className="w-3.5 h-3.5" /> Unsaved
                 </span>
               )}
               <button
                 onClick={loadData}
                 disabled={loading}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-slate-200 bg-white hover:border-[#0052A5] hover:bg-slate-50 transition-all focus:outline-none"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-slate-200 bg-white hover:border-primary-navy hover:bg-primary-navy/5 hover:shadow-md flex items-center justify-center transition-all duration-300 hover:scale-105 focus:outline-none"
                 title="Reload Data"
               >
-                <RefreshCw className={`w-4 h-4 text-slate-600 ${loading ? "animate-spin" : ""}`} />
+                <RefreshCw className={`w-4 h-4 text-slate-500 hover:text-primary-navy ${loading ? "animate-spin" : ""}`} />
               </button>
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center gap-2 bg-[#DC143C] hover:bg-[#b01030] text-white font-bold text-xs px-5 py-2.5 rounded-full shadow-[0_4px_12px_rgba(220,20,60,0.3)] transition-all cursor-pointer disabled:opacity-50"
+                className="btn btn-red flex items-center gap-2 text-xs px-5 py-2.5"
               >
                 <Save className="w-4 h-4" />
                 <span>{saving ? "Saving..." : "Publish Updates"}</span>
@@ -202,7 +209,7 @@ export default function AdminConsole() {
             </div>
           </div>
         </div>
-        <div className="h-1 bg-[#0052A5]" />
+        <div className="h-1 bg-gradient-to-r from-[#0A2A52] via-emergency-red to-[#0A2A52]" />
       </header>
 
       {/* Main Console Content */}
