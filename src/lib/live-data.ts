@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { put, get } from "@vercel/blob";
 import { defaultDashboardData } from "./default-dashboard-data";
+import seedData from "../../data/live-dashboard.json";
 
 export type LiveDashboardData = typeof defaultDashboardData;
 
@@ -14,7 +15,7 @@ function readLocal(): LiveDashboardData {
     return JSON.parse(raw) as LiveDashboardData;
   } catch (error) {
     console.error("Failed to read local live dashboard data:", error);
-    return defaultDashboardData;
+    return seedData as LiveDashboardData;
   }
 }
 
