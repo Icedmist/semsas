@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-17T13:30:00.000Z",
+  "updatedAt": "2026-08-17T13:00:44.114Z",
   "overview": {
     "totalEmergencies": 2012,
     "totalAmbulances": 53,
@@ -9,19 +9,63 @@
     "emergencyTrend": 8.5
   },
   "ambulanceFleet": {
-    "total": 53,
+    "total": 58,
     "byLGA": [
-      { "name": "Gombe", "shortName": "GME", "count": 14 },
-      { "name": "Akko", "shortName": "AKK", "count": 10 },
-      { "name": "Balanga", "shortName": "BLG", "count": 6 },
-      { "name": "Kwami", "shortName": "KWM", "count": 4 },
-      { "name": "Kaltungo", "shortName": "KLT", "count": 5 },
-      { "name": "Yamaltu Deba", "shortName": "YDB", "count": 3 },
-      { "name": "Billiri", "shortName": "BLR", "count": 3 },
-      { "name": "Dukku", "shortName": "DKU", "count": 2 },
-      { "name": "Funakaye", "shortName": "FKY", "count": 2 },
-      { "name": "Nafada", "shortName": "NFD", "count": 2 },
-      { "name": "Shongom", "shortName": "SHM", "count": 2 }
+      {
+        "name": "Gombe",
+        "shortName": "GME",
+        "count": 19
+      },
+      {
+        "name": "Akko",
+        "shortName": "AKK",
+        "count": 10
+      },
+      {
+        "name": "Balanga",
+        "shortName": "BLG",
+        "count": 6
+      },
+      {
+        "name": "Kwami",
+        "shortName": "KWM",
+        "count": 4
+      },
+      {
+        "name": "Kaltungo",
+        "shortName": "KLT",
+        "count": 5
+      },
+      {
+        "name": "Yamaltu Deba",
+        "shortName": "YDB",
+        "count": 3
+      },
+      {
+        "name": "Billiri",
+        "shortName": "BLR",
+        "count": 3
+      },
+      {
+        "name": "Dukku",
+        "shortName": "DKU",
+        "count": 2
+      },
+      {
+        "name": "Funakaye",
+        "shortName": "FKY",
+        "count": 2
+      },
+      {
+        "name": "Nafada",
+        "shortName": "NFD",
+        "count": 2
+      },
+      {
+        "name": "Shongom",
+        "shortName": "SHM",
+        "count": 2
+      }
     ]
   },
   "staff": {
@@ -33,10 +77,26 @@
     "remonic": 83,
     "cemone": 28,
     "distribution": [
-      { "area": "Gombe Central", "remonic": 28, "cemone": 8 },
-      { "area": "Gombe North", "remonic": 20, "cemone": 7 },
-      { "area": "Gombe South", "remonic": 20, "cemone": 7 },
-      { "area": "Gombe East", "remonic": 15, "cemone": 6 }
+      {
+        "area": "Gombe Central",
+        "remonic": 28,
+        "cemone": 8
+      },
+      {
+        "area": "Gombe North",
+        "remonic": 20,
+        "cemone": 7
+      },
+      {
+        "area": "Gombe South",
+        "remonic": 20,
+        "cemone": 7
+      },
+      {
+        "area": "Gombe East",
+        "remonic": 15,
+        "cemone": 6
+      }
     ]
   },
   "dailyDispatch": {
@@ -45,13 +105,34 @@
     "successfulInterventions": 43,
     "avgTimeToScene": "15:00",
     "trends": [
-      { "time": "6AM", "calls": 3 },
-      { "time": "9AM", "calls": 8 },
-      { "time": "12PM", "calls": 12 },
-      { "time": "3PM", "calls": 9 },
-      { "time": "6PM", "calls": 7 },
-      { "time": "9PM", "calls": 5 },
-      { "time": "12AM", "calls": 3 }
+      {
+        "time": "6AM",
+        "calls": 3
+      },
+      {
+        "time": "9AM",
+        "calls": 8
+      },
+      {
+        "time": "12PM",
+        "calls": 12
+      },
+      {
+        "time": "3PM",
+        "calls": 9
+      },
+      {
+        "time": "6PM",
+        "calls": 7
+      },
+      {
+        "time": "9PM",
+        "calls": 5
+      },
+      {
+        "time": "12AM",
+        "calls": 3
+      }
     ]
   },
   "transport": {
@@ -59,26 +140,89 @@
     "totalOtherEmergencies": 236,
     "resmatCases": 1000,
     "monthlyData": [
-      { "month": "June", "total": 151, "deliveries": 127, "otherEmergencies": 24 },
-      { "month": "July", "total": 364, "deliveries": 232, "otherEmergencies": 82 },
-      { "month": "August", "total": 147, "deliveries": 119, "otherEmergencies": 28 },
-      { "month": "September", "total": 128, "deliveries": 100, "otherEmergencies": 28 },
-      { "month": "October", "total": 97, "deliveries": 69, "otherEmergencies": 22 },
-      { "month": "November", "total": 112, "deliveries": 82, "otherEmergencies": 30 },
-      { "month": "December", "total": 150, "deliveries": 54, "otherEmergencies": 12 }
+      {
+        "month": "June",
+        "total": 151,
+        "deliveries": 127,
+        "otherEmergencies": 24
+      },
+      {
+        "month": "July",
+        "total": 364,
+        "deliveries": 232,
+        "otherEmergencies": 82
+      },
+      {
+        "month": "August",
+        "total": 147,
+        "deliveries": 119,
+        "otherEmergencies": 28
+      },
+      {
+        "month": "September",
+        "total": 128,
+        "deliveries": 100,
+        "otherEmergencies": 28
+      },
+      {
+        "month": "October",
+        "total": 97,
+        "deliveries": 69,
+        "otherEmergencies": 22
+      },
+      {
+        "month": "November",
+        "total": 112,
+        "deliveries": 82,
+        "otherEmergencies": 30
+      },
+      {
+        "month": "December",
+        "total": 150,
+        "deliveries": 54,
+        "otherEmergencies": 12
+      }
     ]
   },
   "emergencyTypes": {
     "laborComplications": [
-      { "name": "Prolonged Labor", "count": 36, "color": "#DC143C" },
-      { "name": "Bleeding", "count": 18, "color": "#FF6B6B" },
-      { "name": "Convulsions", "count": 4, "color": "#FFB81C" },
-      { "name": "Other Complications", "count": 24, "color": "#64748B" }
+      {
+        "name": "Prolonged Labor",
+        "count": 36,
+        "color": "#DC143C"
+      },
+      {
+        "name": "Bleeding",
+        "count": 18,
+        "color": "#FF6B6B"
+      },
+      {
+        "name": "Convulsions",
+        "count": 4,
+        "color": "#FFB81C"
+      },
+      {
+        "name": "Other Complications",
+        "count": 24,
+        "color": "#64748B"
+      }
     ],
     "pregnancyComplications": [
-      { "name": "Bleeding", "count": 27, "color": "#DC143C" },
-      { "name": "Convulsions (Eclampsia)", "count": 9, "color": "#FFB81C" },
-      { "name": "Eclampsia", "count": 4, "color": "#8B5CF6" }
+      {
+        "name": "Bleeding",
+        "count": 27,
+        "color": "#DC143C"
+      },
+      {
+        "name": "Convulsions (Eclampsia)",
+        "count": 9,
+        "color": "#FFB81C"
+      },
+      {
+        "name": "Eclampsia",
+        "count": 4,
+        "color": "#8B5CF6"
+      }
     ]
   },
   "performance": {
@@ -90,43 +234,156 @@
   },
   "census": {
     "byLGA": [
-      { "name": "Gombe", "population": 268536, "ambulances": 14, "ratio": "1:19,181" },
-      { "name": "Akko", "population": 353679, "ambulances": 10, "ratio": "1:35,368" },
-      { "name": "Balanga", "population": 170918, "ambulances": 6, "ratio": "1:28,486" },
-      { "name": "Kwami", "population": 159442, "ambulances": 4, "ratio": "1:39,861" },
-      { "name": "Kaltungo", "population": 149805, "ambulances": 5, "ratio": "1:29,961" },
-      { "name": "Yamaltu Deba", "population": 240922, "ambulances": 3, "ratio": "1:80,307" },
-      { "name": "Billiri", "population": 159885, "ambulances": 3, "ratio": "1:53,295" },
-      { "name": "Dukku", "population": 207117, "ambulances": 2, "ratio": "1:103,559" },
-      { "name": "Funakaye", "population": 246646, "ambulances": 2, "ratio": "1:123,323" },
-      { "name": "Nafada", "population": 138185, "ambulances": 2, "ratio": "1:69,093" },
-      { "name": "Shongom", "population": 137254, "ambulances": 2, "ratio": "1:68,627" }
+      {
+        "name": "Gombe",
+        "population": 268536,
+        "ambulances": 14,
+        "ratio": "1:19,181"
+      },
+      {
+        "name": "Akko",
+        "population": 353679,
+        "ambulances": 10,
+        "ratio": "1:35,368"
+      },
+      {
+        "name": "Balanga",
+        "population": 170918,
+        "ambulances": 6,
+        "ratio": "1:28,486"
+      },
+      {
+        "name": "Kwami",
+        "population": 159442,
+        "ambulances": 4,
+        "ratio": "1:39,861"
+      },
+      {
+        "name": "Kaltungo",
+        "population": 149805,
+        "ambulances": 5,
+        "ratio": "1:29,961"
+      },
+      {
+        "name": "Yamaltu Deba",
+        "population": 240922,
+        "ambulances": 3,
+        "ratio": "1:80,307"
+      },
+      {
+        "name": "Billiri",
+        "population": 159885,
+        "ambulances": 3,
+        "ratio": "1:53,295"
+      },
+      {
+        "name": "Dukku",
+        "population": 207117,
+        "ambulances": 2,
+        "ratio": "1:103,559"
+      },
+      {
+        "name": "Funakaye",
+        "population": 246646,
+        "ambulances": 2,
+        "ratio": "1:123,323"
+      },
+      {
+        "name": "Nafada",
+        "population": 138185,
+        "ambulances": 2,
+        "ratio": "1:69,093"
+      },
+      {
+        "name": "Shongom",
+        "population": 137254,
+        "ambulances": 2,
+        "ratio": "1:68,627"
+      }
     ]
   },
   "trends": {
     "monthly": [
-      { "month": "Jun", "emergencies": 151, "deliveries": 127 },
-      { "month": "Jul", "emergencies": 364, "deliveries": 232 },
-      { "month": "Aug", "emergencies": 147, "deliveries": 119 },
-      { "month": "Sep", "emergencies": 128, "deliveries": 100 },
-      { "month": "Oct", "emergencies": 97, "deliveries": 69 },
-      { "month": "Nov", "emergencies": 112, "deliveries": 82 },
-      { "month": "Dec", "emergencies": 150, "deliveries": 54 }
+      {
+        "month": "Jun",
+        "emergencies": 151,
+        "deliveries": 127
+      },
+      {
+        "month": "Jul",
+        "emergencies": 364,
+        "deliveries": 232
+      },
+      {
+        "month": "Aug",
+        "emergencies": 147,
+        "deliveries": 119
+      },
+      {
+        "month": "Sep",
+        "emergencies": 128,
+        "deliveries": 100
+      },
+      {
+        "month": "Oct",
+        "emergencies": 97,
+        "deliveries": 69
+      },
+      {
+        "month": "Nov",
+        "emergencies": 112,
+        "deliveries": 82
+      },
+      {
+        "month": "Dec",
+        "emergencies": 150,
+        "deliveries": 54
+      }
     ]
   },
   "ambulanceServiceRuns": {
     "total": 1951,
     "monthlyRuns": [
-      { "month": "March", "runs": 25 },
-      { "month": "April", "runs": 22 },
-      { "month": "May", "runs": 11 },
-      { "month": "June", "runs": 31 },
-      { "month": "July", "runs": 310 },
-      { "month": "August", "runs": 281 },
-      { "month": "September", "runs": 343 },
-      { "month": "October", "runs": 305 },
-      { "month": "November", "runs": 266 },
-      { "month": "December", "runs": 357 }
+      {
+        "month": "March",
+        "runs": 25
+      },
+      {
+        "month": "April",
+        "runs": 22
+      },
+      {
+        "month": "May",
+        "runs": 11
+      },
+      {
+        "month": "June",
+        "runs": 31
+      },
+      {
+        "month": "July",
+        "runs": 310
+      },
+      {
+        "month": "August",
+        "runs": 281
+      },
+      {
+        "month": "September",
+        "runs": 343
+      },
+      {
+        "month": "October",
+        "runs": 305
+      },
+      {
+        "month": "November",
+        "runs": 266
+      },
+      {
+        "month": "December",
+        "runs": 357
+      }
     ]
   }
 }
