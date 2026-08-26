@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Mail, Globe, ArrowUpRight } from "lucide-react";
+import { Mail, Globe, ArrowRight } from "lucide-react";
 
 interface Leader {
   name: string;
@@ -36,85 +36,69 @@ export default function LeaderTeamCard({ leader, idx = 0, contactHref = "/#conta
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: idx * 0.08 }}
-      className="group relative overflow-hidden rounded-[2.5rem] border border-slate-200/60 bg-white shadow-md hover:shadow-[0_32px_64px_-24px_rgba(10,42,82,0.25)] hover:border-slate-300 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full"
+      className="group flex flex-col bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:border-slate-300 transition-all duration-300 overflow-hidden"
     >
-      {/* Banner */}
-      <div className="relative h-40 bg-gradient-to-br from-[#0A2A52] via-primary-navy to-emergency-red overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 30%, #ffffff, transparent 45%)",
-          }}
-        />
-        <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-emergency-red/50 rounded-full blur-3xl" />
-        <div className="absolute top-6 left-8 flex items-center gap-2 text-white/80">
-          <span className="w-2 h-2 rounded-full bg-emergency-red animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-widest">SEMSAS Command</span>
-        </div>
+      {/* Top Image Section - Flush to edges */}
+      <div className="relative h-64 sm:h-72 w-full bg-slate-50 overflow-hidden">
+        {leader.imageUrl ? (
+          <Image
+            src={leader.imageUrl}
+            alt={leader.name}
+            fill
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center font-heading font-black text-5xl text-slate-300">
+            {initials}
+          </div>
+        )}
+        
+        {/* Subtle overlay gradient for a premium feel */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      {/* Profile Picture */}
-      <div className="px-8 -mt-20 flex justify-center">
-        <div className="relative">
-          {leader.imageUrl ? (
-            <div className="w-40 h-40 rounded-3xl overflow-hidden shadow-2xl ring-[8px] ring-white transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-2">
-              <Image
-                src={leader.imageUrl}
-                alt={leader.name}
-                fill
-                className="object-cover object-top"
-              />
-            </div>
-          ) : (
-            <div className="w-40 h-40 rounded-3xl bg-gradient-to-br from-emergency-red to-primary-navy text-white flex items-center justify-center font-heading font-black text-5xl shadow-2xl ring-[8px] ring-white transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-2">
-              {initials}
-            </div>
-          )}
-          <div className="absolute bottom-2 right-2 w-7 h-7 bg-success-green rounded-full ring-4 ring-white shadow-sm" />
-        </div>
-      </div>
+      {/* Content Section */}
+      <div className="p-6 sm:p-8 flex flex-col flex-1 relative bg-white">
+        {/* Subtle top accent line on hover */}
+        <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-primary-navy to-emergency-red scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
 
-      {/* Content */}
-      <div className="px-8 pb-10 pt-8 flex flex-col flex-1">
-        <div className="text-center">
-          <h4 className="font-heading font-extrabold text-2xl text-primary-navy leading-tight transition-colors group-hover:text-emergency-red">
-            {leader.name}
-          </h4>
-          <p className="text-sm font-bold text-emergency-red/90 uppercase tracking-widest mt-2.5">
+        <div className="mb-4">
+          <p className="text-[11px] font-bold text-emergency-red uppercase tracking-widest mb-2">
             {leader.role}
           </p>
+          <h4 className="font-heading font-bold text-xl text-slate-900 leading-tight">
+            {leader.name}
+          </h4>
         </div>
         
-        <div className="w-16 h-1 bg-slate-100 mx-auto mt-6 rounded-full transition-all duration-300 group-hover:w-24 group-hover:bg-emergency-red/20" />
-        
-        <p className="text-slate-500 text-[15px] leading-relaxed font-light mt-6 text-center line-clamp-4 group-hover:text-slate-700 transition-colors">
+        <p className="text-slate-600 text-sm leading-relaxed font-light line-clamp-4 flex-1">
           {leader.bio}
         </p>
 
-        <div className="mt-auto pt-8">
-          <div className="flex items-center justify-center gap-3">
+        <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+          <div className="flex gap-2">
             <a
               href={`mailto:${leader.email}`}
-              className="w-12 h-12 rounded-full bg-slate-50 hover:bg-emergency-red hover:text-white text-slate-400 hover:shadow-lg flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1"
-              title="Email Administrator"
+              className="w-9 h-9 rounded-full bg-slate-50 hover:bg-emergency-red hover:text-white text-slate-400 flex items-center justify-center transition-colors"
+              title="Email"
             >
-              <Mail className="w-5 h-5" />
+              <Mail className="w-4 h-4" />
             </a>
             <a
               href={leader.linkedin}
-              className="w-12 h-12 rounded-full bg-slate-50 hover:bg-primary-navy hover:text-white text-slate-400 hover:shadow-lg flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1"
-              title="LinkedIn Profile"
+              className="w-9 h-9 rounded-full bg-slate-50 hover:bg-primary-navy hover:text-white text-slate-400 flex items-center justify-center transition-colors"
+              title="LinkedIn"
             >
-              <Globe className="w-5 h-5" />
+              <Globe className="w-4 h-4" />
             </a>
           </div>
+          
           <Link
             href={contactHref}
-            className="mt-6 w-full py-4 px-6 rounded-2xl bg-slate-50 hover:bg-slate-100 flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wider text-primary-navy transition-all duration-300 group-hover:bg-primary-navy/[0.03] group-hover:text-emergency-red"
+            className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-primary-navy hover:text-emergency-red transition-colors"
           >
-            Contact Office
-            <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            Contact
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>
