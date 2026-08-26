@@ -15,6 +15,10 @@ const logos = [
   { src: "/images/worldbank-logo.jpeg", alt: "World Bank", w: 52, h: 52 },
 ];
 
+/**
+ * The header component for the live dashboard.
+ * Displays partner logos, live status indicator, and controls for live updates.
+ */
 export default function DashboardHeader() {
   const { isPaused, togglePaused } = useLiveUpdates();
 
