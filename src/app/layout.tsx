@@ -29,6 +29,10 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * The root layout component for the SEMSAS application.
+ * Wraps all pages with global font links, CSS, and basic motion config.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
