@@ -8,6 +8,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Menu, X, ChevronDown, Mail, Clock } from "lucide-react";
 import { EASE } from "@/lib/motion-variants";
 
+/**
+ * The main header navigation component for the SEMSAS application.
+ * Includes a responsive layout with a top utility bar and a primary navigation menu.
+ * Handles scroll state to adjust styling and layout.
+ */
 export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
