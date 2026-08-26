@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @module DashboardSlides
+ * This module contains various slide components for the live dashboard,
+ * including overview, fleet, RESMAT team, medical facilities, emergency calls,
+ * and specific emergency types. Also includes custom SVG illustrations.
+ */
 import React from "react";
 import {
   Activity,
