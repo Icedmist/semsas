@@ -45,7 +45,7 @@ export default function LeaderTeamCard({ leader, idx = 0, contactHref = "/#conta
             src={leader.imageUrl}
             alt={leader.name}
             fill
-            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center font-heading font-black text-5xl text-slate-300">
