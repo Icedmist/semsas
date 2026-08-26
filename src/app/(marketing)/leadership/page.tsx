@@ -49,6 +49,10 @@ const leadershipTeam = [
   }
 ];
 
+/**
+ * The Leadership page component.
+ * Displays information about the State Coordinator and the management team.
+ */
 export default function Leadership() {
   return (
     <div className="bg-bg-gray">
