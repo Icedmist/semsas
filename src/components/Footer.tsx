@@ -37,6 +37,11 @@ function BrandIcon({ path }: { path: string }) {
   );
 }
 
+/**
+ * The global footer component for the application.
+ * Contains essential links, emergency contact details, social media links,
+ * and copyright information.
+ */
 export default function Footer() {
   return (
     <footer className="relative bg-[#0A2A52] text-white border-t border-white/10 z-10 overflow-hidden">
