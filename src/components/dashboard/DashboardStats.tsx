@@ -48,6 +48,10 @@ const STATS: StatDef[] = [
   },
 ];
 
+/**
+ * The statistics component for the live dashboard.
+ * Displays key metrics like emergency calls, lives saved, etc., with animated counters.
+ */
 export default function DashboardStats() {
   const { isPaused } = useLiveUpdates();
   const [data, setData] = useState<LiveDashboardData | null>(null);
