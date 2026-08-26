@@ -46,7 +46,6 @@ const leadershipTeam = [
     bio: "Coordinates, manages and strengthens the information and communication technology systems supporting SEMSAS operations, ensuring robust digital emergency response systems.",
     email: "ict@semsas.gombe.gov.ng",
     linkedin: "#",
-    imageUrl: "/images/ICT Focal Person.jpg",
   }
 ];
 
@@ -148,7 +147,7 @@ export default function Leadership() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {leadershipTeam.map((leader, index) => (
               <LeaderTeamCard key={index} leader={leader} idx={index} />
             ))}
