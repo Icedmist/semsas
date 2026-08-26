@@ -13,6 +13,10 @@ function formatTime(date: Date) {
   return `${hh}:${mm}:${ss}`;
 }
 
+/**
+ * The footer component for the live dashboard.
+ * Displays the emergency hotline, system operational status, and a clock.
+ */
 export default function DashboardFooter() {
   const { isPaused, currentSection, setCurrentSection } = useLiveUpdates();
   const [time, setTime] = useState("");
