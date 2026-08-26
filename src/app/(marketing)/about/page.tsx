@@ -21,6 +21,10 @@ import {
   UserCheck
 } from "lucide-react";
 
+/**
+ * The About page component.
+ * Displays the mission, vision, core values, and strategic objectives of SEMSAS.
+ */
 export default function AboutPage() {
   const coreValues = [
     {
