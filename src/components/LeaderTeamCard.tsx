@@ -22,6 +22,10 @@ interface Props {
   variant?: "light" | "dark";
 }
 
+/**
+ * A card component displaying information about a leadership team member.
+ * Supports light and dark variants and displays an image or initials.
+ */
 export default function LeaderTeamCard({ leader, idx = 0, contactHref = "/#contact", variant = "light" }: Props) {
   const initials = leader.name
     .replace(/^(Dr\.|Mrs\.|Mallam|Engr\.|Sister|Pharm)\s*/i, "")
