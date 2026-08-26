@@ -4,7 +4,51 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ShieldCheck } from "lucide-react";
 import PageHero from "@/components/PageHero";
+import LeaderTeamCard from "@/components/LeaderTeamCard";
 import { stagger, fadeUpItem } from "@/lib/motion-variants";
+
+const leadershipTeam = [
+  {
+    name: "Dr. Bello Abdulkadir",
+    role: "Head of SEMSAS Admin (Administrative Officer)",
+    bio: "Responsible for providing effective administrative, logistical, human resource and operational support to ensure the smooth and efficient functioning of SEMSAS.",
+    email: "admin@semsas.gombe.gov.ng",
+    linkedin: "#",
+    imageUrl: "/images/Dr Bello Abdulkadir Head of SEMSAS Admin.jpg",
+  },
+  {
+    name: "Dr. Maspara Gideon",
+    role: "Head of Claims",
+    bio: "Coordinates and manages claims and reimbursement processes, ensuring proper documentation, verification, and timely processing.",
+    email: "claims@semsas.gombe.gov.ng",
+    linkedin: "#",
+    imageUrl: "/images/Dr Maspara Gideon Head of Claim.jpg",
+  },
+  {
+    name: "Halima Musa Miyabe",
+    role: "Head of Monitoring & Evaluation",
+    bio: "Oversees monitoring and evaluation to ensure quality, performance, and continuous improvement in emergency medical service delivery.",
+    email: "me@semsas.gombe.gov.ng",
+    linkedin: "#",
+    imageUrl: "/images/Halima Musa Miyabe Head of Monitoring & Evaluation.jpg",
+  },
+  {
+    name: "Muhammad Sanusi Ahmad",
+    role: "Strategic Information",
+    bio: "Manages strategic information, data analytics, and reporting to guide evidence-based decision-making and digital transformation for SEMSAS.",
+    email: "si@semsas.gombe.gov.ng",
+    linkedin: "#",
+    imageUrl: "/images/Muhammad Sanusi Ahmad Strategic Information.jpg",
+  },
+  {
+    name: "SEMSAS ICT Focal Person",
+    role: "ICT Focal Person",
+    bio: "Coordinates, manages and strengthens the information and communication technology systems supporting SEMSAS operations, ensuring robust digital emergency response systems.",
+    email: "ict@semsas.gombe.gov.ng",
+    linkedin: "#",
+    imageUrl: "/images/ICT Focal Person.jpg",
+  }
+];
 
 export default function Leadership() {
   return (
@@ -83,6 +127,31 @@ export default function Leadership() {
 
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Team Grid */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
+            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900 mb-4">
+              SEMSAS Management Team
+            </h2>
+            <p className="text-muted-text font-light text-sm sm:text-base">
+              Meet the dedicated professionals leading the various departments and operations of the Gombe State Emergency Medical Services and Ambulance System.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {leadershipTeam.map((leader, index) => (
+              <LeaderTeamCard key={index} leader={leader} idx={index} />
+            ))}
           </div>
         </div>
       </section>

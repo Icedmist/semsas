@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Mail, Globe, ArrowUpRight } from "lucide-react";
 
@@ -11,6 +12,7 @@ interface Leader {
   bio: string;
   email: string;
   linkedin: string;
+  imageUrl?: string;
 }
 
 interface Props {
@@ -21,7 +23,7 @@ interface Props {
 
 export default function LeaderTeamCard({ leader, idx = 0, contactHref = "/#contact" }: Props) {
   const initials = leader.name
-    .replace(/^(Dr\.|Mrs\.|Mallam|Engr\.|Sister)\s*/i, "")
+    .replace(/^(Dr\.|Mrs\.|Mallam|Engr\.|Sister|Pharm)\s*/i, "")
     .split(" ")
     .map((w) => w[0])
     .slice(0, 2)
@@ -53,9 +55,20 @@ export default function LeaderTeamCard({ leader, idx = 0, contactHref = "/#conta
 
       <div className="px-6 -mt-10 flex justify-center">
         <div className="relative">
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emergency-red to-primary-navy text-white flex items-center justify-center font-heading font-black text-2xl shadow-lg ring-4 ring-white transition-transform duration-500 group-hover:scale-105">
-            {initials}
-          </div>
+          {leader.imageUrl ? (
+            <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-lg ring-4 ring-white transition-transform duration-500 group-hover:scale-105">
+              <Image
+                src={leader.imageUrl}
+                alt={leader.name}
+                fill
+                className="object-cover object-top"
+              />
+            </div>
+          ) : (
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emergency-red to-primary-navy text-white flex items-center justify-center font-heading font-black text-2xl shadow-lg ring-4 ring-white transition-transform duration-500 group-hover:scale-105">
+              {initials}
+            </div>
+          )}
           <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-success-green rounded-full ring-2 ring-white" />
         </div>
       </div>
@@ -69,7 +82,7 @@ export default function LeaderTeamCard({ leader, idx = 0, contactHref = "/#conta
             {leader.role}
           </p>
         </div>
-        <p className="text-muted-text text-xs leading-relaxed font-light mt-3 text-center">
+        <p className="text-muted-text text-xs leading-relaxed font-light mt-3 text-center line-clamp-3">
           {leader.bio}
         </p>
 
