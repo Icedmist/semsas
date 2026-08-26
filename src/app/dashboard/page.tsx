@@ -18,6 +18,10 @@ import {
   SlideServiceRuns
 } from "@/components/dashboard/slides/DashboardSlides";
 
+/**
+ * The main page component for the live dashboard.
+ * Manages fetching live data and navigating between different dashboard slides.
+ */
 export default function DashboardPage() {
   const { currentSection, setCurrentSection, isPaused } = useLiveUpdates();
   const [liveData, setLiveData] = useState<any>(defaultDashboardData);
