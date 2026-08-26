@@ -3,6 +3,50 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import LeaderTeamCard from "@/components/LeaderTeamCard";
+
+const leadershipTeam = [
+  {
+    name: "Dr. Bello Abdulkadir",
+    role: "Head of SEMSAS Admin (Administrative Officer)",
+    bio: "Responsible for providing effective administrative, logistical, human resource and operational support to ensure the smooth and efficient functioning of SEMSAS.",
+    email: "admin@semsas.gombe.gov.ng",
+    linkedin: "#",
+    imageUrl: "/images/Dr Bello Abdulkadir Head of SEMSAS Admin.jpg",
+  },
+  {
+    name: "Dr. Maspara Gideon",
+    role: "Head of Claims",
+    bio: "Coordinates and manages claims and reimbursement processes, ensuring proper documentation, verification, and timely processing.",
+    email: "claims@semsas.gombe.gov.ng",
+    linkedin: "#",
+    imageUrl: "/images/Dr Maspara Gideon Head of Claim.jpg",
+  },
+  {
+    name: "Halima Musa Miyabe",
+    role: "Head of Monitoring and Evaluation",
+    bio: "Oversees monitoring and evaluation to ensure quality, performance, and continuous improvement in emergency medical service delivery.",
+    email: "me@semsas.gombe.gov.ng",
+    linkedin: "#",
+    imageUrl: "/images/Halima Musa Miyabe Head of Monitoring & Evaluation.jpg",
+  },
+  {
+    name: "Muhammad Sanusi Ahmad",
+    role: "Strategic Information",
+    bio: "Manages strategic information, data analytics, and reporting to guide evidence-based decision-making and digital transformation for SEMSAS.",
+    email: "si@semsas.gombe.gov.ng",
+    linkedin: "#",
+    imageUrl: "/images/Muhammad Sanusi Ahmad Strategic Information.jpg",
+  },
+  {
+    name: "SEMSAS ICT Focal Person",
+    role: "ICT Focal Person",
+    bio: "Coordinates, manages and strengthens the information and communication technology systems supporting SEMSAS operations, ensuring robust digital emergency response systems.",
+    email: "ict@semsas.gombe.gov.ng",
+    linkedin: "#",
+    imageUrl: "/images/ICT Focal Person.jpg",
+  }
+];
 import {
   Phone,
   MapPin,
@@ -1221,6 +1265,19 @@ export default function Homepage() {
                 </div>
               </div>
             </div>
+          </motion.div>
+
+          {/* Other Leadership Team Members */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-12"
+          >
+            {leadershipTeam.map((leader, idx) => (
+              <LeaderTeamCard key={idx} leader={leader} idx={idx} variant="dark" />
+            ))}
           </motion.div>
         </div>
       </section>
