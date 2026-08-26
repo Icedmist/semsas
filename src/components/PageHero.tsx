@@ -15,6 +15,10 @@ interface PageHeroProps {
   badge?: string;
 }
 
+/**
+ * A reusable hero section component for secondary pages.
+ * Displays a title, optional subtitle, breadcrumb, and optional background image.
+ */
 export default function PageHero({
   title,
   subtitle,
