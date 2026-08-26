@@ -86,6 +86,10 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
 };
 
+/**
+ * The main landing page for the SEMSAS application.
+ * Displays the hero section, services, about section, leadership team, and news.
+ */
 export default function Homepage() {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
