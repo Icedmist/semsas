@@ -22,6 +22,10 @@ export function useLiveUpdates() {
   return useContext(LiveUpdatesContext);
 }
 
+/**
+ * The layout component for the dashboard section.
+ * Provides live updates context to child components.
+ */
 export default function DashboardLayout({
   children,
 }: Readonly<{
