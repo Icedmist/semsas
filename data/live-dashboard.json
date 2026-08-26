@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-08-17T14:21:22.793Z",
+  "updatedAt": "2026-08-26T20:43:11.667Z",
   "overview": {
-    "totalEmergencies": 2026,
+    "totalEmergencies": 1628,
     "totalAmbulances": 53,
     "avgResponseTime": "15 mins",
     "livesSaved": 783,
@@ -9,7 +9,7 @@
     "emergencyTrend": 8.5
   },
   "ambulanceFleet": {
-    "total": 70,
+    "total": 55,
     "byLGA": [
       {
         "name": "Gombe",
