@@ -10,6 +10,10 @@ interface AnimatedCounterProps {
   suffix?: string;
 }
 
+/**
+ * A component that animates a number from its previous value to a new value.
+ * Useful for dashboard statistics and data visualization.
+ */
 export default function AnimatedCounter({
   value,
   duration = 1.6,
