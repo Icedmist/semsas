@@ -18,6 +18,10 @@ import {
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { stagger, fadeUpItem, fadeUp } from "@/lib/motion-variants";
 
+/**
+ * The Admin Dashboard page component.
+ * Provides a mock CMS interface for managing content, roles, and media.
+ */
 export default function AdminDashboard() {
   const [selectedRole, setSelectedRole] = useState("Content Administrator");
 
