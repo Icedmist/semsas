@@ -113,6 +113,10 @@ const documents: ResourceDoc[] = [
   }
 ];
 
+/**
+ * The Downloads portal page component.
+ * Allows users to browse, search, and download public documents and materials.
+ */
 export default function DownloadsPortal() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
