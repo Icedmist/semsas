@@ -29,6 +29,10 @@ const contactSchema = z.object({
   consent: z.boolean().refine((val) => val === true, "You must consent to data processing")
 });
 
+/**
+ * The Contact page component.
+ * Displays contact details, department directory, and a contact form with validation.
+ */
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
