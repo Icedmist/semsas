@@ -20,6 +20,10 @@ interface FAQItem {
   a: string;
 }
 
+/**
+ * The Emergency Information page component.
+ * Displays emergency contacts, triage rules, safety steps, and FAQs.
+ */
 export default function EmergencyInformation() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
