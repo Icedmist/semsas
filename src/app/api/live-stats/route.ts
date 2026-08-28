@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getLiveDashboardData, saveLiveDashboardData } from "@/lib/live-data";
+import { getLiveDashboardData, saveLiveDashboardData, getAllYearsData } from "@/lib/live-data";
 
 export const dynamic = "force-dynamic";
 
@@ -21,14 +21,35 @@ export async function OPTIONS(request: Request) {
 }
 
 export async function GET(request: Request) {
-  const data = await getLiveDashboardData();
-  return NextResponse.json(data, {
-    headers: getCorsHeaders(request),
-  });
+  const { searchParams } = new URL(request.url);
+  const yearParam = searchParams.get("year");
+  const allYears = searchParams.get("all") === "true";
+  
+  const corsHeaders = getCorsHeaders(request);
+  
+  try {
+    if (allYears) {
+      const data = await getAllYearsData();
+      return NextResponse.json(data, { headers: corsHeaders });
+    }
+    
+    const year = yearParam ? parseInt(yearParam, 10) : undefined;
+    const data = await getLiveDashboardData(year);
+    return NextResponse.json(data, { headers: corsHeaders });
+  } catch (error) {
+    console.error("Failed to load live dashboard data:", error);
+    return NextResponse.json(
+      { error: "Failed to load data" },
+      { status: 500, headers: corsHeaders }
+    );
+  }
 }
 
 export async function POST(request: Request) {
   const corsHeaders = getCorsHeaders(request);
+  const { searchParams } = new URL(request.url);
+  const yearParam = searchParams.get("year");
+  const year = yearParam ? parseInt(yearParam, 10) : undefined;
 
   try {
     // Basic Auth Check (optional secure token check via ADMIN_SECRET_KEY env)
@@ -42,7 +63,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const saved = await saveLiveDashboardData(body);
+    const saved = await saveLiveDashboardData(body, year);
     return NextResponse.json({ success: true, data: saved }, {
       headers: corsHeaders
     });
