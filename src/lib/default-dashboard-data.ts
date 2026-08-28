@@ -1,11 +1,11 @@
 export const defaultDashboardData = {
   overview: {
-    totalEmergencies: 2012,
+    totalEmergencies: 0,
     totalAmbulances: 53,
     avgResponseTime: "15 mins",
-    livesSaved: 783,
-    patientsTransported: 1951,
-    emergencyTrend: 8.5
+    livesSaved: 0,
+    patientsTransported: 0,
+    emergencyTrend: 0
   },
   ambulanceFleet: {
     total: 53,
@@ -39,45 +39,50 @@ export const defaultDashboardData = {
     ]
   },
   dailyDispatch: {
-    callsReceived: 47,
+    callsReceived: 0,
     avgResponseTime: "14:30",
-    successfulInterventions: 43,
+    successfulInterventions: 0,
     avgTimeToScene: "15:00",
     trends: [
-      { time: "6AM", calls: 3 },
-      { time: "9AM", calls: 8 },
-      { time: "12PM", calls: 12 },
-      { time: "3PM", calls: 9 },
-      { time: "6PM", calls: 7 },
-      { time: "9PM", calls: 5 },
-      { time: "12AM", calls: 3 }
+      { time: "6AM", calls: 0 },
+      { time: "9AM", calls: 0 },
+      { time: "12PM", calls: 0 },
+      { time: "3PM", calls: 0 },
+      { time: "6PM", calls: 0 },
+      { time: "9PM", calls: 0 },
+      { time: "12AM", calls: 0 }
     ]
   },
   transport: {
-    totalDeliveries: 783,
-    totalOtherEmergencies: 236,
-    resmatCases: 1000,
+    totalDeliveries: 0,
+    totalOtherEmergencies: 0,
+    resmatCases: 0,
     monthlyData: [
-      { month: "June", total: 151, deliveries: 127, otherEmergencies: 24 },
-      { month: "July", total: 364, deliveries: 232, otherEmergencies: 82 },
-      { month: "August", total: 147, deliveries: 119, otherEmergencies: 28 },
-      { month: "September", total: 128, deliveries: 100, otherEmergencies: 28 },
-      { month: "October", total: 97, deliveries: 69, otherEmergencies: 22 },
-      { month: "November", total: 112, deliveries: 82, otherEmergencies: 30 },
-      { month: "December", total: 150, deliveries: 54, otherEmergencies: 12 }
+      { month: "January", total: 0, deliveries: 0, otherEmergencies: 0 },
+      { month: "February", total: 0, deliveries: 0, otherEmergencies: 0 },
+      { month: "March", total: 0, deliveries: 0, otherEmergencies: 0 },
+      { month: "April", total: 0, deliveries: 0, otherEmergencies: 0 },
+      { month: "May", total: 0, deliveries: 0, otherEmergencies: 0 },
+      { month: "June", total: 0, deliveries: 0, otherEmergencies: 0 },
+      { month: "July", total: 0, deliveries: 0, otherEmergencies: 0 },
+      { month: "August", total: 0, deliveries: 0, otherEmergencies: 0 },
+      { month: "September", total: 0, deliveries: 0, otherEmergencies: 0 },
+      { month: "October", total: 0, deliveries: 0, otherEmergencies: 0 },
+      { month: "November", total: 0, deliveries: 0, otherEmergencies: 0 },
+      { month: "December", total: 0, deliveries: 0, otherEmergencies: 0 }
     ]
   },
   emergencyTypes: {
     laborComplications: [
-      { name: "Prolonged Labor", count: 36, color: "#DC143C" },
-      { name: "Bleeding", count: 18, color: "#FF6B6B" },
-      { name: "Convulsions", count: 4, color: "#FFB81C" },
-      { name: "Other Complications", count: 24, color: "#64748B" }
+      { name: "Prolonged Labor", count: 0, color: "#DC143C" },
+      { name: "Bleeding", count: 0, color: "#FF6B6B" },
+      { name: "Convulsions", count: 0, color: "#FFB81C" },
+      { name: "Other Complications", count: 0, color: "#64748B" }
     ],
     pregnancyComplications: [
-      { name: "Bleeding", count: 27, color: "#DC143C" },
-      { name: "Convulsions (Eclampsia)", count: 9, color: "#FFB81C" },
-      { name: "Eclampsia", count: 4, color: "#8B5CF6" }
+      { name: "Bleeding", count: 0, color: "#DC143C" },
+      { name: "Convulsions (Eclampsia)", count: 0, color: "#FFB81C" },
+      { name: "Eclampsia", count: 0, color: "#8B5CF6" }
     ]
   },
   performance: {
@@ -104,28 +109,35 @@ export const defaultDashboardData = {
   },
   trends: {
     monthly: [
-      { month: "Jun", emergencies: 151, deliveries: 127 },
-      { month: "Jul", emergencies: 364, deliveries: 232 },
-      { month: "Aug", emergencies: 147, deliveries: 119 },
-      { month: "Sep", emergencies: 128, deliveries: 100 },
-      { month: "Oct", emergencies: 97, deliveries: 69 },
-      { month: "Nov", emergencies: 112, deliveries: 82 },
-      { month: "Dec", emergencies: 150, deliveries: 54 }
+      { month: "Jan", emergencies: 0, deliveries: 0 },
+      { month: "Feb", emergencies: 0, deliveries: 0 },
+      { month: "Mar", emergencies: 0, deliveries: 0 },
+      { month: "Apr", emergencies: 0, deliveries: 0 },
+      { month: "May", emergencies: 0, deliveries: 0 },
+      { month: "Jun", emergencies: 0, deliveries: 0 },
+      { month: "Jul", emergencies: 0, deliveries: 0 },
+      { month: "Aug", emergencies: 0, deliveries: 0 },
+      { month: "Sep", emergencies: 0, deliveries: 0 },
+      { month: "Oct", emergencies: 0, deliveries: 0 },
+      { month: "Nov", emergencies: 0, deliveries: 0 },
+      { month: "Dec", emergencies: 0, deliveries: 0 }
     ]
   },
   ambulanceServiceRuns: {
-    total: 1951,
+    total: 0,
     monthlyRuns: [
-      { month: "March", runs: 25 },
-      { month: "April", runs: 22 },
-      { month: "May", runs: 11 },
-      { month: "June", runs: 31 },
-      { month: "July", runs: 310 },
-      { month: "August", runs: 281 },
-      { month: "September", runs: 343 },
-      { month: "October", runs: 305 },
-      { month: "November", runs: 266 },
-      { month: "December", runs: 357 }
+      { month: "January", runs: 0 },
+      { month: "February", runs: 0 },
+      { month: "March", runs: 0 },
+      { month: "April", runs: 0 },
+      { month: "May", runs: 0 },
+      { month: "June", runs: 0 },
+      { month: "July", runs: 0 },
+      { month: "August", runs: 0 },
+      { month: "September", runs: 0 },
+      { month: "October", runs: 0 },
+      { month: "November", runs: 0 },
+      { month: "December", runs: 0 }
     ]
   },
   status: {
@@ -134,3 +146,130 @@ export const defaultDashboardData = {
   },
   updatedAt: new Date().toISOString()
 };
+
+export const defaultYearlyData: Record<number, typeof defaultDashboardData> = {
+  2025: {
+    ...defaultDashboardData,
+    overview: {
+      totalEmergencies: 1628,
+      totalAmbulances: 53,
+      avgResponseTime: "15 mins",
+      livesSaved: 783,
+      patientsTransported: 1951,
+      emergencyTrend: 8.5
+    },
+    ambulanceFleet: {
+      total: 55,
+      byLGA: [
+        { name: "Gombe", shortName: "GME", count: 30 },
+        { name: "Akko", shortName: "AKK", count: 10 },
+        { name: "Balanga", shortName: "BLG", count: 6 },
+        { name: "Kwami", shortName: "KWM", count: 4 },
+        { name: "Kaltungo", shortName: "KLT", count: 5 },
+        { name: "Yamaltu Deba", shortName: "YDB", count: 3 },
+        { name: "Billiri", shortName: "BLR", count: 3 },
+        { name: "Dukku", shortName: "DKU", count: 2 },
+        { name: "Funakaye", shortName: "FKY", count: 2 },
+        { name: "Nafada", shortName: "NFD", count: 2 },
+        { name: "Shongom", shortName: "SHM", count: 2 }
+      ]
+    },
+    dailyDispatch: {
+      callsReceived: 47,
+      avgResponseTime: "14:30",
+      successfulInterventions: 43,
+      avgTimeToScene: "15:00",
+      trends: [
+        { time: "6AM", calls: 3 },
+        { time: "9AM", calls: 8 },
+        { time: "12PM", calls: 12 },
+        { time: "3PM", calls: 9 },
+        { time: "6PM", calls: 7 },
+        { time: "9PM", calls: 5 },
+        { time: "12AM", calls: 3 }
+      ]
+    },
+    transport: {
+      totalDeliveries: 783,
+      totalOtherEmergencies: 236,
+      resmatCases: 1000,
+      monthlyData: [
+        { month: "January", total: 0, deliveries: 0, otherEmergencies: 0 },
+        { month: "February", total: 0, deliveries: 0, otherEmergencies: 0 },
+        { month: "March", total: 0, deliveries: 0, otherEmergencies: 0 },
+        { month: "April", total: 0, deliveries: 0, otherEmergencies: 0 },
+        { month: "May", total: 0, deliveries: 0, otherEmergencies: 0 },
+        { month: "June", total: 151, deliveries: 127, otherEmergencies: 24 },
+        { month: "July", total: 364, deliveries: 232, otherEmergencies: 82 },
+        { month: "August", total: 147, deliveries: 119, otherEmergencies: 28 },
+        { month: "September", total: 128, deliveries: 100, otherEmergencies: 28 },
+        { month: "October", total: 97, deliveries: 69, otherEmergencies: 22 },
+        { month: "November", total: 112, deliveries: 82, otherEmergencies: 30 },
+        { month: "December", total: 150, deliveries: 54, otherEmergencies: 12 }
+      ]
+    },
+    trends: {
+      monthly: [
+        { month: "Jan", emergencies: 0, deliveries: 0 },
+        { month: "Feb", emergencies: 0, deliveries: 0 },
+        { month: "Mar", emergencies: 0, deliveries: 0 },
+        { month: "Apr", emergencies: 0, deliveries: 0 },
+        { month: "May", emergencies: 0, deliveries: 0 },
+        { month: "Jun", emergencies: 151, deliveries: 127 },
+        { month: "Jul", emergencies: 364, deliveries: 232 },
+        { month: "Aug", emergencies: 147, deliveries: 119 },
+        { month: "Sep", emergencies: 128, deliveries: 100 },
+        { month: "Oct", emergencies: 97, deliveries: 69 },
+        { month: "Nov", emergencies: 112, deliveries: 82 },
+        { month: "Dec", emergencies: 150, deliveries: 54 }
+      ]
+    },
+    ambulanceServiceRuns: {
+      total: 1951,
+      monthlyRuns: [
+        { month: "January", runs: 0 },
+        { month: "February", runs: 0 },
+        { month: "March", runs: 25 },
+        { month: "April", runs: 22 },
+        { month: "May", runs: 11 },
+        { month: "June", runs: 31 },
+        { month: "July", runs: 310 },
+        { month: "August", runs: 281 },
+        { month: "September", runs: 343 },
+        { month: "October", runs: 305 },
+        { month: "November", runs: 266 },
+        { month: "December", runs: 357 }
+      ]
+    }
+  },
+  2026: {
+    ...defaultDashboardData,
+    overview: {
+      totalEmergencies: 0,
+      totalAmbulances: 55,
+      avgResponseTime: "15 mins",
+      livesSaved: 0,
+      patientsTransported: 0,
+      emergencyTrend: 0
+    },
+    ambulanceFleet: {
+      total: 55,
+      byLGA: [
+        { name: "Gombe", shortName: "GME", count: 14 },
+        { name: "Akko", shortName: "AKK", count: 10 },
+        { name: "Balanga", shortName: "BLG", count: 6 },
+        { name: "Kwami", shortName: "KWM", count: 4 },
+        { name: "Kaltungo", shortName: "KLT", count: 5 },
+        { name: "Yamaltu Deba", shortName: "YDB", count: 3 },
+        { name: "Billiri", shortName: "BLR", count: 3 },
+        { name: "Dukku", shortName: "DKU", count: 2 },
+        { name: "Funakaye", shortName: "FKY", count: 2 },
+        { name: "Nafada", shortName: "NFD", count: 2 },
+        { name: "Shongom", shortName: "SHM", count: 2 }
+      ]
+    }
+  }
+};
+
+export const AVAILABLE_YEARS = [2025, 2026];
+export const CURRENT_YEAR = new Date().getFullYear();
