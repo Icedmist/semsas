@@ -21,7 +21,7 @@ import {
   Phone
 } from "lucide-react";
 
-import { defaultDashboardData } from "@/lib/default-dashboard-data";
+import { defaultDashboardData, AVAILABLE_YEARS, CURRENT_YEAR } from "@/lib/default-dashboard-data";
 import {
   SlideOverview,
   SlideAmbulanceFleet,
@@ -35,6 +35,7 @@ import {
   SlideLaborDelivery,
   SlideServiceRuns
 } from "@/components/dashboard/slides/DashboardSlides";
+import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 
 type DashboardDataSchema = typeof defaultDashboardData;
 
@@ -66,6 +67,7 @@ export default function AdminConsole() {
   const [dirty, setDirty] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
   const [now, setNow] = useState("");
+  const [selectedYear, setSelectedYear] = useState(CURRENT_YEAR);
 
   const formatTime = (date: Date) => {
     const hh = String(date.getHours()).padStart(2, "0");
@@ -81,15 +83,19 @@ export default function AdminConsole() {
   }, []);
 
   // Read API URL from environment variables
-  const getApiUrl = () => {
+  const getApiUrl = (year?: number) => {
     const nextUrl = process.env.NEXT_PUBLIC_API_URL;
-    return nextUrl ? `${nextUrl}/api/live-stats` : "/api/live-stats";
+    const base = nextUrl ? `${nextUrl}/api/live-stats` : "/api/live-stats";
+    if (year) {
+      return `${base}?year=${year}`;
+    }
+    return base;
   };
 
   const loadData = async () => {
     setLoading(true);
     try {
-      const res = await fetch(getApiUrl());
+      const res = await fetch(getApiUrl(selectedYear));
       if (!res.ok) throw new Error("Failed to load");
       const json = await res.json();
       setData(json);
@@ -105,7 +111,7 @@ export default function AdminConsole() {
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [selectedYear]);
 
   const patch = (section: keyof DashboardDataSchema, partial: any) => {
     setData((prev) => {
@@ -123,7 +129,7 @@ export default function AdminConsole() {
     setSaving(true);
     try {
       const secretKey = process.env.NEXT_PUBLIC_ADMIN_SECRET_KEY || "";
-      const res = await fetch(getApiUrl(), {
+      const res = await fetch(getApiUrl(selectedYear), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -220,6 +226,34 @@ export default function AdminConsole() {
                   Live
                 </span>
               )}
+              {/* Year Selector */}
+              <div className="flex items-center gap-2 ml-4">
+                <button
+                  onClick={() => setSelectedYear(prev => Math.max(Math.min(...AVAILABLE_YEARS), prev - 1))}
+                  disabled={selectedYear <= Math.min(...AVAILABLE_YEARS)}
+                  className="w-9 h-9 rounded-full border border-black flex items-center justify-center bg-white hover:bg-black/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  title="Previous Year"
+                  aria-label="Previous Year"
+                >
+                  <ChevronLeft className="w-5 h-5 text-black" />
+                </button>
+                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2">
+                  <Calendar className="w-5 h-5 text-black" />
+                  <span className="text-sm font-bold text-black tabular-nums w-16 text-center">{selectedYear}</span>
+                  {selectedYear === CURRENT_YEAR && (
+                    <span className="text-[10px] font-bold uppercase text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Current</span>
+                  )}
+                </div>
+                <button
+                  onClick={() => setSelectedYear(prev => Math.min(Math.max(...AVAILABLE_YEARS), prev + 1))}
+                  disabled={selectedYear >= Math.max(...AVAILABLE_YEARS)}
+                  className="w-9 h-9 rounded-full border border-black flex items-center justify-center bg-white hover:bg-black/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  title="Next Year"
+                  aria-label="Next Year"
+                >
+                  <ChevronRight className="w-5 h-5 text-black" />
+                </button>
+              </div>
               <button
                 onClick={loadData}
                 disabled={loading}
@@ -622,7 +656,7 @@ export default function AdminConsole() {
           {/* TAB 10: MONTHLY BIRTHS / TRENDS */}
           {activeTab === "trends" && (
             <div className="space-y-6">
-              <SectionHeader title="Monthly Births (June - Dec 2025)" />
+              <SectionHeader title={`Monthly Births (${selectedYear})`} />
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
                 <div className="space-y-3">
                   {data.trends.monthly.map((m, idx) => (
