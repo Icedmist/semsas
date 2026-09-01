@@ -43,7 +43,7 @@ export default function Home() {
             </div>
             <div className="relative bg-[#f0f5f6] p-4 lg:p-6 flex items-center">
               <div className="relative w-full aspect-[4/3] md:aspect-[4/3] rounded-[24px] overflow-hidden bg-white border border-black/5">
-                <img src="/images/UOMUepVQXzu9Z4Iu7nm30ARGDI.png" alt="Emergency response" className="h-full w-full object-cover" />
+                <img src="/images/gallery-new-4.jpg" alt="SEMSAS Leadership and Government Partnership" className="h-full w-full object-cover" />
                 <div className="absolute bottom-3 left-3 right-3 rounded-2xl bg-white/90 backdrop-blur p-3 border border-black/5 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <img src="/images/CzT5Uj890xo8WuZWLcMHca8t5z0.svg" alt="" className="w-9 h-7 object-contain" />
