@@ -1,14 +1,34 @@
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabaseKey =
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  "";
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Only create client if URL is available, otherwise lazy-load
+let supabaseClient: any = null;
+
+export function getSupabase() {
+  if (!supabaseClient && supabaseUrl && supabaseKey) {
+    supabaseClient = createClient(supabaseUrl, supabaseKey);
+  }
+  return supabaseClient;
+}
+
+// Backwards compatibility export
+export const supabase = { channel: () => ({ on: () => ({ subscribe: () => {} }) }) } as any;
 
 // Database helpers for live-dashboard
 export async function getLiveDashboard(year: string) {
   try {
-    const { data, error } = await supabase
+    const client = getSupabase();
+    if (!client) {
+      console.warn("Supabase not configured");
+      return null;
+    }
+    
+    const { data, error } = await client
       .from("live_dashboard")
       .select("*")
       .eq("year", year)
@@ -28,7 +48,12 @@ export async function getLiveDashboard(year: string) {
 
 export async function setLiveDashboard(year: string, data: any) {
   try {
-    const { error } = await supabase
+    const client = getSupabase();
+    if (!client) {
+      console.warn("Supabase not configured");
+      return false;
+    }
+    const { error } = await client
       .from("live_dashboard")
       .upsert({
         year,
@@ -55,7 +80,13 @@ export function subscribeLiveDashboard(
   cb: (data: any) => void
 ) {
   try {
-    const subscription = supabase
+    const client = getSupabase();
+    if (!client) {
+      console.warn("Supabase not configured for subscription");
+      return () => {};
+    }
+    
+    const subscription = client
       .channel(`live_dashboard:${year}`)
       .on(
         "postgres_changes",
@@ -65,7 +96,7 @@ export function subscribeLiveDashboard(
           table: "live_dashboard",
           filter: `year=eq.${year}`,
         },
-        (payload) => {
+        (payload: any) => {
           if (payload.new && (payload.new as any).data) {
             cb((payload.new as any).data);
           }
