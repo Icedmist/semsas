@@ -142,7 +142,7 @@ export const defaultDashboardData = {
   },
   lgaMonthlyRuns: {
     months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-    data: []
+    data: [] as {lga: string, runs: number[], total: number}[]
   },
   status: {
     message: "All Systems Working",
