@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -7,6 +8,37 @@ import { motion } from "framer-motion";
 // Uses GoSEMSAS geometry: max-w 1280, rounded 40px sections, 66px nav, 58px primary button, Urbanist/Fredoka, #f0f5f6, #0a0a0a, #ffce8a
 
 export default function Home() {
+  const [stats, setStats] = useState({
+    survivalRate: 97.2,
+    emergencies: 1628,
+    ambulances: 55
+  });
+
+  useEffect(() => {
+    async function loadStats() {
+      try {
+        const timestamp = Date.now();
+        const year = new Date().getFullYear();
+        const res = await fetch(`/api/live-stats?year=${year}&t=${timestamp}`, {
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache", "Pragma": "no-cache" }
+        });
+        const json = await res.json();
+        const payload = (json as any).data ?? json;
+        if (payload?.overview) {
+          setStats({
+            survivalRate: payload.performance?.survivalRate ?? 97.2,
+            emergencies: payload.overview.totalEmergencies ?? 1628,
+            ambulances: payload.ambulanceFleet?.total ?? 55
+          });
+        }
+      } catch (err) {
+        console.error("Failed to load live stats for homepage", err);
+      }
+    }
+    loadStats();
+  }, []);
+
   return (
     <div className="bg-white">
       {/* HERO — GoSEMSAS Hero Section: left text + right hero image UOMU... */}
@@ -37,7 +69,7 @@ export default function Home() {
               </div>
               <div className="mt-6 flex gap-6 text-xs font-semibold">
                 <span><b className="text-sm">11 LGAs</b> <span className="text-black/40">Covered</span></span>
-                <span><b className="text-sm">55</b> <span className="text-black/40">Ambulances</span></span>
+                <span><b className="text-sm">{stats.ambulances}</b> <span className="text-black/40">Ambulances</span></span>
                 <span><b className="text-sm">24/7</b> <span className="text-black/40">Dispatch</span></span>
               </div>
             </div>
@@ -50,7 +82,7 @@ export default function Home() {
                     <div className="text-xs leading-tight"><div className="font-bold">Dispatch Centre</div><div className="text-black/60">Avg Response 14:30</div></div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xs font-bold">55 Ambulances</div>
+                    <div className="text-xs font-bold">{stats.ambulances} Ambulances</div>
                     <div className="text-[11px] text-emerald-600 font-bold">● All Systems Working</div>
                   </div>
                 </div>
@@ -70,11 +102,11 @@ export default function Home() {
               </motion.h2>
               <div className="mt-6 grid grid-cols-3 gap-4">
                 <div className="rounded-[20px] bg-white border border-black/5 p-4 text-center">
-                  <div className="text-2xl font-black">97.2%</div>
+                  <div className="text-2xl font-black">{stats.survivalRate}%</div>
                   <div className="text-xs text-black/50">Survival Rate</div>
                 </div>
                 <div className="rounded-[20px] bg-white border border-black/5 p-4 text-center">
-                  <div className="text-2xl font-black">1628</div>
+                  <div className="text-2xl font-black">{stats.emergencies}</div>
                   <div className="text-xs text-black/50">Emergencies</div>
                 </div>
                 <div className="rounded-[20px] bg-[#dc2626] text-white p-4 text-center border border-[#991b1b]">
@@ -188,7 +220,7 @@ export default function Home() {
                 <div className="mt-2"><span className="text-3xl font-black">{card.price}</span> <span className="text-sm opacity-60">/ NEMSAS</span></div>
                 <p className="mt-3 text-sm leading-6 opacity-70">{card.desc}</p>
                 <a href={card.name==="Citizen"?"tel:07033825646": card.name==="RESCUE"?"/contact":"/partners"} className={`mt-6 inline-flex w-full justify-center rounded-full py-3 text-sm font-bold ${card.dark ? "bg-white text-black" : "bg-[#0a0a0a] text-white"}`}>{card.cta}</a>
-                <div className="mt-4 text-xs opacity-50">• 11 LGAs • 24/7 • 55 ambulances</div>
+                <div className="mt-4 text-xs opacity-50">• 11 LGAs • 24/7 • {stats.ambulances} ambulances</div>
               </div>
             ))}
           </div>

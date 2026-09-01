@@ -64,10 +64,16 @@ export default function DashboardStats() {
 
     const load = async () => {
       try {
-        const res = await fetch("/api/live-stats");
-        const json = (await res.json()) as LiveDashboardData;
+        const timestamp = Date.now();
+        const year = new Date().getFullYear();
+        const res = await fetch(`/api/live-stats?year=${year}&t=${timestamp}`, {
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache", "Pragma": "no-cache" }
+        });
+        const json = (await res.json()) as { data: LiveDashboardData } | LiveDashboardData;
+        const payload = (json as any).data ?? json;
         if (mountedRef.current) {
-          setData(json);
+          setData(payload as LiveDashboardData);
           setLoading(false);
         }
       } catch {
