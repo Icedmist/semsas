@@ -86,18 +86,21 @@ export default function AdminConsole() {
 
   // Read API URL — admin is separate app on 3001, so default to semsas on 3000
   const getApiUrl = (year?: number) => {
-    const nextUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-    const base = `${nextUrl}/api/live-stats`;
+    const base = `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"}/api/live-stats`;
+    const t = Date.now();
     if (year) {
-      return `${base}?year=${year}`;
+      return `${base}?year=${year}&t=${t}`;
     }
-    return base;
+    return `${base}?t=${t}`;
   };
 
   const loadData = async () => {
     setLoading(true);
     try {
-      const res = await fetch(getApiUrl(selectedYear));
+      const res = await fetch(getApiUrl(selectedYear), {
+        cache: "no-store",
+        headers: { "Cache-Control": "no-cache", "Pragma": "no-cache" }
+      });
       if (!res.ok) throw new Error("Failed to load");
       const json = await res.json();
       const payload = (json as any).data ?? json;
@@ -132,27 +135,30 @@ export default function AdminConsole() {
     if (!data) return;
     setSaving(true);
     try {
-      const secretKey = process.env.NEXT_PUBLIC_ADMIN_SECRET_KEY || "";
+      const secretKey = process.env.NEXT_PUBLIC_ADMIN_SECRET_KEY || "gosemsas-admin-2025";
       const res = await fetch(getApiUrl(selectedYear), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          ...(secretKey ? { Authorization: `Bearer ${secretKey}` } : {})
+          Authorization: `Bearer ${secretKey}`
         },
         body: JSON.stringify(data)
       });
-      if (!res.ok) throw new Error("Failed to save");
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Failed to save: ${res.status} ${res.statusText} - ${text}`);
+      }
       const json = await res.json();
-      if (json.success || (json as any).data) {
+      if (json.success || json.ok || (json as any).data) {
         setData((json as any).data ?? json);
         setDirty(false);
         setSaveResult("success");
       } else {
         throw new Error(json.error || "Save failed");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      setSaveResult("error");
+      setSaveResult(error.message || "error");
     } finally {
       setSaving(false);
     }
