@@ -3,25 +3,45 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const host = request.headers.get("host") || "";
   const pathname = request.nextUrl.pathname;
+  const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
+  const isAdminHost = host.startsWith("admin.") || host.startsWith("admin.admin.");
 
-  // Check if this is a request to the admin dashboard
-  // Admin should only be accessible via admin.domain or admin subdomain
+  // Canonical admin host is admin.admin.<domain> in production.
+  // Local development accepts localhost and admin.localhost values as well.
   if (pathname.startsWith("/admin")) {
-    // For development/localhost, allow both paths
-    if (host.includes("localhost") || host.includes("127.0.0.1")) {
-      return NextResponse.next();
+    if (isLocal) {
+      if (host.startsWith("admin.") || host.startsWith("admin.admin.")) {
+        return NextResponse.next();
+      }
+
+      const redirectHost = host.includes("localhost") ? "admin.admin.localhost" : "admin.admin.127.0.0.1";
+      return NextResponse.redirect(new URL(pathname, `http://${redirectHost}`), 307);
     }
 
-    // For production, only allow admin subdomain
-    if (!host.startsWith("admin.")) {
-      // Redirect to admin subdomain or show 404
-      return NextResponse.redirect(`https://admin.${host}${pathname}`, 307);
+    if (!isAdminHost) {
+      return NextResponse.redirect(`https://admin.admin.${host}${pathname}`, 307);
     }
+
+    return NextResponse.next();
   }
 
-  // If trying to access admin via admin subdomain at main routes, redirect properly
-  if (host.startsWith("admin.") && !pathname.startsWith("/admin")) {
-    return NextResponse.redirect(`https://admin.${host}/admin`, 307);
+  if (isLocal) {
+    if (host.startsWith("admin.") && !pathname.startsWith("/admin")) {
+      return NextResponse.redirect(new URL("/admin", request.url), 307);
+    }
+
+    return NextResponse.next();
+  }
+
+  // If trying to access the admin route through the main domain or a single-admin host,
+  // redirect to the canonical admin.admin.<domain> route.
+  if ((host.startsWith("admin.") && !host.startsWith("admin.admin.")) || !host.includes(".")) {
+    const baseHost = host.replace(/^admin\./, "");
+    return NextResponse.redirect(`https://admin.admin.${baseHost}/admin`, 307);
+  }
+
+  if (host.startsWith("admin.admin.") && !pathname.startsWith("/admin")) {
+    return NextResponse.redirect(`https://${host}/admin`, 307);
   }
 
   return NextResponse.next();

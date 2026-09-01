@@ -75,7 +75,7 @@ export default function LeaderTeamCard({ leader, idx = 0, contactHref = "/#conta
       {/* Content Section */}
       <div className="p-6 sm:p-8 flex flex-col flex-1 relative z-10 items-center text-center">
         <div className="mb-4">
-          <div className={`inline-flex items-center justify-center px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 ${isDark ? "bg-white/10 text-white" : "bg-emergency-red/10 text-emergency-red"}`}>
+          <div className={`inline-flex items-center justify-center px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 ${isDark ? "bg-white/10 text-white" : "bg-red-100 text-red-700 border border-red-300"}`}>
             {leader.role}
           </div>
           <h4 className={`font-heading font-extrabold text-xl sm:text-2xl leading-tight ${isDark ? "text-white" : "text-slate-900"}`}>
@@ -91,14 +91,14 @@ export default function LeaderTeamCard({ leader, idx = 0, contactHref = "/#conta
           <div className="flex gap-2">
             <a
               href={`mailto:${leader.email}`}
-              className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isDark ? "bg-white/10 hover:bg-white/20 text-white" : "bg-slate-50 hover:bg-emergency-red hover:text-white text-slate-400"}`}
+              className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isDark ? "bg-white/10 hover:bg-red-500/30 text-white" : "bg-red-100 hover:bg-red-600 hover:text-white text-red-600"}`}
               title="Email"
             >
               <Mail className="w-4 h-4" />
             </a>
             <a
               href={leader.linkedin}
-              className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isDark ? "bg-white/10 hover:bg-white/20 text-white" : "bg-slate-50 hover:bg-primary-navy hover:text-white text-slate-400"}`}
+              className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isDark ? "bg-white/10 hover:bg-red-500/30 text-white" : "bg-red-100 hover:bg-primary-navy hover:text-white text-red-600"}`}
               title="LinkedIn"
             >
               <Globe className="w-4 h-4" />
@@ -107,7 +107,7 @@ export default function LeaderTeamCard({ leader, idx = 0, contactHref = "/#conta
           
           <Link
             href={contactHref}
-            className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors ${isDark ? "text-white hover:text-white/80" : "text-primary-navy hover:text-emergency-red"}`}
+            className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors ${isDark ? "text-white hover:text-red-400" : "text-red-700 hover:text-red-900 font-semibold"}`}
           >
             Contact
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
