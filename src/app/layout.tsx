@@ -1,23 +1,12 @@
 import type { Metadata } from "next";
-import { Urbanist, Inter, Fredoka } from "next/font/google";
+import { Urbanist } from "next/font/google";
 import "./globals.css";
 
+// Single font for entire app — Urbanist (Healixx primary)
 const urbanist = Urbanist({
-  variable: "--font-urbanist",
+  variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400","500","600","700","900"],
-  display: "swap",
-});
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400","600"],
-  display: "swap",
-});
-const fredoka = Fredoka({
-  variable: "--font-fredoka",
-  subsets: ["latin"],
-  weight: ["700"],
+  weight: ["400","500","600","700","800","900"],
   display: "swap",
 });
 
@@ -33,8 +22,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${urbanist.variable} ${inter.variable} ${fredoka.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-white text-[#0a0a0a]">{children}</body>
+    <html lang="en" className={`${urbanist.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-white text-[#0a0a0a] font-sans">{children}</body>
     </html>
   );
 }

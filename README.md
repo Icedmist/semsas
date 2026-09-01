@@ -196,3 +196,7 @@ The easiest way to deploy the Next.js apps is the [Vercel Platform](https://verc
 *   [Next.js Documentation](https://nextjs.org/docs)
 *   [Learn Next.js](https://nextjs.org/learn)
 *   [Next.js GitHub](https://github.com/vercel/next.js)
+
+## Design System
+See [design.md](./design.md) for Healixx-faithful tokens, single Urbanist font, and Helix-only components.
+

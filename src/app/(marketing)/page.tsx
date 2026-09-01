@@ -195,57 +195,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PARTNERS — moved below, marquee moves right → */}
+      {/* PARTNERS — Healixx pill style, acronyms underlined red, no dots, moves right → */}
       <section className="mx-auto max-w-[1280px] px-4 mt-6">
-        <div className="rounded-[32px] bg-[#fef2f2] border border-red-100 p-4 md:p-5 overflow-hidden">
+        <div className="rounded-[32px] bg-white border border-black/5 p-4 md:p-5 overflow-hidden">
           <div className="flex items-center justify-between mb-3 px-1">
-            <div className="text-xs font-black tracking-widest text-[#dc2626]">OUR PARTNERS • MOVING RIGHT →</div>
-            <Link href="/partners" className="text-xs font-bold underline text-[#dc2626]">View all →</Link>
+            <div className="text-xs font-black tracking-widest text-black/40">OUR PARTNERS • MOVING RIGHT →</div>
+            <Link href="/partners" className="text-xs font-bold underline decoration-[#dc2626] decoration-2 underline-offset-4 text-[#dc2626]">View all →</Link>
           </div>
-          <div className="relative overflow-hidden rounded-full border border-red-200 bg-white py-2.5">
-            <div className="flex animate-[marquee_22s_linear_infinite] whitespace-nowrap gap-3 pl-6">
+          <div className="relative overflow-hidden rounded-full border border-black/5 bg-[#f0f5f6] py-2.5">
+            <div className="flex animate-[marquee_22s_linear_infinite] whitespace-nowrap gap-6 pl-6">
               {[
-                "FMOH","NEMSAS National","FRSC","NEMA","Gombe SEMA","Gombe State Specialist Hospital","Nigerian Police Force","Nigerian Red Cross",
-                "FMOH","NEMSAS National","FRSC","NEMA","Gombe SEMA","Gombe State Specialist Hospital","Nigerian Police Force","Nigerian Red Cross",
+                { acronym: "FMOH", name: "Federal Ministry of Health" },
+                { acronym: "NEMSAS", name: "National Emergency Medical Service & Ambulance System" },
+                { acronym: "FRSC", name: "Federal Road Safety Corps" },
+                { acronym: "NEMA", name: "National Emergency Management Agency" },
+                { acronym: "GOS-EMA", name: "Gombe State Emergency Management Agency" },
+                { acronym: "GSSH", name: "Gombe State Specialist Hospital" },
+                { acronym: "NPF", name: "Nigerian Police Force" },
+                { acronym: "NRCS", name: "Nigerian Red Cross Society" },
+                { acronym: "FMOH", name: "Federal Ministry of Health" },
+                { acronym: "NEMSAS", name: "National Emergency Medical Service & Ambulance System" },
+                { acronym: "FRSC", name: "Federal Road Safety Corps" },
+                { acronym: "NEMA", name: "National Emergency Management Agency" },
+                { acronym: "GOS-EMA", name: "Gombe State Emergency Management Agency" },
+                { acronym: "GSSH", name: "Gombe State Specialist Hospital" },
+                { acronym: "NPF", name: "Nigerian Police Force" },
+                { acronym: "NRCS", name: "Nigerian Red Cross Society" },
               ].map((p,i)=> (
-                <span key={i} className="inline-flex items-center gap-1.5 rounded-full bg-[#f0f5f6] border border-black/5 px-3.5 py-1.5 text-xs font-bold shadow-sm shrink-0">
-                  <span className="w-1.5 h-1.5 bg-[#dc2626] rounded-full" />{p}
+                <span key={i} className="inline-flex items-center gap-1.5 px-2 py-1 text-xs font-black tracking-wide shrink-0">
+                  <span className="underline decoration-[#dc2626] decoration-2 underline-offset-4 text-[#dc2626]">{p.acronym}</span>
+                  <span className="text-black/40 font-semibold hidden sm:inline">— {p.name}</span>
                 </span>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* MOCKUP SHOWCASE — Firebase + Mockups, Healixx style */}
-      <section className="mx-auto max-w-[1280px] px-4 mt-6">
-        <div className="rounded-[40px] bg-white border border-black/5 p-6 md:p-10">
-          <div className="flex flex-col md:flex-row justify-between gap-4">
-            <h2 className="text-2xl md:text-3xl font-black" style={{fontFamily:"var(--font-urbanist)"}}>Built with Firebase <span className="text-black/40">& live mockups</span></h2>
-            <p className="max-w-md text-sm leading-6 text-black/60">Firestore as backend for live-dashboard • Mock data seeded for 2025/2026 • Admin publishes to Firebase + local JSON fallback.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-4 mt-8">
-            <div className="rounded-[24px] overflow-hidden border border-black/5 bg-[#f0f5f6] p-4">
-              <img src="/mockups/dashboard-mockup.svg" alt="Dashboard mockup" className="w-full h-auto rounded-[16px] border border-black/5 bg-white" />
-              <div className="font-bold text-sm mt-3">Dashboard TV Mockup</div>
-              <div className="text-xs text-black/50">11 slides • 48s carousel • 15s poll — matches DashboardSlides</div>
-            </div>
-            <div className="rounded-[24px] overflow-hidden border border-black/5 bg-[#f0f5f6] p-4">
-              <img src="/mockups/phone-mockup.svg" alt="Phone mockup" className="w-full h-[280px] object-contain bg-white rounded-[16px] border border-black/5" />
-              <div className="font-bold text-sm mt-3">Emergency Phone Mockup</div>
-              <div className="text-xs text-black/50">Tap to call 0703 382 5646 • Healixx 58px button</div>
-            </div>
-            <div className="rounded-[24px] border border-black/5 p-6 bg-white">
-              <div className="text-xs font-bold tracking-widest text-black/40">FIREBASE BACKEND</div>
-              <div className="mt-2 font-black">Firestore • Auth • Hosting Ready</div>
-              <div className="mt-3 text-sm leading-6 text-black/60">Live data at <code className="bg-[#f0f5f6] px-1.5 py-0.5 rounded">live_dashboard/{'{year}'}</code> with <code>updatedAt</code>. Falls back to <code>data/live-dashboard.json</code> when offline. Admin uses <code>NEXT_PUBLIC_ADMIN_SECRET_KEY</code>.</div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <span className="rounded-full bg-[#ffce8a] px-3 py-1 text-xs font-bold">Mock Mode</span>
-                <span className="rounded-full bg-[#f0f5f6] px-3 py-1 text-xs font-semibold">Project: gosemsas-mock</span>
-              </div>
-              <div className="mt-4 rounded-xl bg-[#0a0a0a] text-white p-3 font-mono text-xs">
-                NEXT_PUBLIC_FIREBASE_API_KEY=mock-api-key<br/>PROJECT_ID=gosemsas-mock
-              </div>
             </div>
           </div>
         </div>
