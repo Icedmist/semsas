@@ -207,6 +207,58 @@ export default function Home() {
         </div>
       </section>
 
+      {/* LEADERSHIP — Meet the team */}
+      <section className="mx-auto max-w-[1280px] px-4 mt-6">
+        <div className="rounded-[40px] bg-white border border-black/5 p-6 md:p-10">
+          <div className="flex flex-col md:flex-row justify-between gap-6 items-start md:items-center mb-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-black" style={{fontFamily:"var(--font-urbanist)"}}>Meet our <span className="text-black/40">leadership team</span></h2>
+              <p className="mt-2 text-sm text-black/60 max-w-md">Dedicated professionals driving excellence in emergency medical services across Gombe State.</p>
+            </div>
+            <Link href="/leadership" className="rounded-full bg-[#dc2626] text-white px-6 py-2.5 text-sm font-bold hover:bg-[#b91c1c] whitespace-nowrap">View Full Team →</Link>
+          </div>
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {[
+              {
+                name: "Dr. Bello Abdulkadir",
+                role: "Head of SEMSAS Admin",
+                image: "/images/Dr Bello Abdulkadir Head of SEMSAS Admin.jpg"
+              },
+              {
+                name: "Dr. Maspara Gideon",
+                role: "Head of Claims",
+                image: "/images/Dr Maspara Gideon Head of Claim.jpg"
+              },
+              {
+                name: "Halima Musa Miyabe",
+                role: "Head of M&E",
+                image: "/images/Halima Musa Miyabe Head of Monitoring & Evaluation.jpg"
+              },
+              {
+                name: "Muhammad Sanusi Ahmad",
+                role: "Strategic Information",
+                image: "/images/Muhammad Sanusi Ahmad Strategic Information.jpg"
+              },
+              {
+                name: "SEMSAS ICT Focal Person",
+                role: "ICT Coordination",
+                image: "/images/ICT Focal Person.jpg"
+              }
+            ].map((member) => (
+              <div key={member.name} className="rounded-[20px] overflow-hidden border border-black/5 hover:shadow-lg transition-shadow">
+                <div className="aspect-square overflow-hidden bg-[#f0f5f6]">
+                  <img src={member.image} alt={member.name} className="w-full h-full object-cover" onError={(e) => {e.currentTarget.src = "/images/about-personnel.jpg"}} />
+                </div>
+                <div className="p-3">
+                  <div className="font-bold text-sm line-clamp-2">{member.name}</div>
+                  <div className="text-xs text-black/50 mt-1">{member.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* PARTNERS — Healixx pill style, acronyms underlined red, no dots, moves right → */}
       <section className="mx-auto max-w-[1280px] px-4 mt-6">
         <div className="rounded-[32px] bg-white border border-black/5 p-4 md:p-5 overflow-hidden">
