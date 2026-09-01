@@ -15,7 +15,8 @@ import {
   SlidePerformance,
   SlideCensus,
   SlideLaborDelivery,
-  SlideServiceRuns
+  SlideServiceRuns,
+  SlideResmatLGA
 } from "@/components/dashboard/slides/DashboardSlides";
 
 /**
@@ -87,11 +88,11 @@ export default function DashboardPage() {
 
   // Handle automatic carousel transition
   const nextSection = useCallback(() => {
-    setCurrentSection((currentSection + 1) % 11);
+    setCurrentSection((currentSection + 1) % 12);
   }, [currentSection, setCurrentSection]);
 
   const prevSection = useCallback(() => {
-    setCurrentSection((currentSection - 1 + 11) % 11);
+    setCurrentSection((currentSection - 1 + 12) % 12);
   }, [currentSection, setCurrentSection]);
 
   useEffect(() => {
@@ -138,6 +139,8 @@ export default function DashboardPage() {
         return <SlideLaborDelivery key="trends" data={liveData.trends} />;
       case 10:
         return <SlideServiceRuns key="runs" data={liveData.ambulanceServiceRuns} />;
+      case 11:
+        return <SlideResmatLGA key="lgaMonthlyRuns" data={liveData.lgaMonthlyRuns} />;
       default:
         return <SlideOverview key="overview" data={liveData.overview} />;
     }

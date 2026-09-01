@@ -33,7 +33,7 @@ export default function DashboardFooter() {
           </div>
 
           <div className="flex items-center gap-1.5">
-            {Array.from({ length: 11 }).map((_, i) => (
+            {Array.from({ length: 12 }).map((_, i) => (
               <motion.button
                 key={i}
                 onClick={() => setCurrentSection(i)}

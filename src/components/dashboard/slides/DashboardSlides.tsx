@@ -1105,3 +1105,73 @@ export function SlideServiceRuns({ data }: { data: any }) {
     </SlideWrapper>
   );
 }
+
+export function SlideResmatLGA({ data }: { data: any }) {
+  if (!data || !data.data) {
+    return (
+      <SlideWrapper title="RESMAT LGA Breakdown" titleColor="#DC143C">
+        <div className="flex items-center justify-center h-96">
+          <p className="text-black">No data available</p>
+        </div>
+      </SlideWrapper>
+    );
+  }
+
+  // Filter out "STATE TOTAL" for the chart if needed, or keep it.
+  const chartData = data.data.filter((d: any) => d.lga !== "STATE TOTAL" && d.total > 0);
+
+  return (
+    <SlideWrapper
+      title="RESMAT Cases by LGA"
+      subtitle="Monthly breakdown of RESMAT runs"
+      illustration={<Ambulance className="w-16 h-16 text-primary-navy" />}
+      titleColor="#DC143C"
+    >
+      <div className="space-y-4 max-h-[420px] overflow-y-auto pr-2">
+        <div className="h-44 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <XAxis dataKey="lga" angle={-15} textAnchor="end" height={40} tick={{ fill: "#000", fontSize: 9 }} />
+              <YAxis tick={{ fill: "#000", fontSize: 10 }} />
+              <Tooltip
+                contentStyle={{ backgroundColor: "#fff", border: "1px solid #ddd", color: "#000" }}
+                labelStyle={{ color: "#000", fontWeight: "bold" }}
+                formatter={(value: any) => [`${value} cases`, "Total RESMAT"]}
+              />
+              <Bar dataKey="total" fill="#0052A5" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="bg-gray-50 rounded-lg p-3 overflow-x-auto">
+          <table className="w-full text-[10px]">
+            <thead>
+              <tr className="border-b-2 border-black">
+                <th className="text-left py-2 px-1 text-black font-bold whitespace-nowrap">LGA</th>
+                {data.months.map((m: string) => (
+                  <th key={m} className="text-center py-2 px-1 text-black font-bold whitespace-nowrap">{m}</th>
+                ))}
+                <th className="text-right py-2 px-1 text-black font-bold whitespace-nowrap">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.data.map((row: any, rIdx: number) => {
+                const isTotal = row.lga === "STATE TOTAL";
+                return (
+                  <tr key={rIdx} className={`border-b border-black/10 hover:bg-white ${isTotal ? "bg-red-50/50 font-bold" : ""}`}>
+                    <td className="py-1.5 px-1 text-black font-medium">{row.lga}</td>
+                    {row.runs.map((r: number, i: number) => (
+                      <td key={i} className="text-center py-1.5 px-1 text-black">{r}</td>
+                    ))}
+                    <td className="text-right py-1.5 px-1 text-black font-semibold text-[#DC143C]">{row.total}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </SlideWrapper>
+  );
+}
