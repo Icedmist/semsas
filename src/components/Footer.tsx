@@ -29,7 +29,7 @@ export default function Footer() {
             <div className="flex flex-col lg:flex-row gap-8 justify-between">
               <div className="max-w-sm">
                 <Link href="/" className="inline-flex items-center gap-2">
-                  <img src="/images/gosemsas-logo.svg" alt="GoSEMSAS" className="h-7 w-auto" />
+                  <img src="/images/logo.jpg" alt="GoSEMSAS" className="h-7 w-auto" />
                   <span className="font-black">GoSEMSAS</span>
                 </Link>
                 <p className="mt-3 text-sm leading-6 text-black/60">

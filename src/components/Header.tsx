@@ -16,7 +16,7 @@ export default function Header() {
               <div className="flex items-center gap-6">
                 {/* Logo Box - GoSEMSAS uses N6Px SVG */}
                 <Link href="/" className="flex items-center gap-2">
-                  <img src="/images/gosemsas-logo.svg" alt="GoSEMSAS" className="h-[28px] w-auto object-contain" />
+                  <img src="/images/logo.jpg" alt="GoSEMSAS" className="h-[28px] w-auto object-contain" />
                   <span className="hidden sm:inline font-black tracking-tight text-[18px]">GoSEMSAS</span>
                 </Link>
 

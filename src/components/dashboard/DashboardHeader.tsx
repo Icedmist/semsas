@@ -14,7 +14,7 @@ export default function DashboardHeader() {
         <div className="rounded-[16px] border border-black/5 bg-white px-3 py-2 flex items-center justify-between shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
           <div className="flex items-center gap-3 min-w-0">
             <Link href="/" className="flex items-center gap-2">
-              <img src="/images/gosemsas-logo.svg" alt="GoSEMSAS" className="h-7 w-auto" />
+              <img src="/images/logo.jpg" alt="GoSEMSAS" className="h-7 w-auto" />
             </Link>
             <div className="hidden sm:block h-6 w-px bg-black/10" />
             <div className="min-w-0 hidden md:block">
