@@ -88,7 +88,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex-1 rounded-[24px] overflow-hidden bg-white border border-black/5 max-h-[420px]">
-              <img src="/images/4t9GS4DAR9pDQAoyOtsuWlMBE.png" alt="Team" className="h-full w-full object-cover" />
+              <img src="/images/news-advocacy-5.jpg" alt="Community Partnership" className="h-full w-full object-cover" />
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-4 mt-8">
             {[
               {img:"/images/3NIJipihll5Gq0XC8umIY2uao0.png", title:"Rapid Dispatch", desc:"0703 382 5646 routes to nearest ambulance in seconds."},
-              {img:"/images/TlKNkGph24dTdXM8Mds4keWK1Xw.png", title:"Pre-hospital Care", desc:"BLS/ACLS stabilization on scene before hospital."},
+              {img:"/images/gallery-new-3.jpg", title:"Pre-hospital Care", desc:"BLS/ACLS stabilization on scene before hospital."},
               {img:"/images/andCpPt4jBacvOjQq85iVP07Lk.png", title:"Coordinated Referral", desc:"Pre-alert + handover to 111 facilities statewide."},
             ].map(c=> (
               <div key={c.title} className="rounded-[24px] border border-black/5 overflow-hidden bg-[#f8fafa]">
@@ -140,7 +140,7 @@ export default function Home() {
               </div>
             </div>
             <div className="rounded-[24px] overflow-hidden bg-white border border-black/5">
-              <img src="/images/TXIbSKRPFAwuK68w77ilsUwHjqE.png" alt="Steps" className="w-full h-64 md:h-[380px] object-cover" />
+              <img src="/images/WhatsApp Image 2026-05-14 at 17.44.26.jpeg" alt="Emergency Response Steps" className="w-full h-64 md:h-[380px] object-cover" />
             </div>
           </div>
         </div>
@@ -359,34 +359,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PARTNERS — Healixx pill style, acronyms underlined red, no dots, moves right → */}
+      {/* PARTNERS — Healixx pill style with logos, acronyms underlined red, moving right → */}
       <section className="mx-auto max-w-[1280px] px-4 mt-6">
         <div className="rounded-[32px] bg-white border border-black/5 p-4 md:p-5 overflow-hidden">
           <div className="flex items-center justify-between mb-3 px-1">
             <div className="text-xs font-black tracking-widest text-black/40">OUR PARTNERS • MOVING RIGHT →</div>
             <Link href="/partners" className="text-xs font-bold underline decoration-[#dc2626] decoration-2 underline-offset-4 text-[#dc2626]">View all →</Link>
           </div>
-          <div className="relative overflow-hidden rounded-full border border-black/5 bg-[#f0f5f6] py-2.5">
-            <div className="flex animate-[marquee_22s_linear_infinite] whitespace-nowrap gap-6 pl-6">
+          <div className="relative overflow-hidden rounded-full border border-black/5 bg-[#f0f5f6] py-3">
+            <div className="flex animate-[marquee_25s_linear_infinite] whitespace-nowrap gap-8 pl-6">
               {[
-                { acronym: "FMOH", name: "Federal Ministry of Health" },
-                { acronym: "NEMSAS", name: "National Emergency Medical Service & Ambulance System" },
-                { acronym: "FRSC", name: "Federal Road Safety Corps" },
-                { acronym: "NEMA", name: "National Emergency Management Agency" },
-                { acronym: "GOS-EMA", name: "Gombe State Emergency Management Agency" },
-                { acronym: "GSSH", name: "Gombe State Specialist Hospital" },
-                { acronym: "NPF", name: "Nigerian Police Force" },
-                { acronym: "NRCS", name: "Nigerian Red Cross Society" },
-                { acronym: "FMOH", name: "Federal Ministry of Health" },
-                { acronym: "NEMSAS", name: "National Emergency Medical Service & Ambulance System" },
-                { acronym: "FRSC", name: "Federal Road Safety Corps" },
-                { acronym: "NEMA", name: "National Emergency Management Agency" },
-                { acronym: "GOS-EMA", name: "Gombe State Emergency Management Agency" },
-                { acronym: "GSSH", name: "Gombe State Specialist Hospital" },
-                { acronym: "NPF", name: "Nigerian Police Force" },
-                { acronym: "NRCS", name: "Nigerian Red Cross Society" },
+                { acronym: "FMOH", name: "Federal Ministry of Health", logo: "/images/fmoh-logo.png" },
+                { acronym: "NEMSAS", name: "National Emergency Medical Service & Ambulance System", logo: "/images/nemsas-logo.png" },
+                { acronym: "MOH-Gombe", name: "Gombe State Ministry of Health", logo: "/images/moh-gombe-logo.jpeg" },
+                { acronym: "World Bank", name: "World Bank Partnership", logo: "/images/worldbank-logo.jpeg" },
+                { acronym: "FMOH", name: "Federal Ministry of Health", logo: "/images/fmoh-logo.png" },
+                { acronym: "NEMSAS", name: "National Emergency Medical Service & Ambulance System", logo: "/images/nemsas-logo.png" },
+                { acronym: "MOH-Gombe", name: "Gombe State Ministry of Health", logo: "/images/moh-gombe-logo.jpeg" },
+                { acronym: "World Bank", name: "World Bank Partnership", logo: "/images/worldbank-logo.jpeg" },
               ].map((p,i)=> (
-                <span key={i} className="inline-flex items-center gap-1.5 px-2 py-1 text-xs font-black tracking-wide shrink-0">
+                <span key={i} className="inline-flex items-center gap-2 px-3 py-2 text-xs font-black tracking-wide shrink-0">
+                  <img src={p.logo} alt={p.acronym} className="h-8 w-auto object-contain" onError={(e) => {e.currentTarget.style.display = 'none'}} />
                   <span className="underline decoration-[#dc2626] decoration-2 underline-offset-4 text-[#dc2626]">{p.acronym}</span>
                   <span className="text-black/40 font-semibold hidden sm:inline">— {p.name}</span>
                 </span>
