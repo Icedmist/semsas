@@ -30,8 +30,8 @@ export default function AdminDashboard() {
   const supabase = getBrowserSupabase();
   const [session, setSession] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
-  const [email, setEmail] = useState("admin@semsas.gombe.gov.ng");
-  const [password, setPassword] = useState("Password123!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [pending, setPending] = useState(false);
@@ -51,7 +51,7 @@ export default function AdminDashboard() {
   ];
 
   const rolePermissions: Record<string, string[]> = {
-    admin: ["manage:users", "manage:content", "manage:dashboard", "manage:assets"],
+    admin: ["view:dashboard"],
     manager: ["view:dashboard", "manage:dashboard", "approve:content"],
     claims: ["view:dashboard", "manage:claims", "review:reports"],
     analyst: ["view:dashboard", "manage:reports", "export:data"],
@@ -229,7 +229,6 @@ export default function AdminDashboard() {
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-primary-navy focus:bg-white"
-                placeholder="admin@semsas.gombe.gov.ng"
                 required
               />
             </div>
@@ -240,7 +239,6 @@ export default function AdminDashboard() {
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-primary-navy focus:bg-white"
-                placeholder="Password123!"
                 required
               />
             </div>
@@ -259,17 +257,7 @@ export default function AdminDashboard() {
             </button>
           </form>
 
-          <div className="mt-6 rounded-2xl bg-slate-50 p-4 text-xs text-muted-text">
-            <p className="font-bold text-primary-navy uppercase tracking-[0.12em]">Seeded roles</p>
-            <ul className="mt-3 space-y-1.5">
-              <li><span className="font-bold text-primary-navy">admin@semsas.gombe.gov.ng</span> — Super Administrator</li>
-              <li><span className="font-bold text-primary-navy">claims@semsas.gombe.gov.ng</span> — Claims Manager</li>
-              <li><span className="font-bold text-primary-navy">si@semsas.gombe.gov.ng</span> — Strategic Information Lead</li>
-              <li><span className="font-bold text-primary-navy">ict@semsas.gombe.gov.ng</span> — ICT Focal Person</li>
-              <li><span className="font-bold text-primary-navy">statecoordinator@semsas.gombe.gov.ng</span> — State Coordinator</li>
-            </ul>
-            <p className="mt-3 font-semibold text-primary-navy">Password for all accounts: Password123!</p>
-          </div>
+
         </div>
       </div>
     );

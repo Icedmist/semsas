@@ -5,6 +5,11 @@ export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
 
+  // Extract base domain (last 2 parts: e.g., gosemsas.org from admin.www.gosemsas.org)
+  const hostWithoutPort = host.split(":")[0];
+  const domainParts = hostWithoutPort.split(".");
+  const baseDomain = domainParts.slice(-2).join(".");
+
   // Admin routes should be accessible from:
   // 1. localhost or 127.0.0.1 in development
   // 2. admin subdomain in production
@@ -19,8 +24,9 @@ export function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    // Redirect main domain to admin subdomain
-    return NextResponse.redirect(`https://admin.${host}${pathname}`, 307);
+    // Redirect to admin.gosemsas.org (removes all subdomains)
+    const adminDomain = `admin.${baseDomain}`;
+    return NextResponse.redirect(`https://${adminDomain}${pathname}`, 307);
   }
 
   // Redirect admin subdomain to /admin route if not already there
