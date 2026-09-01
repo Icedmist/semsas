@@ -296,9 +296,9 @@ export default function Home() {
                   dept: "Data & Analytics"
                 },
                 {
-                  name: "SEMSAS ICT Focal Person",
-                  role: "ICT Coordination",
-                  image: "/images/ICT Focal Person.jpg",
+                  name: "Dr. Muhammad Garba Buwa",
+                  role: "ICT Focal Person",
+                  image: "/images/Dr_Muhammad_Garba_Buwa_Director_Hospital_Serive.png",
                   dept: "Technology"
                 }
               ].map((member) => (

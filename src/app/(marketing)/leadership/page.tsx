@@ -41,11 +41,12 @@ const leadershipTeam = [
     imageUrl: "/images/Muhammad Sanusi Ahmad Strategic Information.jpg",
   },
   {
-    name: "SEMSAS ICT Focal Person",
+    name: "Dr. Muhammad Garba Buwa",
     role: "ICT Focal Person",
     bio: "Coordinates, manages and strengthens the information and communication technology systems supporting SEMSAS operations, ensuring robust digital emergency response systems.",
     email: "ict@semsas.gombe.gov.ng",
     linkedin: "#",
+    imageUrl: "/images/Dr_Muhammad_Garba_Buwa_Director_Hospital_Serive.png",
   }
 ];
 
