@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import "./globals.css";
+import AnimatedGradientBar from "@/components/AnimatedGradientBar";
 
 // Single font for entire app — Urbanist (Healixx primary)
 const urbanist = Urbanist({
@@ -23,7 +24,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${urbanist.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-white text-[#0a0a0a] font-sans">{children}</body>
+      <body className="min-h-full flex flex-col bg-white text-[#0a0a0a] font-sans relative">
+        {/* Animated vertical gradient bar — Image 1 stylish animation */}
+        <AnimatedGradientBar />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 // GoSEMSAS (GoSEMSAS geometry) homepage rebuilt with GoSEMSAS content
 // Uses GoSEMSAS geometry: max-w 1280, rounded 40px sections, 66px nav, 58px primary button, Urbanist/Fredoka, #f0f5f6, #0a0a0a, #ffce8a
@@ -8,19 +11,28 @@ export default function Home() {
     <div className="bg-white">
       {/* HERO — GoSEMSAS Hero Section: left text + right hero image UOMU... */}
       <section className="mx-auto max-w-[1280px] px-4">
-        <div className="rounded-[32px] bg-white border border-black/5 overflow-hidden">
+        <div className="rounded-[32px] bg-white border border-black/5 overflow-hidden relative">
+          {/* Animated gradient wash — Image 1 stylish */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px]" aria-hidden>
+            <motion.div
+              animate={{ backgroundPosition: ["0% 0%", "0% 100%"] }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", repeatType: "reverse" }}
+              className="absolute -left-1/2 -top-1/2 w-[200%] h-[200%] opacity-[0.035]"
+              style={{ background: "linear-gradient(180deg, #0A2A52 0%, #DC143C 100%)", backgroundSize: "100% 100%" }}
+            />
+          </div>
           <div className="grid lg:grid-cols-2 gap-0">
             <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center">
-              <h1 className="mt-0 text-3xl md:text-5xl font-black leading-[0.95] tracking-tight" style={{fontFamily:"var(--font-urbanist)"}}>
+              <motion.h1 initial={{opacity:0, y:16}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{type:"spring", stiffness:260, damping:20}} className="mt-0 text-3xl md:text-5xl font-black leading-[0.95] tracking-tight" style={{fontFamily:"var(--font-urbanist)"}}>
                 Where care<br />
                 <span className="text-black/30">meets rapid</span><br />
                 response
-              </h1>
+              </motion.h1>
               <p className="mt-4 text-[15px] leading-7 text-black/60 max-w-xl">
                 From road traffic crashes to maternal emergencies, GoSEMSAS bridges the gap between 11 LGAs and health facilities — rapid dispatch, pre-hospital stabilization, coordinated referrals — 24/7 statewide.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a href="tel:07033825646" className="rounded-full bg-[#dc2626] border border-[#b91c1c] px-6 py-3 text-sm font-bold text-white hover:bg-[#b91c1c] shadow-[0_2px_12px_rgba(220,38,38,0.25)]">Emergency 0703 382 5646</a>
+                <motion.a whileHover={{scale:1.03}} whileTap={{scale:0.97}} href="tel:07033825646" className="rounded-full bg-[#dc2626] border border-[#b91c1c] px-6 py-3 text-sm font-bold text-white hover:bg-[#b91c1c] shadow-[0_2px_12px_rgba(220,38,38,0.25)]">Emergency 0703 382 5646</motion.a>
                 <Link href="/emergency-information" className="rounded-full bg-white border border-black/10 px-6 py-3 text-sm font-semibold hover:bg-black hover:text-white hover:border-black">How to call →</Link>
               </div>
               <div className="mt-6 flex gap-6 text-xs font-semibold">
@@ -53,9 +65,9 @@ export default function Home() {
         <div className="rounded-[40px] bg-[#f0f5f6] p-6 md:p-10">
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="flex-1">
-              <h2 className="text-2xl md:text-3xl font-black tracking-tight" style={{fontFamily:"var(--font-urbanist)"}}>
+              <motion.h2 initial={{opacity:0, y:12}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{delay:0.05}} className="text-2xl md:text-3xl font-black tracking-tight" style={{fontFamily:"var(--font-urbanist)"}}>
                 Why choose GoSEMSAS for emergency <span className="text-black/40">care & transport?</span>
-              </h2>
+              </motion.h2>
               <div className="mt-6 grid grid-cols-3 gap-4">
                 <div className="rounded-[20px] bg-white border border-black/5 p-4 text-center">
                   <div className="text-2xl font-black">97.2%</div>
