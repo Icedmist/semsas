@@ -172,7 +172,7 @@ export default function Home() {
               </div>
             </div>
             <div className="rounded-[24px] overflow-hidden bg-white border border-black/5">
-              <img src="/images/WhatsApp Image 2026-05-14 at 17.44.26.jpeg" alt="Emergency Response Steps" className="w-full h-64 md:h-[380px] object-cover" />
+              <img src="/images/news-launch-room-8.jpg" alt="Emergency Response Steps" className="w-full h-64 md:h-[380px] object-cover" />
             </div>
           </div>
         </div>
