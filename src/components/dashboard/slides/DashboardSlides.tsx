@@ -346,7 +346,7 @@ export function SlideAmbulanceFleet({ data }: { data: any }) {
     <SlideWrapper
       title="Ambulance Fleet"
       subtitle="Vehicles across all LGAs"
-      illustration={<IllustrationFleet className="w-full h-28" />}
+      illustration={<IllustrationFleet className="w-full h-28 md:h-32" />}
       titleColor="#DC143C"
     >
       <div className="flex flex-col h-full gap-4">
@@ -424,7 +424,7 @@ export function SlideResmatTeam({ data }: { data: any }) {
     <SlideWrapper
       title="Our RESMAT Team"
       subtitle="Community responders"
-      illustration={<IllustrationTeam className="w-full h-28" />}
+      illustration={<IllustrationTeam className="w-full h-28 md:h-32" />}
       titleColor="#DC143C"
     >
       <div className="flex items-center justify-center gap-8 h-full">
@@ -502,7 +502,7 @@ export function SlideMedicalFacilities({ data }: { data: any }) {
     <SlideWrapper
       title="Medical Facilities"
       subtitle="Healthcare centers in Gombe"
-      illustration={<IllustrationFacilities className="w-full h-28" />}
+      illustration={<IllustrationFacilities className="w-full h-28 md:h-32" />}
       titleColor="#DC143C"
     >
       <div className="flex items-center justify-center gap-8 h-full">
@@ -577,7 +577,7 @@ export function SlideEmergencyCalls({ data }: { data: any }) {
     <SlideWrapper
       title="Emergency Calls"
       subtitle="Daily dispatch center"
-      illustration={<IllustrationCalls className="w-full h-28" />}
+      illustration={<IllustrationCalls className="w-full h-28 md:h-32" />}
       titleColor="#DC143C"
     >
       <div className="flex flex-col justify-center h-full gap-6">
@@ -646,7 +646,7 @@ export function SlidePatientTransport({ data }: { data: any }) {
     <SlideWrapper
       title="RESMAT Patient Transport"
       subtitle="Emergency cases handled"
-      illustration={<IllustrationTransport className="w-full h-28" />}
+      illustration={<IllustrationTransport className="w-full h-28 md:h-32" />}
       titleColor="#DC143C"
     >
       <div className="flex flex-col h-full gap-4">
@@ -858,7 +858,7 @@ export function SlidePerformance({ data }: { data: any }) {
     <SlideWrapper
       title="How We Are Doing"
       subtitle="Our performance numbers"
-      illustration={<IllustrationPerformance className="w-full h-28" />}
+      illustration={<IllustrationPerformance className="w-full h-28 md:h-32" />}
     >
       <div className="flex flex-col justify-center h-full">
         <div className="grid grid-cols-2 gap-5">
@@ -966,7 +966,7 @@ export function SlideLaborDelivery({ data }: { data: any }) {
     <SlideWrapper
       title="Monthly Labor & Delivery Cases (June - December 2025)"
       subtitle="Monthly births we helped with"
-      illustration={<IllustrationTrends className="w-full h-28" />}
+      illustration={<IllustrationTrends className="w-full h-28 md:h-32" />}
     >
       <div className="flex flex-col justify-center h-full gap-6">
         <div className="flex justify-center gap-8">

@@ -42,7 +42,7 @@ export default function Home() {
               </div>
             </div>
             <div className="relative bg-[#f0f5f6] p-4 lg:p-6 flex items-center">
-              <div className="relative w-full aspect-[4/3] rounded-[24px] overflow-hidden bg-white border border-black/5">
+              <div className="relative w-full aspect-[4/3] md:aspect-[4/3] rounded-[24px] overflow-hidden bg-white border border-black/5">
                 <img src="/images/UOMUepVQXzu9Z4Iu7nm30ARGDI.png" alt="Emergency response" className="h-full w-full object-cover" />
                 <div className="absolute bottom-3 left-3 right-3 rounded-2xl bg-white/90 backdrop-blur p-3 border border-black/5 flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -140,7 +140,7 @@ export default function Home() {
               </div>
             </div>
             <div className="rounded-[24px] overflow-hidden bg-white border border-black/5">
-              <img src="/images/TXIbSKRPFAwuK68w77ilsUwHjqE.png" alt="Steps" className="w-full h-[380px] object-cover" />
+              <img src="/images/TXIbSKRPFAwuK68w77ilsUwHjqE.png" alt="Steps" className="w-full h-64 md:h-[380px] object-cover" />
             </div>
           </div>
         </div>

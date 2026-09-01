@@ -69,6 +69,8 @@ export default function AdminConsole() {
   const [now, setNow] = useState("");
   const [selectedYear, setSelectedYear] = useState(CURRENT_YEAR);
 
+  // Guard: prevent render before data loaded
+
   const formatTime = (date: Date) => {
     const hh = String(date.getHours()).padStart(2, "0");
     const mm = String(date.getMinutes()).padStart(2, "0");
@@ -98,7 +100,9 @@ export default function AdminConsole() {
       const res = await fetch(getApiUrl(selectedYear));
       if (!res.ok) throw new Error("Failed to load");
       const json = await res.json();
-      setData(json);
+      const payload = (json as any).data ?? json;
+      if (!payload || !payload.overview) throw new Error("Invalid data");
+      setData(payload);
       setDirty(false);
       setSaveResult(null);
     } catch (error) {
@@ -139,8 +143,8 @@ export default function AdminConsole() {
       });
       if (!res.ok) throw new Error("Failed to save");
       const json = await res.json();
-      if (json.success) {
-        setData(json.data);
+      if (json.success || (json as any).data) {
+        setData((json as any).data ?? json);
         setDirty(false);
         setSaveResult("success");
       } else {
@@ -336,12 +340,12 @@ export default function AdminConsole() {
             <div className="space-y-6">
               <SectionHeader title="Overview Settings" />
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {renderNumberField("overview", "totalEmergencies", "Total Emergencies", data.overview.totalEmergencies)}
-                {renderNumberField("overview", "totalAmbulances", "Total Ambulances", data.overview.totalAmbulances)}
-                {renderTextField("overview", "avgResponseTime", "Average Response Time", data.overview.avgResponseTime)}
-                {renderNumberField("overview", "livesSaved", "Lives Saved", data.overview.livesSaved)}
-                {renderNumberField("overview", "patientsTransported", "Patients Transported", data.overview.patientsTransported)}
-                {renderNumberField("overview", "emergencyTrend", "Emergency Trend (%)", data.overview.emergencyTrend, true)}
+                {renderNumberField("overview", "totalEmergencies", "Total Emergencies", (data as any)?.overview?.totalEmergencies ?? 0)}
+                {renderNumberField("overview", "totalAmbulances", "Total Ambulances", (data as any)?.overview?.totalAmbulances ?? 0)}
+                {renderTextField("overview", "avgResponseTime", "Average Response Time", (data as any)?.overview?.avgResponseTime ?? 0)}
+                {renderNumberField("overview", "livesSaved", "Lives Saved", (data as any)?.overview?.livesSaved ?? 0)}
+                {renderNumberField("overview", "patientsTransported", "Patients Transported", (data as any)?.overview?.patientsTransported ?? 0)}
+                {renderNumberField("overview", "emergencyTrend", "Emergency Trend (%)", (data as any)?.overview?.emergencyTrend ?? 0, true)}
               </div>
             </div>
           )}
