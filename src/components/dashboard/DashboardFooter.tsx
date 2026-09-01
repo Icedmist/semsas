@@ -1,22 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Phone, Activity } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Phone } from "lucide-react";
+import { motion } from "framer-motion";
 import { useLiveUpdates } from "@/app/dashboard/layout";
 
-const LGA_STATUS_DOTS = 11;
-
-function formatTime(date: Date) {
-  const hh = String(date.getHours()).padStart(2, "0");
-  const mm = String(date.getMinutes()).padStart(2, "0");
-  const ss = String(date.getSeconds()).padStart(2, "0");
-  return `${hh}:${mm}:${ss}`;
+function formatTime(d: Date) {
+  return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}:${String(d.getSeconds()).padStart(2, "0")}`;
 }
 
-/**
- * The footer component for the live dashboard.
- * Displays the emergency hotline, system operational status, and a clock.
- */
 export default function DashboardFooter() {
   const { isPaused, currentSection, setCurrentSection } = useLiveUpdates();
   const [time, setTime] = useState("");
@@ -29,52 +21,36 @@ export default function DashboardFooter() {
   }, [isPaused]);
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-slate-200 z-50">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-3">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <span className="w-8 h-8 rounded-full bg-emergency-red/10 text-emergency-red flex items-center justify-center">
+    <footer className="sticky bottom-0 bg-white border-t border-black/5">
+      <div className="mx-auto max-w-[1280px] px-4 py-3">
+        <div className="rounded-[16px] bg-[#f0f5f6] border border-black/5 px-3 py-2 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="w-8 h-8 rounded-full bg-[#dc2626] text-white flex items-center justify-center">
               <Phone className="w-4 h-4" />
             </span>
-            <span className="text-[11px] text-slate-500 uppercase tracking-wide font-bold hidden md:inline">
-              Emergency Hotline:
-            </span>
-            <span className="text-sm font-heading font-extrabold text-primary-navy">112</span>
+            <span className="text-xs font-bold tracking-widest text-black/40 hidden md:inline">EMERGENCY</span>
+            <span className="font-black text-[#0a0a0a]">0703 382 5646</span>
           </div>
 
-          <div className="flex items-center gap-2" title="11 sections under coverage">
-            {Array.from({ length: LGA_STATUS_DOTS }).map((_, i) => (
-              <button
+          <div className="flex items-center gap-1.5">
+            {Array.from({ length: 11 }).map((_, i) => (
+              <motion.button
                 key={i}
                 onClick={() => setCurrentSection(i)}
-                className={`transition-all duration-300 rounded-full cursor-pointer focus:outline-none ${
-                  i === currentSection
-                    ? "w-5 h-2 bg-gradient-to-r from-primary-navy to-emergency-red shadow-[0_0_8px_rgba(220,20,60,0.4)]"
-                    : "w-2 h-2 bg-slate-300 hover:bg-primary-navy"
-                }`}
-                aria-label={`Go to slide ${i + 1}`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                className={`rounded-full transition-all ${i === currentSection ? "w-6 h-2 bg-[#0a0a0a]" : "w-2 h-2 bg-black/15 hover:bg-black/30"}`}
+                aria-label={`Slide ${i + 1}`}
               />
             ))}
           </div>
 
-          <div className="flex items-center gap-4 text-xs">
-            <div className="hidden lg:flex items-center gap-1.5">
-              <span className="relative flex h-2 w-2">
-                <span
-                  className={`absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 ${
-                    isPaused ? "" : "animate-ping"
-                  }`}
-                />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00A86B]" />
-              </span>
-              <span className="font-bold text-slate-700 tracking-wide">
-                SYSTEM {isPaused ? "PAUSED" : "OPERATIONAL"}
-              </span>
-            </div>
-            <span className="text-slate-500 font-semibold tabular-nums flex items-center gap-1.5">
-              <Activity className="w-3.5 h-3.5 text-primary-navy" />
-              {time}
+          <div className="flex items-center gap-3 text-xs font-bold">
+            <span className={`hidden lg:inline-flex items-center gap-1.5 ${isPaused ? "text-black/40" : "text-[#0a7a3a]"}`}>
+              <span className={`w-2 h-2 rounded-full ${isPaused ? "bg-black/20" : "bg-[#0a7a3a] animate-pulse"}`} />
+              {isPaused ? "PAUSED" : "LIVE"}
             </span>
+            <span className="font-mono bg-white rounded-full px-3 py-1 border border-black/5">{time}</span>
           </div>
         </div>
       </div>

@@ -1,58 +1,33 @@
 import type { Metadata } from "next";
-import { MotionConfig } from "framer-motion";
+import { Urbanist } from "next/font/google";
 import "./globals.css";
+import AnimatedGradientBar from "@/components/AnimatedGradientBar";
+
+// Single font for entire app — Urbanist (Healixx primary)
+const urbanist = Urbanist({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["400","500","600","700","800","900"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Gombe State Emergency Medical Services & Ambulance System | SEMSAS",
-  description: "Gombe State SEMSAS provides 24-hour rapid response, ambulance services, pre-hospital emergency care, disaster response, and safe medical transportation across Gombe State.",
-  keywords: [
-    "Gombe State",
-    "SEMSAS",
-    "Emergency Medical Services",
-    "Ambulance Services",
-    "Nigeria Emergency",
-    "NEMSAS",
-    "Gombe Ambulance",
-    "Pre-hospital Care",
-  ],
-  authors: [{ name: "Gombe State Government" }],
+  title: "GoSEMSAS — Gombe State Emergency Medical Services and Ambulance System",
+  description: "Official digital platform for Gombe State NEMSAS. Emergency Dispatch: 0703 382 5646 — 24/7 statewide. Rapid ambulance dispatch, pre-hospital stabilization, and coordinated referrals across 11 LGAs.",
   openGraph: {
-    title: "Gombe State Emergency Medical Services & Ambulance System",
-    description: "Rapid response, professional paramedics, and state-of-the-art ambulance fleet serving all local government areas in Gombe State.",
+    title: "GoSEMSAS — Gombe State Emergency Medical Services",
+    description: "Bridging medical emergencies and health facilities across Gombe State. 24/7 dispatch 0703 382 5646.",
     type: "website",
-    locale: "en_NG",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Gombe State Emergency Medical Services & Ambulance System",
-    description: "Rapid response, professional paramedics, and state-of-the-art ambulance fleet serving Gombe State.",
   },
 };
 
-/**
- * The root layout component for the SEMSAS application.
- * Wraps all pages with global font links, CSS, and basic motion config.
- */
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className="h-full antialiased scroll-smooth"
-    >
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="min-h-full flex flex-col font-sans bg-bg-gray text-text-dark">
-        <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    <html lang="en" className={`${urbanist.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-white text-[#0a0a0a] font-sans relative">
+        {/* Animated vertical gradient bar — Image 1 stylish animation */}
+        <AnimatedGradientBar />
+        {children}
       </body>
     </html>
   );

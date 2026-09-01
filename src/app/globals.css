@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-heading: "Sora", "Montserrat", system-ui, -apple-system, sans-serif;
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Urbanist", sans-serif;
+  --font-sans: "Urbanist", sans-serif;
 
   --color-primary-navy: #0052A5;
   --color-primary-deep: #003066;
@@ -59,8 +59,9 @@ html {
 }
 
 body {
-  background-color: var(--color-bg-gray);
-  color: var(--color-text-dark);
+  background-color: #ffffff;
+  color: #0a0a0a;
+  font-family: var(--font-sans), "Urbanist", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -137,11 +138,11 @@ body {
   transform: translateY(-2px);
 }
 
-/* ---------- Section Tags (modern pill, duotone) ---------- */
+/* ---------- Section Tags (Healixx: clean pill, no dot) ---------- */
 .section-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0;
   background: #F1F5F9;
   color: #0052A5;
   font-size: 0.72rem;
@@ -154,12 +155,8 @@ body {
   transition: border-color 0.25s ease, background-color 0.25s ease;
 }
 .section-tag::before {
-  content: "";
-  width: 0.4rem;
-  height: 0.4rem;
-  border-radius: 9999px;
-  background: #DC143C;
-  box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.12);
+  display: none;
+  content: none;
 }
 .section-tag-red {
   background: #FFF1F3;
@@ -167,8 +164,8 @@ body {
   border-color: #FDC9D2;
 }
 .section-tag-red::before {
-  background: #DC143C;
-  box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.12);
+  display: none;
+  content: none;
 }
 .section-tag-light {
   background: rgba(255, 255, 255, 0.08);
@@ -176,8 +173,8 @@ body {
   border-color: rgba(255, 255, 255, 0.14);
 }
 .section-tag-light::before {
-  background: #DC143C;
-  box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.25);
+  display: none;
+  content: none;
 }
 
 /* ---------- Card Lift ---------- */
@@ -394,3 +391,28 @@ body {
   transform: translateY(-6px);
   box-shadow: 0 24px 50px -15px rgba(10, 42, 82, 0.18);
 }
+
+/* === Healixx faithful tokens merged from template === */
+:root {
+  --token-bg: #fff;
+  --token-bg-muted: #f0f5f6;
+  --token-text-muted: #3b3b3b;
+  --token-text: #0a0a0a;
+  --token-accent: #ffce8a;
+  --gosemsas-green: #0a7a3a;
+  --gosemsas-red: #dc2626;
+}
+.gosemsas-hero-gradient {
+  background: radial-gradient(120% 120% at 50% 0%, #e6f4ec 0%, #ffffff 55%);
+}
+.glass-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(10,10,10,0.07);
+}
+@keyframes marquee {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+::selection { background: #dc2626; color: #fff; }
+a:focus-visible, button:focus-visible { outline: 2px solid #dc2626; outline-offset: 2px; }

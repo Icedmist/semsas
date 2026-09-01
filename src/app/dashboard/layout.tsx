@@ -43,9 +43,9 @@ export default function DashboardLayout({
         setCurrentSection,
       }}
     >
-      <div className="min-h-screen bg-[#f5f7fa] flex flex-col">
+      <div className="min-h-screen bg-white flex flex-col" style={{ fontFamily: "var(--font-sans)" }}>
         <DashboardHeader />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 bg-[#f0f5f6]">{children}</main>
         <DashboardFooter />
       </div>
     </LiveUpdatesContext.Provider>

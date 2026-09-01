@@ -139,20 +139,40 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-160px)] py-6 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto animate-fade-in relative">
-      <div className="h-[calc(100vh-200px)]">
+    <div className="mx-auto max-w-[1280px] px-4 py-6">
+      {/* Healixx top bar */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+        <div className="text-xs font-black tracking-widest text-black/40">LIVE DASHBOARD • SLIDE {String(currentSection + 1).padStart(2, "0")}/11</div>
+        <div className="flex gap-2">
+          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={prevSection} className="rounded-full bg-white border border-black/10 px-4 py-1.5 text-xs font-bold hover:bg-black hover:text-white">← Prev</motion.button>
+          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={nextSection} className="rounded-full bg-[#0a0a0a] text-white px-4 py-1.5 text-xs font-bold hover:bg-black">Next →</motion.button>
+        </div>
+      </div>
+
+      <motion.div
+        key={currentSection}
+        initial={{ opacity: 0, y: 16, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -16, scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        className="min-h-[520px]"
+      >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={currentSection}
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.35 }}
+            exit={{ opacity: 0, x: -24 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="h-full"
           >
             {renderSlide()}
           </motion.div>
         </AnimatePresence>
+      </motion.div>
+
+      <div className="mt-4 flex justify-center gap-2 lg:hidden">
+        <span className="text-xs text-black/40">Swipe or use ← →</span>
       </div>
     </div>
   );
