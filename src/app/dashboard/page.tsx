@@ -57,6 +57,7 @@ export default function DashboardPage() {
               "census",
               "trends",
               "ambulanceServiceRuns",
+              "lgaMonthlyRuns",
               "status"
             ] as const;
             const payload = data.data || data;
