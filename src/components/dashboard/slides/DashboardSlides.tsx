@@ -245,35 +245,35 @@ export function SlideWrapper({
   subtitle,
   illustration,
   icon: IconComponent,
-  titleColor = "#000000",
+  titleColor = "#0a0a0a",
   children
 }: SlideWrapperProps) {
   return (
-    <div className="flex gap-6 h-full">
-      {/* Left Sidebar */}
-      <div className="w-[380px] flex-shrink-0">
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 h-full flex flex-col items-center justify-center relative overflow-hidden shadow-sm">
-          <div className="absolute top-0 left-0 w-24 h-24 border-t-4 border-l-4 border-[#0052A5] rounded-tl-2xl" />
-          {illustration ? (
-            <div className="mb-6 w-full max-w-[280px]">{illustration}</div>
-          ) : IconComponent ? (
-            <div className="mb-8">
-              <IconComponent className="w-20 h-20 text-[#0052A5] stroke-[1.5]" />
-            </div>
-          ) : null}
-          <h2 className="text-2xl font-bold text-center mb-2 text-balance" style={{ color: titleColor }}>
-            {title}
-          </h2>
-          {subtitle && <p className="text-sm text-black text-center mb-3">{subtitle}</p>}
-          <div className="w-12 h-1 bg-[#FFB81C] rounded-full" />
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/5 to-transparent" />
+    <div className="rounded-[40px] bg-[#f0f5f6] p-4 md:p-6 h-full">
+      <div className="flex gap-4 md:gap-6 h-full flex-col lg:flex-row">
+        {/* Left: Healixx card */}
+        <div className="w-full lg:w-[380px] flex-shrink-0">
+          <div className="bg-white rounded-[24px] border border-black/5 p-8 h-full flex flex-col items-center justify-center relative overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+            {illustration ? (
+              <div className="mb-6 w-full max-w-[280px]">{illustration}</div>
+            ) : IconComponent ? (
+              <div className="mb-8">
+                <IconComponent className="w-20 h-20 text-[#0a0a0a] stroke-[1.5]" />
+              </div>
+            ) : null}
+            <h2 className="text-2xl font-black text-center mb-2 text-balance" style={{ color: titleColor, fontFamily:"var(--font-urbanist)" }}>
+              {title}
+            </h2>
+            {subtitle && <p className="text-sm text-black/60 text-center mb-3">{subtitle}</p>}
+            <div className="w-12 h-1 bg-[#dc2626] rounded-full" />
+          </div>
         </div>
-      </div>
 
-      {/* Right Content Panel */}
-      <div className="flex-1">
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 h-full shadow-sm">
-          {children}
+        {/* Right: Healixx card */}
+        <div className="flex-1 min-h-0">
+          <div className="bg-white rounded-[24px] border border-black/5 p-6 md:p-8 h-full shadow-[0_8px_30px_rgba(0,0,0,0.06)] overflow-auto">
+            {children}
+          </div>
         </div>
       </div>
     </div>
@@ -306,11 +306,11 @@ export function SlideOverview({ data }: { data: any }) {
             return (
               <div
                 key={card.label}
-                className={`${card.bgColor} rounded-2xl p-6 flex items-center gap-4 animate-slide-up`}
+                className={`${card.bgColor} rounded-[24px] p-6 flex items-center gap-4 animate-slide-up`}
                 style={{ animationDelay: `${100 * idx}ms` }}
               >
                 <div
-                  className="w-16 h-16 rounded-xl flex items-center justify-center shrink-0"
+                  className="w-16 h-16 rounded-[16px] flex items-center justify-center shrink-0"
                   style={{ backgroundColor: card.color }}
                 >
                   <CardIcon className="w-8 h-8 text-white" />
@@ -325,7 +325,7 @@ export function SlideOverview({ data }: { data: any }) {
             );
           })}
         </div>
-        <div className="mt-8 flex items-center justify-center gap-3 p-4 bg-green-50 rounded-xl border border-green-200">
+        <div className="mt-8 flex items-center justify-center gap-3 p-4 bg-green-50 rounded-[16px] border border-green-200">
           <div className="w-4 h-4 rounded-full bg-[#00A86B] animate-pulse" />
           <span className="text-base font-semibold text-green-700">All Systems Working</span>
         </div>
@@ -351,7 +351,7 @@ export function SlideAmbulanceFleet({ data }: { data: any }) {
     >
       <div className="flex flex-col h-full gap-4">
         <div className="flex justify-center">
-          <div className="flex items-center gap-4 p-4 rounded-xl bg-red-50 border-2 border-[#FF0000]">
+          <div className="flex items-center gap-4 p-4 rounded-[16px] bg-red-50 border-2 border-[#FF0000]">
             <div className="w-14 h-14 rounded-lg flex items-center justify-center bg-[#FF0000] shrink-0">
               <Ambulance className="w-7 h-7 text-white" />
             </div>
@@ -364,7 +364,7 @@ export function SlideAmbulanceFleet({ data }: { data: any }) {
           </div>
         </div>
 
-        <div className="flex-1 bg-black/5 rounded-xl p-4">
+        <div className="flex-1 bg-black/5 rounded-[16px] p-4">
           <p className="text-xs text-black uppercase tracking-wide font-semibold mb-2 text-center">
             Ambulances by Local Government Area
           </p>
@@ -461,7 +461,7 @@ export function SlideResmatTeam({ data }: { data: any }) {
             return (
               <div
                 key={item.name}
-                className="flex items-center gap-4 p-4 rounded-xl"
+                className="flex items-center gap-4 p-4 rounded-[16px]"
                 style={{ backgroundColor: `${item.color}15` }}
               >
                 <div
@@ -539,7 +539,7 @@ export function SlideMedicalFacilities({ data }: { data: any }) {
             return (
               <div
                 key={item.name}
-                className="p-5 rounded-xl border-l-4"
+                className="p-5 rounded-[16px] border-l-4"
                 style={{ backgroundColor: `${item.color}10`, borderLeftColor: item.color }}
               >
                 <div className="flex items-center gap-3 mb-2">
@@ -585,9 +585,9 @@ export function SlideEmergencyCalls({ data }: { data: any }) {
           {cards.map((card) => {
             const CardIcon = card.icon;
             return (
-              <div key={card.label} className={`${card.bgColor} rounded-2xl p-6 flex items-center gap-4 flex-1 max-w-xs`}>
+              <div key={card.label} className={`${card.bgColor} rounded-[24px] p-6 flex items-center gap-4 flex-1 max-w-xs`}>
                 <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0"
+                  className="w-14 h-14 rounded-[16px] flex items-center justify-center shrink-0"
                   style={{ backgroundColor: card.color }}
                 >
                   <CardIcon className="w-7 h-7 text-white" />
@@ -601,8 +601,8 @@ export function SlideEmergencyCalls({ data }: { data: any }) {
               </div>
             );
           })}
-          <div className="bg-amber-50 rounded-2xl p-6 flex items-center gap-4 flex-1 max-w-xs">
-            <div className="w-14 h-14 rounded-xl flex items-center justify-center bg-[#FFB81C] shrink-0">
+          <div className="bg-amber-50 rounded-[24px] p-6 flex items-center gap-4 flex-1 max-w-xs">
+            <div className="w-14 h-14 rounded-[16px] flex items-center justify-center bg-[#FFB81C] shrink-0">
               <Clock className="w-7 h-7 text-white" />
             </div>
             <div>
@@ -612,7 +612,7 @@ export function SlideEmergencyCalls({ data }: { data: any }) {
           </div>
         </div>
 
-        <div className="bg-gray-50 rounded-xl p-4">
+        <div className="bg-gray-50 rounded-[16px] p-4">
           <p className="text-xs text-black mb-2 font-medium">Calls Throughout the Day</p>
           <div className="h-28">
             <ResponsiveContainer width="100%" height="100%">
@@ -656,7 +656,7 @@ export function SlidePatientTransport({ data }: { data: any }) {
             return (
               <div
                 key={card.name}
-                className="flex items-center gap-3 p-3 rounded-xl flex-1 max-w-[200px]"
+                className="flex items-center gap-3 p-3 rounded-[16px] flex-1 max-w-[200px]"
                 style={{ backgroundColor: `${card.color}15` }}
               >
                 <div
@@ -676,7 +676,7 @@ export function SlidePatientTransport({ data }: { data: any }) {
           })}
         </div>
 
-        <div className="flex-1 bg-gray-50 rounded-xl p-4">
+        <div className="flex-1 bg-gray-50 rounded-[16px] p-4">
           <p className="text-xs text-black uppercase tracking-wide font-semibold mb-2 text-center">
             Monthly Labor & Delivery Cases (June - November 2025)
           </p>
@@ -867,12 +867,12 @@ export function SlidePerformance({ data }: { data: any }) {
             return (
               <div
                 key={item.label}
-                className={`${item.bgColor} rounded-2xl p-5 animate-slide-up`}
+                className={`${item.bgColor} rounded-[24px] p-5 animate-slide-up`}
                 style={{ animationDelay: `${100 * idx}ms` }}
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                    className="w-12 h-12 rounded-[16px] flex items-center justify-center shrink-0"
                     style={{ backgroundColor: item.color }}
                   >
                     <ItemIcon className="w-6 h-6 text-white" />
@@ -909,7 +909,7 @@ export function SlideCensus({ data }: { data: any }) {
     >
       <div className="flex flex-col h-full gap-4">
         <div className="flex justify-center gap-8">
-          <div className="flex items-center gap-3 p-4 rounded-xl bg-blue-50">
+          <div className="flex items-center gap-3 p-4 rounded-[16px] bg-blue-50">
             <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-[#FF0000] shrink-0">
               <Ambulance className="w-6 h-6 text-white" />
             </div>
@@ -920,7 +920,7 @@ export function SlideCensus({ data }: { data: any }) {
               <p className="text-xs text-black">Total Ambulances</p>
             </div>
           </div>
-          <div className="flex items-center gap-3 p-4 rounded-xl bg-green-50">
+          <div className="flex items-center gap-3 p-4 rounded-[16px] bg-green-50">
             <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-[#00A86B] shrink-0">
               <Users className="w-6 h-6 text-white" />
             </div>
@@ -933,7 +933,7 @@ export function SlideCensus({ data }: { data: any }) {
           </div>
         </div>
 
-        <div className="flex-1 bg-black/5 rounded-xl p-4 overflow-auto max-h-[300px]">
+        <div className="flex-1 bg-black/5 rounded-[16px] p-4 overflow-auto max-h-[300px]">
           <div className="grid grid-cols-2 gap-3">
             {data.byLGA.map((lga: any) => (
               <div
@@ -970,7 +970,7 @@ export function SlideLaborDelivery({ data }: { data: any }) {
     >
       <div className="flex flex-col justify-center h-full gap-6">
         <div className="flex justify-center gap-8">
-          <div className="flex items-center gap-3 p-4 rounded-xl bg-green-50">
+          <div className="flex items-center gap-3 p-4 rounded-[16px] bg-green-50">
             <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-[#00A86B] shrink-0">
               <CheckCircle className="w-6 h-6 text-white" />
             </div>
@@ -981,7 +981,7 @@ export function SlideLaborDelivery({ data }: { data: any }) {
               <p className="text-xs text-black">Total Deliveries</p>
             </div>
           </div>
-          <div className="flex items-center gap-3 p-4 rounded-xl bg-blue-50">
+          <div className="flex items-center gap-3 p-4 rounded-[16px] bg-blue-50">
             <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-[#0052A5] shrink-0">
               <TrendingUp className="w-6 h-6 text-white" />
             </div>
@@ -994,7 +994,7 @@ export function SlideLaborDelivery({ data }: { data: any }) {
           </div>
         </div>
 
-        <div className="bg-gray-50 rounded-xl p-4 flex-1">
+        <div className="bg-gray-50 rounded-[16px] p-4 flex-1">
           <div className="h-48">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data.monthly} margin={{ left: -20, right: 10 }}>
