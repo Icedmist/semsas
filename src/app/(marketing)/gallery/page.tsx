@@ -195,6 +195,87 @@ export default function GalleryPage() {
       date: "August 2026"
     },
     {
+      id: "g25",
+      type: "image",
+      title: "Advocacy & Engagement with Community Leaders",
+      category: "Community Outreach",
+      src: "/images/gallery-advocacy-1.jpg",
+      location: "Government Commissioning",
+      date: "September 2026"
+    },
+    {
+      id: "g26",
+      type: "image",
+      title: "Children Receiving Emergency Awareness",
+      category: "Community Outreach",
+      src: "/images/gallery-advocacy-2.jpg",
+      location: "Community Center",
+      date: "September 2026"
+    },
+    {
+      id: "g27",
+      type: "image",
+      title: "Emergency Medical Services Officials Gathering",
+      category: "Events",
+      src: "/images/gallery-advocacy-3.jpg",
+      location: "Government Complex",
+      date: "September 2026"
+    },
+    {
+      id: "g28",
+      type: "image",
+      title: "Commissioners and Officials Engagement",
+      category: "Events",
+      src: "/images/gallery-advocacy-4.jpg",
+      location: "Government Headquarters",
+      date: "September 2026"
+    },
+    {
+      id: "g29",
+      type: "image",
+      title: "Leadership and Government Officials Meeting",
+      category: "Events",
+      src: "/images/gallery-advocacy-5.jpg",
+      location: "State Administrative Building",
+      date: "September 2026"
+    },
+    {
+      id: "g30",
+      type: "image",
+      title: "SEMSAS Team Official Commissioning Ceremony",
+      category: "Events",
+      src: "/images/gallery-advocacy-6.jpg",
+      location: "Government Complex",
+      date: "September 2026"
+    },
+    {
+      id: "g31",
+      type: "image",
+      title: "Community Health Officials and SEMSAS Staff",
+      category: "Community Outreach",
+      src: "/images/gallery-advocacy-7.jpg",
+      location: "Health Administration Building",
+      date: "September 2026"
+    },
+    {
+      id: "g32",
+      type: "image",
+      title: "Government Officials and Emergency Services Team",
+      category: "Events",
+      src: "/images/gallery-advocacy-8.jpg",
+      location: "Government Complex",
+      date: "September 2026"
+    },
+    {
+      id: "g33",
+      type: "image",
+      title: "State Leadership and SEMSAS Partnership",
+      category: "Community Outreach",
+      src: "/images/gallery-advocacy-9.jpg",
+      location: "Government Administrative Center",
+      date: "September 2026"
+    },
+    {
       id: "1",
       type: "image",
       title: "Southern Gombe Ambulance Deployment",
