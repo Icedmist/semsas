@@ -141,7 +141,7 @@ export default function DashboardPage() {
   return (
     <div className="mx-auto max-w-[1280px] px-4 py-6">
       {/* Healixx top bar */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
         <div className="text-xs font-black tracking-widest text-black/40">LIVE DASHBOARD • SLIDE {String(currentSection + 1).padStart(2, "0")}/11</div>
         <div className="flex gap-2">
           <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={prevSection} className="rounded-full bg-white border border-black/10 px-4 py-1.5 text-xs font-bold hover:bg-black hover:text-white">← Prev</motion.button>

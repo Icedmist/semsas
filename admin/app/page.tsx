@@ -82,10 +82,10 @@ export default function AdminConsole() {
     return () => clearInterval(id);
   }, []);
 
-  // Read API URL from environment variables
+  // Read API URL — admin is separate app on 3001, so default to semsas on 3000
   const getApiUrl = (year?: number) => {
-    const nextUrl = process.env.NEXT_PUBLIC_API_URL;
-    const base = nextUrl ? `${nextUrl}/api/live-stats` : "/api/live-stats";
+    const nextUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+    const base = `${nextUrl}/api/live-stats`;
     if (year) {
       return `${base}?year=${year}`;
     }
