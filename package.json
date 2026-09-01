@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "upload:assets": "node --env-file=.env.local scripts/upload-images-to-supabase.mjs",
+    "supabase:setup": "node --env-file=.env.local scripts/supabase-setup.mjs",
+    "seed:users": "node --env-file=.env.local scripts/seed-supabase-users.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.43.0",
@@ -20,7 +23,9 @@
     "react-dom": "19.2.4",
     "react-hook-form": "^7.84.0",
     "recharts": "^3.10.1",
+    "sharp": "^0.33.5",
     "tailwind-merge": "^3.6.0",
+    "ws": "^8.21.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {

@@ -14,6 +14,11 @@ const urbanist = Urbanist({
 export const metadata: Metadata = {
   title: "GoSEMSAS — Gombe State Emergency Medical Services and Ambulance System",
   description: "Official digital platform for Gombe State NEMSAS. Emergency Dispatch: 0703 382 5646 — 24/7 statewide. Rapid ambulance dispatch, pre-hospital stabilization, and coordinated referrals across 11 LGAs.",
+  icons: {
+    icon: "/images/gosemsas-logo-light.svg",
+    shortcut: "/images/gosemsas-logo-light.svg",
+    apple: "/images/gosemsas-logo-light.svg",
+  },
   openGraph: {
     title: "GoSEMSAS — Gombe State Emergency Medical Services",
     description: "Bridging medical emergencies and health facilities across Gombe State. 24/7 dispatch 0703 382 5646.",
