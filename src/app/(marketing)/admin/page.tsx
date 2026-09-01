@@ -97,9 +97,15 @@ export default function AdminDashboard() {
       const resolvedRole = roleData?.role || profileData?.role || "staff";
       console.log("Resolved role:", resolvedRole);
 
-      // Always use rolePermissions mapping as source of truth
-      const resolvedPermissions = rolePermissions[resolvedRole] || rolePermissions.staff;
+      // Use permissions from Supabase (user_roles or profiles table)
+      // Fall back to rolePermissions mapping only if not in Supabase
+      const supabasePermissions = roleData?.permissions || profileData?.permissions || null;
+      const resolvedPermissions = (supabasePermissions && Array.isArray(supabasePermissions)) 
+        ? supabasePermissions 
+        : (rolePermissions[resolvedRole] || rolePermissions.staff);
+      
       console.log("Resolved permissions:", resolvedPermissions);
+      console.log("Permissions source:", supabasePermissions ? "Supabase" : "Frontend mapping");
 
       setProfile({
         id: userId,

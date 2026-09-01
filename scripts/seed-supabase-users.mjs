@@ -22,7 +22,7 @@ const seedUsers = [
     password: 'Password123!',
     full_name: 'SEMSAS Admin Officer',
     role: 'admin',
-    permissions: ['manage:users', 'manage:content', 'manage:dashboard', 'manage:assets'],
+    permissions: ['manage:users', 'manage:content', 'manage:dashboard', 'manage:assets', 'manage:live-data', 'edit:all-content'],
   },
   {
     email: 'claims@semsas.gombe.gov.ng',
@@ -54,39 +54,30 @@ const seedUsers = [
   },
 ];
 
-for (const user of seedUsers) {
-  const { data: createData, error: createError } = await supabase.auth.admin.createUser({
-    email: user.email,
-    password: user.password,
-    email_confirm: true,
-    user_metadata: {
-      full_name: user.full_name,
-      role: user.role,
-    },
-  });
+console.log('Fetching existing auth users...');
+const { data: authUsers, error: listError } = await supabase.auth.admin.listUsers();
+if (listError) {
+  console.error('Failed to list users:', listError.message);
+  process.exit(1);
+}
 
-  if (createError && !createError.message.toLowerCase().includes('already exists')) {
-    console.error(`Failed to create user ${user.email}:`, createError.message);
+const authUserMap = {};
+authUsers.users.forEach(user => {
+  authUserMap[user.email] = user.id;
+});
+console.log(`Found ${authUsers.users.length} auth users\n`);
+
+for (const user of seedUsers) {
+  console.log(`\n--- Processing user: ${user.email} ---`);
+  
+  const userId = authUserMap[user.email];
+  if (!userId) {
+    console.error(`User ${user.email} not found in auth system`);
     continue;
   }
+  console.log(`Using userId: ${userId}`);
 
-  const authUser = createData?.user || null;
-  const userId = authUser?.id ?? null;
-
-  if (!userId) {
-    const { data: existingUsers, error: listError } = await supabase.auth.admin.listUsers();
-    if (listError) {
-      console.error('Could not resolve existing user after create error:', listError.message);
-      continue;
-    }
-    const existing = existingUsers.users.find((entry) => entry.email === user.email);
-    if (!existing) {
-      console.error(`User ${user.email} not found after creation attempt.`);
-      continue;
-    }
-    userId = existing.id;
-  }
-
+  console.log(`Upserting profile for ${user.email}...`);
   const { error: profileError } = await supabase.from('profiles').upsert({
     id: userId,
     email: user.email,
@@ -100,7 +91,9 @@ for (const user of seedUsers) {
     console.error(`Failed to upsert profile for ${user.email}:`, profileError.message);
     continue;
   }
+  console.log(`✓ Profile upserted`);
 
+  console.log(`Upserting user role for ${user.email}...`);
   const { error: roleError } = await supabase.from('user_roles').upsert({
     user_id: userId,
     role: user.role,
@@ -111,8 +104,9 @@ for (const user of seedUsers) {
     console.error(`Failed to upsert user role for ${user.email}:`, roleError.message);
     continue;
   }
+  console.log(`✓ Role upserted`);
 
-  console.log(`Seeded user: ${user.email} (${user.role})`);
+  console.log(`\n✓✓✓ SUCCESS: ${user.email} (${user.role}) with permissions: ${user.permissions.join(', ')}\n`);
 }
 
 console.log('Seed script complete.');
