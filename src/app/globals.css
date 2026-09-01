@@ -394,3 +394,28 @@ body {
   transform: translateY(-6px);
   box-shadow: 0 24px 50px -15px rgba(10, 42, 82, 0.18);
 }
+
+/* === Healixx faithful tokens merged from template === */
+:root {
+  --token-bg: #fff;
+  --token-bg-muted: #f0f5f6;
+  --token-text-muted: #3b3b3b;
+  --token-text: #0a0a0a;
+  --token-accent: #ffce8a;
+  --gosemsas-green: #0a7a3a;
+  --gosemsas-red: #dc2626;
+}
+.gosemsas-hero-gradient {
+  background: radial-gradient(120% 120% at 50% 0%, #e6f4ec 0%, #ffffff 55%);
+}
+.glass-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(10,10,10,0.07);
+}
+@keyframes marquee {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+::selection { background: #dc2626; color: #fff; }
+a:focus-visible, button:focus-visible { outline: 2px solid #dc2626; outline-offset: 2px; }

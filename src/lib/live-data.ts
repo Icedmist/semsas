@@ -121,3 +121,27 @@ export function getAvailableYears(): number[] {
 export function getCurrentYear(): number {
   return CURRENT_YEAR;
 }
+
+// === Compatibility wrappers for Firebase mock (Downloads) ===
+import { defaultYearlyData as _defaults } from "./default-dashboard-data";
+export function readStore(): Record<string, any> {
+  const all = readLocal();
+  // Normalize to string keys
+  const out: Record<string, any> = {};
+  for (const [k,v] of Object.entries(all)) out[String(k)] = v;
+  // Ensure fallback
+  if (!out["2025"]) out["2025"] = (_defaults as any)["2025"];
+  if (!out["2026"]) out["2026"] = (_defaults as any)["2026"];
+  return out;
+}
+export function writeStore(data: Record<string, any>) {
+  const yearly: any = {};
+  for (const [k,v] of Object.entries(data)) yearly[Number(k)] = v;
+  writeLocal(yearly);
+}
+export function getYear(year: string | null): any {
+  const y = year ? parseInt(year) : CURRENT_YEAR;
+  // Try getLiveDashboardData sync fallback via readLocal
+  const all = readLocal();
+  return all[y] || all[CURRENT_YEAR];
+}
