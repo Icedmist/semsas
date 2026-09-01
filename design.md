@@ -1,6 +1,6 @@
 # GoSEMSAS Design System — Healixx Based
 
-This document describes the single-source design system for **GoSEMSAS** (Gombe State Emergency Medical Services and Ambulance System). The implementation is a faithful reconstruction of the **Healixx Framer template** (`healixx.framer.website`) with GoSEMSAS content, preserving geometry, spacing, and tokens while introducing GoSEMSAS branding, red accents, and Firebase-ready data.
+This document describes the single-source design system for **GoSEMSAS** (Gombe State Emergency Medical Services and Ambulance System). The implementation is a faithful reconstruction of the **Healixx Framer template** (`healixx.framer.website`) with GoSEMSAS content, preserving geometry, spacing, and tokens while introducing GoSEMSAS branding, red accents, and Supabase-ready data.
 
 ## 1. Philosophy — Helix Only
 

@@ -43,7 +43,7 @@ export default function Home() {
             </div>
             <div className="relative bg-[#f0f5f6] p-4 lg:p-6 flex items-center">
               <div className="relative w-full aspect-[4/3] md:aspect-[4/3] rounded-[24px] overflow-hidden bg-white border border-black/5">
-                <img src="/images/UOMUepVQXzu9Z4Iu7nm30ARGDI.png" alt="Emergency response" className="h-full w-full object-cover" />
+                <img src="/images/gallery-new-4.jpg" alt="SEMSAS Leadership and Government Partnership" className="h-full w-full object-cover" />
                 <div className="absolute bottom-3 left-3 right-3 rounded-2xl bg-white/90 backdrop-blur p-3 border border-black/5 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <img src="/images/CzT5Uj890xo8WuZWLcMHca8t5z0.svg" alt="" className="w-9 h-7 object-contain" />
@@ -88,7 +88,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex-1 rounded-[24px] overflow-hidden bg-white border border-black/5 max-h-[420px]">
-              <img src="/images/4t9GS4DAR9pDQAoyOtsuWlMBE.png" alt="Team" className="h-full w-full object-cover" />
+              <img src="/images/news-advocacy-5.jpg" alt="Community Partnership" className="h-full w-full object-cover" />
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-4 mt-8">
             {[
               {img:"/images/3NIJipihll5Gq0XC8umIY2uao0.png", title:"Rapid Dispatch", desc:"0703 382 5646 routes to nearest ambulance in seconds."},
-              {img:"/images/TlKNkGph24dTdXM8Mds4keWK1Xw.png", title:"Pre-hospital Care", desc:"BLS/ACLS stabilization on scene before hospital."},
+              {img:"/images/gallery-new-3.jpg", title:"Pre-hospital Care", desc:"BLS/ACLS stabilization on scene before hospital."},
               {img:"/images/andCpPt4jBacvOjQq85iVP07Lk.png", title:"Coordinated Referral", desc:"Pre-alert + handover to 111 facilities statewide."},
             ].map(c=> (
               <div key={c.title} className="rounded-[24px] border border-black/5 overflow-hidden bg-[#f8fafa]">
@@ -140,7 +140,7 @@ export default function Home() {
               </div>
             </div>
             <div className="rounded-[24px] overflow-hidden bg-white border border-black/5">
-              <img src="/images/TXIbSKRPFAwuK68w77ilsUwHjqE.png" alt="Steps" className="w-full h-64 md:h-[380px] object-cover" />
+              <img src="/images/WhatsApp Image 2026-05-14 at 17.44.26.jpeg" alt="Emergency Response Steps" className="w-full h-64 md:h-[380px] object-cover" />
             </div>
           </div>
         </div>
@@ -207,34 +207,179 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PARTNERS — Healixx pill style, acronyms underlined red, no dots, moves right → */}
+      {/* LEADERSHIP — Meet the team */}
+      <section className="mx-auto max-w-[1280px] px-4 mt-6">
+        <div className="rounded-[40px] bg-white border border-black/5 p-6 md:p-10">
+          <div className="flex flex-col md:flex-row justify-between gap-6 items-start md:items-center mb-10">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-black" style={{fontFamily:"var(--font-urbanist)"}}>Meet our <span className="text-black/40">leadership team</span></h2>
+              <p className="mt-2 text-sm text-black/60 max-w-md">Dedicated professionals driving excellence in emergency medical services across Gombe State.</p>
+            </div>
+            <Link href="/leadership" className="rounded-full bg-[#dc2626] text-white px-6 py-2.5 text-sm font-bold hover:bg-[#b91c1c] whitespace-nowrap">View Full Team →</Link>
+          </div>
+          
+          {/* STATE COORDINATOR — Top */}
+          <div className="mb-10 pb-10 border-b border-black/5">
+            <div className="text-xs font-bold tracking-widest text-black/40 mb-4">STATE COORDINATOR</div>
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              <div className="w-32 h-32 rounded-[16px] overflow-hidden border-2 border-[#dc2626] shrink-0">
+                <img src="/images/Dr Suraj Abdulkarim .jpg" alt="Dr. Suraj Abdulkarim" className="w-full h-full object-cover" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-black">Dr. Suraj Abdulkarim</h3>
+                <p className="text-sm text-[#dc2626] font-bold mt-1">State Coordinator, GoSEMSAS</p>
+                <p className="text-sm text-black/60 mt-3 leading-6">Oversees the overall coordination and strategic direction of SEMSAS, ensuring seamless integration of emergency services across all 11 LGAs with a focus on operational excellence and life-saving interventions.</p>
+                <p className="text-xs text-black/40 mt-3">si@semsas.gombe.gov.ng</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* MANAGEMENT TEAM — Below */}
+          <div>
+            <div className="text-xs font-bold tracking-widest text-black/40 mb-4">MANAGEMENT TEAM</div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+              {[
+                {
+                  name: "Dr. Bello Abdulkadir",
+                  role: "Head of SEMSAS Admin",
+                  image: "/images/Dr Bello Abdulkadir Head of SEMSAS Admin.jpg",
+                  dept: "Administration"
+                },
+                {
+                  name: "Dr. Maspara Gideon",
+                  role: "Head of Claims",
+                  image: "/images/Dr Maspara Gideon Head of Claim.jpg",
+                  dept: "Finance"
+                },
+                {
+                  name: "Halima Musa Miyabe",
+                  role: "Head of M&E",
+                  image: "/images/Halima Musa Miyabe Head of Monitoring & Evaluation.jpg",
+                  dept: "Quality Assurance"
+                },
+                {
+                  name: "Muhammad Sanusi Ahmad",
+                  role: "Strategic Information",
+                  image: "/images/Muhammad Sanusi Ahmad Strategic Information.jpg",
+                  dept: "Data & Analytics"
+                },
+                {
+                  name: "SEMSAS ICT Focal Person",
+                  role: "ICT Coordination",
+                  image: "/images/ICT Focal Person.jpg",
+                  dept: "Technology"
+                }
+              ].map((member) => (
+                <div key={member.name} className="rounded-[20px] overflow-hidden border border-black/5 hover:shadow-lg hover:border-[#dc2626]/20 transition-all group">
+                  <div className="aspect-square overflow-hidden bg-[#f0f5f6]">
+                    <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" onError={(e) => {e.currentTarget.src = "/images/about-personnel.jpg"}} />
+                  </div>
+                  <div className="p-3">
+                    <div className="text-xs font-bold text-[#dc2626] mb-1">{member.dept}</div>
+                    <div className="font-bold text-sm line-clamp-2">{member.name}</div>
+                    <div className="text-xs text-black/50 mt-1 line-clamp-1">{member.role}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GALLERY PREVIEW — Media highlights */}
+      <section className="mx-auto max-w-[1280px] px-4 mt-6">
+        <div className="rounded-[40px] bg-[#f0f5f6] p-6 md:p-10">
+          <div className="flex flex-col md:flex-row justify-between gap-6 items-start md:items-center mb-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-black" style={{fontFamily:"var(--font-urbanist)"}}>Media <span className="text-black/40">& gallery</span></h2>
+              <p className="mt-2 text-sm text-black/60 max-w-md">Explore our community engagement, training sessions, and emergency response activities across Gombe State.</p>
+            </div>
+            <Link href="/gallery" className="rounded-full bg-[#dc2626] text-white px-6 py-2.5 text-sm font-bold hover:bg-[#b91c1c] whitespace-nowrap">View Gallery →</Link>
+          </div>
+          
+          {/* Gallery Grid Preview */}
+          <div className="grid md:grid-cols-3 gap-4 mb-6">
+            {[
+              {
+                src: "/images/gallery-advocacy-1.jpg",
+                title: "Community Advocacy",
+                category: "Outreach"
+              },
+              {
+                src: "/images/gallery-advocacy-2.jpg",
+                title: "Children's Awareness",
+                category: "Outreach"
+              },
+              {
+                src: "/images/gallery-advocacy-3.jpg",
+                title: "Government Partnership",
+                category: "Events"
+              },
+              {
+                src: "/images/news-launch-ambulance-10.jpg",
+                title: "Fleet Deployment",
+                category: "Ambulances"
+              },
+              {
+                src: "/images/news-orientation-cemttos-2.jpg",
+                title: "CEMTTOS Training",
+                category: "Training"
+              },
+              {
+                src: "/images/gallery-new-5.jpg",
+                title: "Maternal Outreach",
+                category: "Community"
+              }
+            ].map((item, i) => (
+              <Link href="/gallery" key={i} className="group relative rounded-[24px] overflow-hidden bg-white border border-black/5 h-48 hover:border-[#dc2626]/50 transition-all">
+                <img src={item.src} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-black/70 transition-all" />
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <div className="text-xs font-bold text-white/70 mb-1">{item.category}</div>
+                  <div className="font-bold text-sm text-white">{item.title}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Category Links */}
+          <div className="flex flex-wrap gap-2">
+            {[
+              { label: "All Photos", href: "/gallery" },
+              { label: "Community Outreach", href: "/gallery" },
+              { label: "Training Sessions", href: "/gallery" },
+              { label: "Events & Launches", href: "/gallery" },
+              { label: "Emergency Response", href: "/gallery" }
+            ].map((cat) => (
+              <Link key={cat.label} href={cat.href} className="rounded-full bg-white border border-black/10 px-4 py-2 text-xs font-semibold hover:bg-[#dc2626] hover:text-white hover:border-[#dc2626] transition-all">
+                {cat.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PARTNERS — Healixx pill style with logos, acronyms underlined red, moving right → */}
       <section className="mx-auto max-w-[1280px] px-4 mt-6">
         <div className="rounded-[32px] bg-white border border-black/5 p-4 md:p-5 overflow-hidden">
           <div className="flex items-center justify-between mb-3 px-1">
             <div className="text-xs font-black tracking-widest text-black/40">OUR PARTNERS • MOVING RIGHT →</div>
             <Link href="/partners" className="text-xs font-bold underline decoration-[#dc2626] decoration-2 underline-offset-4 text-[#dc2626]">View all →</Link>
           </div>
-          <div className="relative overflow-hidden rounded-full border border-black/5 bg-[#f0f5f6] py-2.5">
-            <div className="flex animate-[marquee_22s_linear_infinite] whitespace-nowrap gap-6 pl-6">
+          <div className="relative overflow-hidden rounded-full border border-black/5 bg-[#f0f5f6] py-3">
+            <div className="flex animate-[marquee_25s_linear_infinite] whitespace-nowrap gap-8 pl-6">
               {[
-                { acronym: "FMOH", name: "Federal Ministry of Health" },
-                { acronym: "NEMSAS", name: "National Emergency Medical Service & Ambulance System" },
-                { acronym: "FRSC", name: "Federal Road Safety Corps" },
-                { acronym: "NEMA", name: "National Emergency Management Agency" },
-                { acronym: "GOS-EMA", name: "Gombe State Emergency Management Agency" },
-                { acronym: "GSSH", name: "Gombe State Specialist Hospital" },
-                { acronym: "NPF", name: "Nigerian Police Force" },
-                { acronym: "NRCS", name: "Nigerian Red Cross Society" },
-                { acronym: "FMOH", name: "Federal Ministry of Health" },
-                { acronym: "NEMSAS", name: "National Emergency Medical Service & Ambulance System" },
-                { acronym: "FRSC", name: "Federal Road Safety Corps" },
-                { acronym: "NEMA", name: "National Emergency Management Agency" },
-                { acronym: "GOS-EMA", name: "Gombe State Emergency Management Agency" },
-                { acronym: "GSSH", name: "Gombe State Specialist Hospital" },
-                { acronym: "NPF", name: "Nigerian Police Force" },
-                { acronym: "NRCS", name: "Nigerian Red Cross Society" },
+                { acronym: "FMOH", name: "Federal Ministry of Health", logo: "/images/fmoh-logo.png" },
+                { acronym: "NEMSAS", name: "National Emergency Medical Service & Ambulance System", logo: "/images/nemsas-logo.png" },
+                { acronym: "MOH-Gombe", name: "Gombe State Ministry of Health", logo: "/images/moh-gombe-logo.jpeg" },
+                { acronym: "World Bank", name: "World Bank Partnership", logo: "/images/worldbank-logo.jpeg" },
+                { acronym: "FMOH", name: "Federal Ministry of Health", logo: "/images/fmoh-logo.png" },
+                { acronym: "NEMSAS", name: "National Emergency Medical Service & Ambulance System", logo: "/images/nemsas-logo.png" },
+                { acronym: "MOH-Gombe", name: "Gombe State Ministry of Health", logo: "/images/moh-gombe-logo.jpeg" },
+                { acronym: "World Bank", name: "World Bank Partnership", logo: "/images/worldbank-logo.jpeg" },
               ].map((p,i)=> (
-                <span key={i} className="inline-flex items-center gap-1.5 px-2 py-1 text-xs font-black tracking-wide shrink-0">
+                <span key={i} className="inline-flex items-center gap-2 px-3 py-2 text-xs font-black tracking-wide shrink-0">
+                  <img src={p.logo} alt={p.acronym} className="h-8 w-auto object-contain" onError={(e) => {e.currentTarget.style.display = 'none'}} />
                   <span className="underline decoration-[#dc2626] decoration-2 underline-offset-4 text-[#dc2626]">{p.acronym}</span>
                   <span className="text-black/40 font-semibold hidden sm:inline">— {p.name}</span>
                 </span>

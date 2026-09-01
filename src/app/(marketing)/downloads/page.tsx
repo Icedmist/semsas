@@ -237,14 +237,30 @@ export default function DownloadsPortal() {
 
                   <div className="grid grid-cols-2 gap-3 pt-6 mt-6 border-t border-gray-200/60">
                     <button
-                      onClick={() => alert(`Opening web viewer for ${doc.title}`)}
+                      onClick={() => {
+                        // Create a simple PDF download (placeholder implementation)
+                        const link = document.createElement('a');
+                        link.href = `data:text/plain;charset=utf-8,${encodeURIComponent(`Document: ${doc.title}\nVersion: ${doc.version}\nSize: ${doc.size}\nFormat: ${doc.format}\n\nThis is a placeholder document.`)}`;
+                        link.download = `${doc.title.replace(/\s+/g, '_')}.txt`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }}
                       className="flex items-center justify-center gap-1.5 bg-white hover:bg-primary-navy hover:text-white hover:border-primary-navy border border-slate-200/80 text-primary-navy font-bold py-2.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-xs"
                     >
                       <Eye className="w-3.5 h-3.5" /> View Online
                     </button>
 
                     <button
-                      onClick={() => alert(`Downloading placeholder: ${doc.title}`)}
+                      onClick={() => {
+                        // Trigger PDF download (for now creates a simple text file)
+                        const link = document.createElement('a');
+                        link.href = `data:text/plain;charset=utf-8,${encodeURIComponent(`${doc.title}\n\nVersion: ${doc.version}\nPublished: ${doc.pubDate}\n\n${doc.desc}`)}`;
+                        link.download = `${doc.title.replace(/\s+/g, '_')}_${doc.version}.txt`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }}
                       className="btn btn-dark py-2.5 text-xs"
                     >
                       <Download className="w-3.5 h-3.5" /> Download
