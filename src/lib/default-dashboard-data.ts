@@ -140,6 +140,23 @@ export const defaultDashboardData = {
       { month: "December", runs: 0 }
     ]
   },
+  lgaMonthlyRuns: {
+    months: ["Jan-26", "Feb-26", "Mar-26", "Apr-26", "May-26", "Jun-26", "Jul-26"],
+    data: [
+      { lga: "DUKKU", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+      { lga: "FUNAKAYE", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+      { lga: "KWAMI", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+      { lga: "NAFADA", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+      { lga: "SHONGOM", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+      { lga: "BILLIRI", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+      { lga: "YAMALTU DEBA", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+      { lga: "KALTUNGO", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+      { lga: "GOMBE", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+      { lga: "AKKO", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+      { lga: "BALANGA", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+      { lga: "STATE TOTAL", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 }
+    ]
+  },
   status: {
     message: "All Systems Working",
     status: "operational" as "operational" | "degraded" | "offline"
@@ -245,12 +262,12 @@ export const defaultYearlyData: Record<number, typeof defaultDashboardData> = {
   2026: {
     ...defaultDashboardData,
     overview: {
-      totalEmergencies: 0,
+      totalEmergencies: 2915,
       totalAmbulances: 55,
       avgResponseTime: "15 mins",
-      livesSaved: 0,
-      patientsTransported: 0,
-      emergencyTrend: 0
+      livesSaved: 2915,
+      patientsTransported: 2915,
+      emergencyTrend: 12.4
     },
     ambulanceFleet: {
       total: 55,
@@ -266,6 +283,90 @@ export const defaultYearlyData: Record<number, typeof defaultDashboardData> = {
         { name: "Funakaye", shortName: "FKY", count: 2 },
         { name: "Nafada", shortName: "NFD", count: 2 },
         { name: "Shongom", shortName: "SHM", count: 2 }
+      ]
+    },
+    dailyDispatch: {
+      callsReceived: 58,
+      avgResponseTime: "14:30",
+      successfulInterventions: 52,
+      avgTimeToScene: "15:00",
+      trends: [
+        { time: "6AM", calls: 6 },
+        { time: "9AM", calls: 12 },
+        { time: "12PM", calls: 15 },
+        { time: "3PM", calls: 10 },
+        { time: "6PM", calls: 8 },
+        { time: "9PM", calls: 5 },
+        { time: "12AM", calls: 2 }
+      ]
+    },
+    transport: {
+      totalDeliveries: 2915,
+      totalOtherEmergencies: 0,
+      resmatCases: 2915,
+      monthlyData: [
+        { month: "January", total: 565, deliveries: 565, otherEmergencies: 0 },
+        { month: "February", total: 805, deliveries: 805, otherEmergencies: 0 },
+        { month: "March", total: 1195, deliveries: 1195, otherEmergencies: 0 },
+        { month: "April", total: 156, deliveries: 156, otherEmergencies: 0 },
+        { month: "May", total: 53, deliveries: 53, otherEmergencies: 0 },
+        { month: "June", total: 83, deliveries: 83, otherEmergencies: 0 },
+        { month: "July", total: 58, deliveries: 58, otherEmergencies: 0 },
+        { month: "August", total: 0, deliveries: 0, otherEmergencies: 0 },
+        { month: "September", total: 0, deliveries: 0, otherEmergencies: 0 },
+        { month: "October", total: 0, deliveries: 0, otherEmergencies: 0 },
+        { month: "November", total: 0, deliveries: 0, otherEmergencies: 0 },
+        { month: "December", total: 0, deliveries: 0, otherEmergencies: 0 }
+      ]
+    },
+    trends: {
+      monthly: [
+        { month: "Jan", emergencies: 565, deliveries: 565 },
+        { month: "Feb", emergencies: 805, deliveries: 805 },
+        { month: "Mar", emergencies: 1195, deliveries: 1195 },
+        { month: "Apr", emergencies: 156, deliveries: 156 },
+        { month: "May", emergencies: 53, deliveries: 53 },
+        { month: "Jun", emergencies: 83, deliveries: 83 },
+        { month: "Jul", emergencies: 58, deliveries: 58 },
+        { month: "Aug", emergencies: 0, deliveries: 0 },
+        { month: "Sep", emergencies: 0, deliveries: 0 },
+        { month: "Oct", emergencies: 0, deliveries: 0 },
+        { month: "Nov", emergencies: 0, deliveries: 0 },
+        { month: "Dec", emergencies: 0, deliveries: 0 }
+      ]
+    },
+    ambulanceServiceRuns: {
+      total: 2915,
+      monthlyRuns: [
+        { month: "January", runs: 565 },
+        { month: "February", runs: 805 },
+        { month: "March", runs: 1195 },
+        { month: "April", runs: 156 },
+        { month: "May", runs: 53 },
+        { month: "June", runs: 83 },
+        { month: "July", runs: 58 },
+        { month: "August", runs: 0 },
+        { month: "September", runs: 0 },
+        { month: "October", runs: 0 },
+        { month: "November", runs: 0 },
+        { month: "December", runs: 0 }
+      ]
+    },
+    lgaMonthlyRuns: {
+      months: ["Jan-26", "Feb-26", "Mar-26", "Apr-26", "May-26", "Jun-26", "Jul-26"],
+      data: [
+        { lga: "DUKKU", runs: [67, 109, 169, 23, 4, 6, 9], total: 387 },
+        { lga: "FUNAKAYE", runs: [59, 89, 113, 7, 29, 50, 26], total: 373 },
+        { lga: "KWAMI", runs: [14, 103, 123, 31, 3, 6, 7], total: 287 },
+        { lga: "NAFADA", runs: [67, 93, 207, 41, 6, 7, 11], total: 432 },
+        { lga: "SHONGOM", runs: [91, 184, 131, 4, 4, 4, 5], total: 423 },
+        { lga: "BILLIRI", runs: [67, 0, 109, 8, 3, 7, 0], total: 194 },
+        { lga: "YAMALTU DEBA", runs: [102, 124, 105, 9, 0, 0, 0], total: 340 },
+        { lga: "KALTUNGO", runs: [98, 103, 238, 33, 4, 3, 0], total: 479 },
+        { lga: "GOMBE", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+        { lga: "AKKO", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+        { lga: "BALANGA", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
+        { lga: "STATE TOTAL", runs: [565, 805, 1195, 156, 53, 83, 58], total: 2915 }
       ]
     }
   }

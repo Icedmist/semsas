@@ -3,25 +3,37 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const host = request.headers.get("host") || "";
   const pathname = request.nextUrl.pathname;
+  const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
 
-  // Check if this is a request to the admin dashboard
-  // Admin should only be accessible via admin.domain or admin subdomain
+  // Extract base domain (last 2 parts: e.g., gosemsas.org from admin.www.gosemsas.org)
+  const hostWithoutPort = host.split(":")[0];
+  const domainParts = hostWithoutPort.split(".");
+  const baseDomain = domainParts.slice(-2).join(".");
+
+  // Admin routes should be accessible from:
+  // 1. localhost or 127.0.0.1 in development
+  // 2. admin subdomain in production
   if (pathname.startsWith("/admin")) {
-    // For development/localhost, allow both paths
-    if (host.includes("localhost") || host.includes("127.0.0.1")) {
+    // Allow from localhost/127.0.0.1 (development)
+    if (isLocal) {
       return NextResponse.next();
     }
 
-    // For production, only allow admin subdomain
-    if (!host.startsWith("admin.")) {
-      // Redirect to admin subdomain or show 404
-      return NextResponse.redirect(`https://admin.${host}${pathname}`, 307);
+    // Allow from admin subdomain in production
+    if (host.startsWith("admin.")) {
+      return NextResponse.next();
     }
+
+    // Redirect to admin.gosemsas.org (removes all subdomains)
+    const adminDomain = `admin.${baseDomain}`;
+    return NextResponse.redirect(`https://${adminDomain}${pathname}`, 307);
   }
 
-  // If trying to access admin via admin subdomain at main routes, redirect properly
-  if (host.startsWith("admin.") && !pathname.startsWith("/admin")) {
-    return NextResponse.redirect(`https://admin.${host}/admin`, 307);
+  // Redirect admin subdomain to /admin route if not already there
+  if (host.startsWith("admin.")) {
+    if (!pathname.startsWith("/admin")) {
+      return NextResponse.redirect(new URL("/admin", request.url), 307);
+    }
   }
 
   return NextResponse.next();

@@ -15,9 +15,9 @@ export const metadata: Metadata = {
   title: "GoSEMSAS — Gombe State Emergency Medical Services and Ambulance System",
   description: "Official digital platform for Gombe State NEMSAS. Emergency Dispatch: 0703 382 5646 — 24/7 statewide. Rapid ambulance dispatch, pre-hospital stabilization, and coordinated referrals across 11 LGAs.",
   icons: {
-    icon: "/images/gosemsas-logo-light.svg",
-    shortcut: "/images/gosemsas-logo-light.svg",
-    apple: "/images/gosemsas-logo-light.svg",
+    icon: "/images/photo_1_2026-09-01_15-55-09.jpg",
+    shortcut: "/images/photo_1_2026-09-01_15-55-09.jpg",
+    apple: "/images/photo_1_2026-09-01_15-55-09.jpg",
   },
   openGraph: {
     title: "GoSEMSAS — Gombe State Emergency Medical Services",

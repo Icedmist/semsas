@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   title: "SEMSAS Admin Console",
   description:
     "Administration console for the Gombe State Emergency Medical Services & Ambulance System (SEMSAS) live dashboard.",
+  icons: {
+    icon: "/images/photo_1_2026-09-01_15-55-09.jpg",
+    shortcut: "/images/photo_1_2026-09-01_15-55-09.jpg",
+    apple: "/images/photo_1_2026-09-01_15-55-09.jpg",
+  },
 };
 
 export default function RootLayout({

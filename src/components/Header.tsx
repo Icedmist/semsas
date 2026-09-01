@@ -22,25 +22,25 @@ export default function Header() {
 
                 {/* Menu Black pills - desktop */}
                 <div className="hidden lg:flex items-center gap-1.5">
-                  <Link href="/about" className="rounded-[10px] px-3.5 py-2 text-sm font-medium text-black/70 hover:bg-black/5 hover:text-black">About</Link>
-                  <Link href="/services" className="rounded-[10px] px-3.5 py-2 text-sm font-medium text-black/70 hover:bg-black/5 hover:text-black">Services</Link>
-                  <Link href="/organizational-structure" className="rounded-[10px] px-3.5 py-2 text-sm font-medium text-black/70 hover:bg-black/5 hover:text-black">Structure</Link>
-                  <Link href="/partners" className="rounded-[10px] px-3.5 py-2 text-sm font-medium text-black/70 hover:bg-black/5 hover:text-black">Partners</Link>
-                  <Link href="/emergency-information" className="rounded-[10px] bg-[#dc2626] px-3.5 py-2 text-sm font-bold text-white hover:bg-[#b91c1c] shadow-sm">Emergency 0703 382 5646</Link>
+                  <Link href="/about" className="rounded-[10px] px-3.5 py-2 text-sm font-medium text-black/70 hover:bg-red-50 hover:text-red-700 hover:border-red-300 border border-transparent transition-all">About</Link>
+                  <Link href="/services" className="rounded-[10px] px-3.5 py-2 text-sm font-medium text-black/70 hover:bg-red-50 hover:text-red-700 hover:border-red-300 border border-transparent transition-all">Services</Link>
+                  <Link href="/organizational-structure" className="rounded-[10px] px-3.5 py-2 text-sm font-medium text-black/70 hover:bg-red-50 hover:text-red-700 hover:border-red-300 border border-transparent transition-all">Structure</Link>
+                  <Link href="/partners" className="rounded-[10px] px-3.5 py-2 text-sm font-medium text-black/70 hover:bg-red-50 hover:text-red-700 hover:border-red-300 border border-transparent transition-all">Partners</Link>
+                  <Link href="/emergency-information" className="rounded-full bg-[#F32A4D] px-4 py-2 text-sm font-bold text-white hover:bg-[#c81235] shadow-lg hover:shadow-xl hover:shadow-red-400/40 transition-all">Emergency 0703 382 5646</Link>
                 </div>
               </div>
 
               <div className="flex items-center gap-2">
                 <Link href="/news" className="hidden md:inline-flex rounded-[10px] px-3.5 py-2 text-sm font-medium text-black/70 hover:bg-black/5">Media</Link>
-                <Link href="/contact" className="hidden md:inline-flex rounded-[10px] px-3.5 py-2 text-sm font-medium text-black/70 hover:bg-black/5">Contact</Link>
-                {/* Primary Button 58px - GoSEMSAS black pill */}
-                <Link href="/dashboard" className="hidden sm:inline-flex items-center justify-center rounded-full bg-[#0a0a0a] border border-black px-5 py-2.5 text-sm font-semibold text-white hover:bg-black">
+                <Link href="/contact" className="hidden md:inline-flex rounded-[10px] px-3.5 py-2 text-sm font-medium text-black/70 hover:bg-red-50 hover:text-red-700 transition-colors">Contact</Link>
+                {/* Primary Button 58px - GoSEMSAS with red accent */}
+                <Link href="/dashboard" className="hidden sm:inline-flex items-center justify-center rounded-full bg-[#F32A4D] border border-[#F32A4D] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#c81235] hover:shadow-lg hover:shadow-red-400/30 transition-all">
                   Live Dashboard
                 </Link>
-                <button onClick={() => setMobile(!mobile)} className="lg:hidden w-9 h-9 rounded-full border border-black/10 flex flex-col items-center justify-center gap-1">
-                  <span className="block w-4 h-0.5 bg-black" />
-                  <span className="block w-4 h-0.5 bg-black" />
-                  <span className="block w-4 h-0.5 bg-black" />
+                <button onClick={() => setMobile(!mobile)} className="lg:hidden w-9 h-9 rounded-full border border-red-300 flex flex-col items-center justify-center gap-1 hover:bg-red-50 transition-colors">
+                  <span className="block w-4 h-0.5 bg-red-600" />
+                  <span className="block w-4 h-0.5 bg-red-600" />
+                  <span className="block w-4 h-0.5 bg-red-600" />
                 </button>
               </div>
             </nav>
@@ -62,9 +62,9 @@ export default function Header() {
                   ["/contact","Contact"],
                   ["/dashboard","Live Dashboard"],
                 ].map(([href,label])=> (
-                  <Link key={href} href={href} onClick={()=>setMobile(false)} className="rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-[#f0f5f6]">{label}</Link>
+                  <Link key={href} href={href} onClick={()=>setMobile(false)} className="rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-red-50 hover:text-red-700 transition-colors">{label}</Link>
                 ))}
-                <a href="tel:07033825646" className="mt-2 rounded-full bg-[#dc2626] py-3 text-center text-sm font-black text-white">Emergency 0703 382 5646</a>
+                <a href="tel:07033825646" className="mt-2 rounded-full bg-[#f1314d] py-3 text-center text-sm font-black text-white hover:bg-[#d91c3e] transition-colors shadow-md hover:shadow-lg hover:shadow-red-400/30">Emergency 0703 382 5646</a>
               </div>
             </div>
           )}

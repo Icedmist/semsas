@@ -20,73 +20,53 @@ const seedUsers = [
   {
     email: 'admin@semsas.gombe.gov.ng',
     password: 'Password123!',
-    full_name: 'SEMSAS Admin Officer',
+    full_name: 'SEMSAS Super Admin',
     role: 'admin',
-    permissions: ['manage:users', 'manage:content', 'manage:dashboard', 'manage:assets'],
-  },
-  {
-    email: 'claims@semsas.gombe.gov.ng',
-    password: 'Password123!',
-    full_name: 'Claims Manager',
-    role: 'claims',
-    permissions: ['view:dashboard', 'manage:claims', 'review:reports'],
-  },
-  {
-    email: 'si@semsas.gombe.gov.ng',
-    password: 'Password123!',
-    full_name: 'Strategic Information Lead',
-    role: 'analyst',
-    permissions: ['view:dashboard', 'manage:reports', 'export:data'],
-  },
-  {
-    email: 'ict@semsas.gombe.gov.ng',
-    password: 'Password123!',
-    full_name: 'ICT Focal Person',
-    role: 'support',
-    permissions: ['view:dashboard', 'manage:assets', 'manage:users'],
-  },
-  {
-    email: 'statecoordinator@semsas.gombe.gov.ng',
-    password: 'Password123!',
-    full_name: 'State Coordinator',
-    role: 'manager',
-    permissions: ['view:dashboard', 'manage:dashboard', 'approve:content'],
+    permissions: ['manage:live-data'],
   },
 ];
 
-for (const user of seedUsers) {
-  const { data: createData, error: createError } = await supabase.auth.admin.createUser({
-    email: user.email,
-    password: user.password,
-    email_confirm: true,
-    user_metadata: {
-      full_name: user.full_name,
-      role: user.role,
-    },
-  });
+console.log('Fetching existing auth users...');
+const { data: authUsers, error: listError } = await supabase.auth.admin.listUsers();
+if (listError) {
+  console.error('Failed to list users:', listError.message);
+  process.exit(1);
+}
 
-  if (createError && !createError.message.toLowerCase().includes('already exists')) {
-    console.error(`Failed to create user ${user.email}:`, createError.message);
+console.log(`Found ${authUsers.users.length} auth users`);
+console.log('\n🗑️  Deleting non-admin users...\n');
+
+// Delete all users except admin
+for (const authUser of authUsers.users) {
+  if (authUser.email !== 'admin@semsas.gombe.gov.ng') {
+    const { error: deleteError } = await supabase.auth.admin.deleteUser(authUser.id);
+    if (deleteError) {
+      console.error(`❌ Failed to delete ${authUser.email}:`, deleteError.message);
+    } else {
+      console.log(`✓ Deleted user: ${authUser.email}`);
+    }
+  }
+}
+
+console.log('\n📋 Processing admin user...\n');
+
+const authUserMap = {};
+authUsers.users.forEach(user => {
+  authUserMap[user.email] = user.id;
+});
+console.log(`Found ${authUsers.users.length} auth users\n`);
+
+for (const user of seedUsers) {
+  console.log(`\n--- Processing user: ${user.email} ---`);
+  
+  const userId = authUserMap[user.email];
+  if (!userId) {
+    console.error(`User ${user.email} not found in auth system`);
     continue;
   }
+  console.log(`Using userId: ${userId}`);
 
-  const authUser = createData?.user || null;
-  const userId = authUser?.id ?? null;
-
-  if (!userId) {
-    const { data: existingUsers, error: listError } = await supabase.auth.admin.listUsers();
-    if (listError) {
-      console.error('Could not resolve existing user after create error:', listError.message);
-      continue;
-    }
-    const existing = existingUsers.users.find((entry) => entry.email === user.email);
-    if (!existing) {
-      console.error(`User ${user.email} not found after creation attempt.`);
-      continue;
-    }
-    userId = existing.id;
-  }
-
+  console.log(`Upserting profile for ${user.email}...`);
   const { error: profileError } = await supabase.from('profiles').upsert({
     id: userId,
     email: user.email,
@@ -100,7 +80,9 @@ for (const user of seedUsers) {
     console.error(`Failed to upsert profile for ${user.email}:`, profileError.message);
     continue;
   }
+  console.log(`✓ Profile upserted`);
 
+  console.log(`Upserting user role for ${user.email}...`);
   const { error: roleError } = await supabase.from('user_roles').upsert({
     user_id: userId,
     role: user.role,
@@ -111,8 +93,9 @@ for (const user of seedUsers) {
     console.error(`Failed to upsert user role for ${user.email}:`, roleError.message);
     continue;
   }
+  console.log(`✓ Role upserted`);
 
-  console.log(`Seeded user: ${user.email} (${user.role})`);
+  console.log(`\n✓✓✓ SUCCESS: ${user.email} (${user.role}) with permissions: ${user.permissions.join(', ')}\n`);
 }
 
 console.log('Seed script complete.');

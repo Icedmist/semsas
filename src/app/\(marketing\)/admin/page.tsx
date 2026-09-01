@@ -65,7 +65,6 @@ export default function AdminDashboard() {
   }, [supabase]);
 
   const loadDashboardData = async () => {
-    if (!supabase) return;
     try {
       const { data: dashboardData } = await supabase
         .from("live_dashboard")
