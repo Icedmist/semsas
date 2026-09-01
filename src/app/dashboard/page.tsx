@@ -33,7 +33,11 @@ export default function DashboardPage() {
 
     const fetchLiveStats = async () => {
       try {
-        const res = await fetch("/api/live-stats");
+        const timestamp = Date.now();
+        const res = await fetch(`/api/live-stats?year=${new Date().getFullYear()}&t=${timestamp}`, {
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache", "Pragma": "no-cache" }
+        });
         if (!res.ok) return;
         const data = await res.json();
         if (mountedRef.current && data) {
@@ -54,9 +58,10 @@ export default function DashboardPage() {
               "ambulanceServiceRuns",
               "status"
             ] as const;
+            const payload = data.data || data;
             for (const section of sections) {
-              if (data[section] && typeof data[section] === "object") {
-                updated[section] = { ...updated[section], ...data[section] };
+              if (payload[section] && typeof payload[section] === "object") {
+                updated[section] = { ...updated[section], ...payload[section] };
               }
             }
             return updated;
