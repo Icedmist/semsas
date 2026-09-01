@@ -98,8 +98,7 @@ export default function AdminConsole() {
     setLoading(true);
     try {
       const res = await fetch(getApiUrl(selectedYear), {
-        cache: "no-store",
-        headers: { "Cache-Control": "no-cache", "Pragma": "no-cache" }
+        cache: "no-store"
       });
       if (!res.ok) throw new Error("Failed to load");
       const json = await res.json();
