@@ -10,10 +10,10 @@ export async function GET(req: NextRequest) {
     // strip firebase meta
     const { updatedAt, ...data } = fb;
     // if fb data has nested structure, return it
-    if ((data as any).overview) return NextResponse.json({ year, data, source: "firebase", updatedAt }, { headers: { "Cache-Control": "no-store" } });
+    if ((data as any).overview) return NextResponse.json({ year, data, source: "firebase", updatedAt }, { headers: { "Cache-Control": "no-store", "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type, Authorization" } });
   }
   const data = getYear(year);
-  return NextResponse.json({ year, data, source: "local" }, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json({ year, data, source: "local" }, { headers: { "Cache-Control": "no-store", "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type, Authorization" } });
 }
 
 export async function POST(req: NextRequest) {
@@ -32,4 +32,15 @@ export async function POST(req: NextRequest) {
   writeStore(store);
 
   return NextResponse.json({ ok: true, year, saved: "firebase+local" });
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
 }
