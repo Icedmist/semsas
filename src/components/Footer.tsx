@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="w-full bg-white pt-6">
       {/* Section CTA - GoSEMSAS rounded bg white with inner container */}
       <div className="mx-auto max-w-[1280px] px-4">
-        <div className="rounded-[24px] bg-[#f0f5f6] md:rounded-[32px] overflow-hidden border border-black/5">
+        <div className="rounded-[24px] bg-red-section border-2 border-red-200/50 md:rounded-[32px] overflow-hidden shadow-lg shadow-red-200/20">
           <div className="px-6 py-10 md:px-12 md:py-14 flex flex-col lg:flex-row items-start justify-between gap-8">
             <div className="max-w-2xl">
               <h2 className="text-2xl md:text-3xl font-black leading-tight" style={{fontFamily:"var(--font-urbanist)"}}>
@@ -77,9 +77,9 @@ export default function Footer() {
             <div className="mt-8 pt-6 border-t border-black/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div className="text-sm text-black/50">© 2025 GoSEMSAS — Gombe State Ministry of Health. All Rights Reserved.</div>
               <div className="flex items-center gap-2">
-                <a href="https://x.com" className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs">𝕏</a>
-                <a href="https://facebook.com" className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs">f</a>
-                <a href="https://linkedin.com" className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs">in</a>
+                <a href="https://x.com" className="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center text-xs hover:bg-red-700 transition-colors">𝕏</a>
+                <a href="https://facebook.com" className="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center text-xs hover:bg-red-700 transition-colors">f</a>
+                <a href="https://linkedin.com" className="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center text-xs hover:bg-red-700 transition-colors">in</a>
               </div>
             </div>
           </div>

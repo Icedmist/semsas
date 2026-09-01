@@ -398,17 +398,21 @@ body {
   --token-bg-muted: #f0f5f6;
   --token-text-muted: #3b3b3b;
   --token-text: #0a0a0a;
-  --token-accent: #ffce8a;
+  --token-accent: #F32A4D;
   --gosemsas-green: #0a7a3a;
   --gosemsas-red: #f1314d;
 }
 .gosemsas-hero-gradient {
-  background: radial-gradient(120% 120% at 50% 0%, #e6f4ec 0%, #ffffff 55%);
+  background: linear-gradient(135deg, rgba(243, 42, 77, 0.06) 0%, rgba(255, 255, 255, 1) 55%), radial-gradient(120% 120% at 50% 0%, #e6f4ec 0%, #ffffff 55%);
 }
 .glass-card {
   backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.9);
-  border: 1px solid rgba(10,10,10,0.07);
+  background: rgba(255,255,255,0.95);
+  border: 2px solid rgba(243, 42, 77, 0.15);
+}
+.glass-card:hover {
+  border-color: rgba(243, 42, 77, 0.3);
+  box-shadow: 0 8px 32px rgba(243, 42, 77, 0.12);
 }
 @keyframes marquee {
   0% { transform: translateX(-50%); }
@@ -416,3 +420,14 @@ body {
 }
 ::selection { background: #f1314d; color: #fff; }
 a:focus-visible, button:focus-visible { outline: 2px solid #f1314d; outline-offset: 2px; }
+
+/* ---------- Red Accent Enhancements ---------- */
+.bg-red-accent { background-color: rgba(243, 42, 77, 0.08); }
+.bg-red-accent-hover:hover { background-color: rgba(243, 42, 77, 0.15); }
+.border-red-accent { border-color: rgba(243, 42, 77, 0.3); }
+.border-red-accent-strong { border: 2px solid #F32A4D; }
+.text-red-secondary { color: #F32A4D; }
+.bg-red-section { background: linear-gradient(135deg, rgba(243, 42, 77, 0.04) 0%, rgba(243, 42, 77, 0.02) 100%); }
+.red-divider { border-top: 3px solid #F32A4D; }
+.red-accent-line { border-left: 4px solid #F32A4D; padding-left: 1rem; }
+.red-bg-card { background: linear-gradient(135deg, #FFF1F4 0%, #FFFFFF 100%); border: 1px solid #FDC9D7; }

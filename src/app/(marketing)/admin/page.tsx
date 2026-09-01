@@ -74,30 +74,44 @@ export default function AdminDashboard() {
     if (!supabase) return;
 
     try {
+      console.log("Fetching profile for user:", userId);
+      
+      // Fetch both profile and role data in parallel
       const [{ data: profileData, error: profileError }, { data: roleData, error: roleError }] = await Promise.all([
         supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
         supabase.from("user_roles").select("*").eq("user_id", userId).maybeSingle(),
       ]);
 
       if (profileError && profileError.code !== "PGRST116") {
-        console.warn("Profile error:", profileError.message);
+        console.error("Profile fetch error:", profileError);
       }
 
       if (roleError && roleError.code !== "PGRST116") {
-        console.warn("Role error:", roleError.message);
+        console.error("Role fetch error:", roleError);
       }
 
+      console.log("Profile data:", profileData);
+      console.log("Role data:", roleData);
+
+      // Resolve role from user_roles (priority) or profiles table
       const resolvedRole = roleData?.role || profileData?.role || "staff";
-      const resolvedPermissions = roleData?.permissions || profileData?.permissions || rolePermissions[resolvedRole] || rolePermissions.staff;
+      console.log("Resolved role:", resolvedRole);
+
+      // Always use rolePermissions mapping as source of truth
+      const resolvedPermissions = rolePermissions[resolvedRole] || rolePermissions.staff;
+      console.log("Resolved permissions:", resolvedPermissions);
 
       setProfile({
-        ...profileData,
+        id: userId,
+        full_name: profileData?.full_name || "User",
+        email: profileData?.email || "",
         role: resolvedRole,
         permissions: resolvedPermissions,
       });
     } catch (caughtError) {
-      console.warn("Failed to fetch profile:", caughtError);
-      setProfile({ role: "staff", permissions: rolePermissions.staff });
+      console.error("Failed to fetch profile:", caughtError);
+      // Default to staff role with staff permissions
+      setProfile({ id: userId, role: "staff", permissions: rolePermissions.staff });
     }
   };
 
