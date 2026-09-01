@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getYear, readStore, writeStore } from "@/lib/live-data";
-import { getLiveDashboard, setLiveDashboard } from "@/lib/firebase";
+import { getLiveDashboard, setLiveDashboard } from "@/lib/supabase";
 
 export async function GET(req: NextRequest) {
   const year = req.nextUrl.searchParams.get("year") || "2025";
-  // Try Firebase first, fallback to local JSON
-  const fb = await getLiveDashboard(year);
-  if (fb && fb.overview) {
-    // strip firebase meta
-    const { updatedAt, ...data } = fb;
-    // if fb data has nested structure, return it
-    if ((data as any).overview) return NextResponse.json({ year, data, source: "firebase", updatedAt }, { headers: { "Cache-Control": "no-store", "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type, Authorization" } });
+  // Try Supabase first, fallback to local JSON
+  const sbData = await getLiveDashboard(year);
+  if (sbData && sbData.overview) {
+    // strip supabase meta
+    const { updatedAt, ...data } = sbData;
+    // if supabase data has nested structure, return it
+    if ((data as any).overview) return NextResponse.json({ year, data, source: "supabase", updatedAt }, { headers: { "Cache-Control": "no-store", "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type, Authorization" } });
   }
   const data = getYear(year);
   return NextResponse.json({ year, data, source: "local" }, { headers: { "Cache-Control": "no-store", "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type, Authorization" } });
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
   const year = req.nextUrl.searchParams.get("year") || "2025";
   const body = await req.json();
 
-  // Save to Firebase (mock will no-op but keep)
+  // Save to Supabase
   await setLiveDashboard(year, body);
 
   // Always persist to local JSON as fallback / mock backend
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
   store[year] = body;
   writeStore(store);
 
-  return NextResponse.json({ ok: true, year, saved: "firebase+local" });
+  return NextResponse.json({ ok: true, year, saved: "supabase+local" });
 }
 
 export async function OPTIONS() {
