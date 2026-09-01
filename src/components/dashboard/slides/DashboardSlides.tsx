@@ -1107,7 +1107,7 @@ export function SlideServiceRuns({ data }: { data: any }) {
 }
 
 export function SlideResmatLGA({ data }: { data: any }) {
-  if (!data || !data.data) {
+  if (!data || !data.data || data.data.length === 0) {
     return (
       <SlideWrapper title="RESMAT LGA Breakdown" titleColor="#DC143C">
         <div className="flex items-center justify-center h-96">

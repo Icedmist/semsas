@@ -141,21 +141,8 @@ export const defaultDashboardData = {
     ]
   },
   lgaMonthlyRuns: {
-    months: ["Jan-26", "Feb-26", "Mar-26", "Apr-26", "May-26", "Jun-26", "Jul-26"],
-    data: [
-      { lga: "DUKKU", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
-      { lga: "FUNAKAYE", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
-      { lga: "KWAMI", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
-      { lga: "NAFADA", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
-      { lga: "SHONGOM", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
-      { lga: "BILLIRI", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
-      { lga: "YAMALTU DEBA", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
-      { lga: "KALTUNGO", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
-      { lga: "GOMBE", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
-      { lga: "AKKO", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
-      { lga: "BALANGA", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 },
-      { lga: "STATE TOTAL", runs: [0, 0, 0, 0, 0, 0, 0], total: 0 }
-    ]
+    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    data: []
   },
   status: {
     message: "All Systems Working",

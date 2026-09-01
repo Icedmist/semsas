@@ -144,7 +144,10 @@ export default function AdminConsole() {
         },
         body: JSON.stringify(data)
       });
-      if (!res.ok) throw new Error("Failed to save");
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Failed to save: ${res.status} ${res.statusText} - ${text}`);
+      }
       const json = await res.json();
       if (json.success || json.ok || (json as any).data) {
         setData((json as any).data ?? data);
@@ -153,9 +156,9 @@ export default function AdminConsole() {
       } else {
         throw new Error(json.error || "Save failed");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      setSaveResult("error");
+      setSaveResult(error.message || "error");
     } finally {
       setSaving(false);
     }
