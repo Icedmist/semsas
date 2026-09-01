@@ -4,44 +4,30 @@ export function middleware(request: NextRequest) {
   const host = request.headers.get("host") || "";
   const pathname = request.nextUrl.pathname;
   const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
-  const isAdminHost = host.startsWith("admin.") || host.startsWith("admin.admin.");
 
-  // Canonical admin host is admin.admin.<domain> in production.
-  // Local development accepts localhost and admin.localhost values as well.
+  // Admin routes should be accessible from:
+  // 1. localhost or 127.0.0.1 in development
+  // 2. admin subdomain in production
   if (pathname.startsWith("/admin")) {
+    // Allow from localhost/127.0.0.1 (development)
     if (isLocal) {
-      if (host.startsWith("admin.") || host.startsWith("admin.admin.")) {
-        return NextResponse.next();
-      }
-
-      const redirectHost = host.includes("localhost") ? "admin.admin.localhost" : "admin.admin.127.0.0.1";
-      return NextResponse.redirect(new URL(pathname, `http://${redirectHost}`), 307);
+      return NextResponse.next();
     }
 
-    if (!isAdminHost) {
-      return NextResponse.redirect(`https://admin.admin.${host}${pathname}`, 307);
+    // Allow from admin subdomain in production
+    if (host.startsWith("admin.")) {
+      return NextResponse.next();
     }
 
-    return NextResponse.next();
+    // Redirect main domain to admin subdomain
+    return NextResponse.redirect(`https://admin.${host}${pathname}`, 307);
   }
 
-  if (isLocal) {
-    if (host.startsWith("admin.") && !pathname.startsWith("/admin")) {
+  // Redirect admin subdomain to /admin route if not already there
+  if (host.startsWith("admin.")) {
+    if (!pathname.startsWith("/admin")) {
       return NextResponse.redirect(new URL("/admin", request.url), 307);
     }
-
-    return NextResponse.next();
-  }
-
-  // If trying to access the admin route through the main domain or a single-admin host,
-  // redirect to the canonical admin.admin.<domain> route.
-  if ((host.startsWith("admin.") && !host.startsWith("admin.admin.")) || !host.includes(".")) {
-    const baseHost = host.replace(/^admin\./, "");
-    return NextResponse.redirect(`https://admin.admin.${baseHost}/admin`, 307);
-  }
-
-  if (host.startsWith("admin.admin.") && !pathname.startsWith("/admin")) {
-    return NextResponse.redirect(`https://${host}/admin`, 307);
   }
 
   return NextResponse.next();

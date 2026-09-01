@@ -105,24 +105,35 @@ export default function AdminDashboard() {
     if (!supabase) {
       setLoading(false);
       setError("Supabase environment is not configured for browser auth.");
+      console.error("Supabase not initialized - missing environment variables");
       return;
     }
 
     const restoreSession = async () => {
-      const { data, error: sessionError } = await supabase.auth.getSession();
-      if (sessionError) {
-        setError(sessionError.message);
-      }
+      try {
+        const { data, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) {
+          console.error("Session error:", sessionError);
+          setError(sessionError.message);
+        }
 
-      const activeSession = data.session;
-      setSession(activeSession);
-      if (activeSession?.user) {
-        await fetchProfile(activeSession.user.id);
+        const activeSession = data.session;
+        setSession(activeSession);
+        if (activeSession?.user) {
+          console.log("Existing session found for:", activeSession.user.email);
+          await fetchProfile(activeSession.user.id);
+        } else {
+          console.log("No existing session found");
+        }
+      } catch (err) {
+        console.error("Failed to restore session:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     const { data: authListener } = supabase.auth.onAuthStateChange(async (_event, nextSession) => {
+      console.log("Auth state changed:", _event);
       setSession(nextSession);
       if (nextSession?.user) {
         await fetchProfile(nextSession.user.id);
@@ -142,27 +153,37 @@ export default function AdminDashboard() {
     event.preventDefault();
     if (!supabase) {
       setError("Supabase auth is not configured.");
+      console.error("Supabase client not initialized for sign-in");
       return;
     }
 
     setPending(true);
     setError("");
 
-    const { data, error: signInError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      console.log("Attempting sign-in with email:", email);
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    setPending(false);
+      if (signInError) {
+        console.error("Sign-in error:", signInError);
+        setError(signInError.message || "Sign-in failed. Please check your credentials.");
+        setPending(false);
+        return;
+      }
 
-    if (signInError) {
-      setError(signInError.message);
-      return;
-    }
-
-    setSession(data.session);
-    if (data.session?.user) {
-      await fetchProfile(data.session.user.id);
+      console.log("Sign-in successful for:", data.user?.email);
+      setSession(data.session);
+      if (data.session?.user) {
+        await fetchProfile(data.session.user.id);
+      }
+    } catch (err) {
+      console.error("Unexpected error during sign-in:", err);
+      setError("An unexpected error occurred during sign-in.");
+    } finally {
+      setPending(false);
     }
   };
 
