@@ -51,7 +51,7 @@ export default function AdminDashboard() {
   ];
 
   const rolePermissions: Record<string, string[]> = {
-    admin: ["manage:users", "manage:content", "manage:dashboard", "manage:assets", "manage:live-data", "edit:all-content"],
+    admin: ["manage:live-data"],
     manager: ["view:dashboard", "manage:dashboard", "approve:content"],
     claims: ["view:dashboard", "manage:claims", "review:reports"],
     analyst: ["view:dashboard", "manage:reports", "export:data"],

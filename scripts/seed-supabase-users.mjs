@@ -20,37 +20,9 @@ const seedUsers = [
   {
     email: 'admin@semsas.gombe.gov.ng',
     password: 'Password123!',
-    full_name: 'SEMSAS Admin Officer',
+    full_name: 'SEMSAS Super Admin',
     role: 'admin',
-    permissions: ['manage:users', 'manage:content', 'manage:dashboard', 'manage:assets', 'manage:live-data', 'edit:all-content'],
-  },
-  {
-    email: 'claims@semsas.gombe.gov.ng',
-    password: 'Password123!',
-    full_name: 'Claims Manager',
-    role: 'claims',
-    permissions: ['view:dashboard', 'manage:claims', 'review:reports'],
-  },
-  {
-    email: 'si@semsas.gombe.gov.ng',
-    password: 'Password123!',
-    full_name: 'Strategic Information Lead',
-    role: 'analyst',
-    permissions: ['view:dashboard', 'manage:reports', 'export:data'],
-  },
-  {
-    email: 'ict@semsas.gombe.gov.ng',
-    password: 'Password123!',
-    full_name: 'ICT Focal Person',
-    role: 'support',
-    permissions: ['view:dashboard', 'manage:assets', 'manage:users'],
-  },
-  {
-    email: 'statecoordinator@semsas.gombe.gov.ng',
-    password: 'Password123!',
-    full_name: 'State Coordinator',
-    role: 'manager',
-    permissions: ['view:dashboard', 'manage:dashboard', 'approve:content'],
+    permissions: ['manage:live-data'],
   },
 ];
 
@@ -60,6 +32,23 @@ if (listError) {
   console.error('Failed to list users:', listError.message);
   process.exit(1);
 }
+
+console.log(`Found ${authUsers.users.length} auth users`);
+console.log('\n🗑️  Deleting non-admin users...\n');
+
+// Delete all users except admin
+for (const authUser of authUsers.users) {
+  if (authUser.email !== 'admin@semsas.gombe.gov.ng') {
+    const { error: deleteError } = await supabase.auth.admin.deleteUser(authUser.id);
+    if (deleteError) {
+      console.error(`❌ Failed to delete ${authUser.email}:`, deleteError.message);
+    } else {
+      console.log(`✓ Deleted user: ${authUser.email}`);
+    }
+  }
+}
+
+console.log('\n📋 Processing admin user...\n');
 
 const authUserMap = {};
 authUsers.users.forEach(user => {
