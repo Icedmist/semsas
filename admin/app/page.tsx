@@ -100,7 +100,10 @@ export default function AdminConsole() {
       const res = await fetch(getApiUrl(selectedYear), {
         cache: "no-store"
       });
-      if (!res.ok) throw new Error("Failed to load");
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`HTTP ${res.status}: ${text.slice(0, 100)}`);
+      }
       const json = await res.json();
       const payload = (json as any).data ?? json;
       if (!payload || !payload.overview) throw new Error("Invalid data");
@@ -109,7 +112,7 @@ export default function AdminConsole() {
       setSaveResult(null);
     } catch (error) {
       console.error(error);
-      setSaveResult("error");
+      setSaveResult(String(error));
     } finally {
       setLoading(false);
     }
@@ -176,7 +179,7 @@ export default function AdminConsole() {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-bg-gray space-y-4">
         <XCircle className="w-16 h-16 text-emergency-red" />
-        <p className="text-lg font-bold text-slate-800">Failed to load dashboard data</p>
+        <p className="text-lg font-bold text-slate-800">Failed to load dashboard data: {saveResult}</p>
         <button onClick={loadData} className="btn btn-dark px-6 py-2.5 text-sm">
           Retry Connection
         </button>
