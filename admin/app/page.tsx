@@ -63,7 +63,7 @@ export default function AdminConsole() {
   const [data, setData] = useState<DashboardDataSchema | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [saveResult, setSaveResult] = useState<"success" | "error" | null>(null);
+  const [saveResult, setSaveResult] = useState<any>(null);
   const [dirty, setDirty] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
   const [now, setNow] = useState("");
